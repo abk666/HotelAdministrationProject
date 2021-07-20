@@ -1,1 +1,15 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+
+.text-field{
+	-fx-prompt-text-fill: #4ebcff;
+}
+
+.combo-box.text-field{
+	-fx-prompt-text-fill: #4ebcff;
+	-fx-font-size: 18;
+}
+
+.password-field{
+	-fx-prompt-text-fill: #4ebcff;
+}
+
