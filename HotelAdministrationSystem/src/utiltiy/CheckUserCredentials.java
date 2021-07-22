@@ -30,11 +30,8 @@ private Connection connection;
 		if(role=="Admin") {
 			resultSet= statement.executeQuery("select admin"+loginType+",adminPassword from admin where admin"+loginType+" = '"+email+"' and "+"adminPassword = '"+password+"';");
 			
-		}else if(role=="Manager") {
-			resultSet= statement.executeQuery("select staff"+loginType+",staffPassword from staff where staff"+loginType+" = '"+email+" ,staffPassword = '"+password+"' and "+"staffRoll = '"+role+"';");
-			
 		}else {
-			
+			resultSet= statement.executeQuery("select staff"+loginType+" , staffPassword , staffRole from staff where staff"+loginType+" = '"+email+"' and staffPassword = '"+password+"' and "+"staffRole = '"+role+"';");
 		}
 	
 		if(resultSet.next()) {
