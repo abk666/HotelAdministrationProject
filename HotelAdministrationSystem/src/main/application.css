@@ -4,9 +4,9 @@
 	-fx-prompt-text-fill: #4ebcff;
 }
 
-.combo-box.text-field{
+.jfx-combo-box {
 	-fx-prompt-text-fill: #4ebcff;
-	-fx-font-size: 18;
+	-fx-font-size: 15;
 }
 
 .password-field{

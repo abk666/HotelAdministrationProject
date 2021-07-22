@@ -14,9 +14,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.LogInController">
+<AnchorPane prefHeight="510.0" prefWidth="818.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.LogInController">
    <children>
-      <ImageView fitHeight="500.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="510.0" fitWidth="818.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
             <Image url="@../img/login.jpg" />
          </image>
@@ -53,23 +53,23 @@
                <image>
                   <Image url="@../img/user.png" />
                </image></ImageView>
-            <JFXTextField focusColor="#b1fff2" labelFloat="true" prefHeight="38.0" prefWidth="263.0" promptText="Email" style="-fx-border-color: #2effdf;" unFocusColor="#0282b9" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <JFXTextField fx:id="tfEmail" focusColor="#b1fff2" labelFloat="true" prefHeight="38.0" prefWidth="263.0" promptText="Email" style="-fx-border-color: #2effdf;" unFocusColor="#0282b9" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
                   <Font size="15.0" />
                </font></JFXTextField>
-            <JFXPasswordField focusColor="#b1fff2" labelFloat="true" prefHeight="43.0" prefWidth="263.0" promptText="Password" style="-fx-border-color: #2effdf;" unFocusColor="#0282b9" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <JFXPasswordField fx:id="pfPassword" focusColor="#b1fff2" labelFloat="true" prefHeight="43.0" prefWidth="263.0" promptText="Password" style="-fx-border-color: #2effdf;" unFocusColor="#0282b9" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <font>
                   <Font size="15.0" />
                </font></JFXPasswordField>
-            <JFXComboBox focusColor="#b1fff2" prefHeight="42.0" prefWidth="263.0" promptText="Staff" style="-fx-border-color: #2effdf;" unFocusColor="#0282b9" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <JFXComboBox fx:id="cobStaff" focusColor="#b1fff2" prefHeight="42.0" prefWidth="263.0" promptText="Staff Role" style="-fx-border-color: #2effdf;" unFocusColor="#0282b9" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="225.0" text="Login Here" textFill="WHITE" GridPane.columnIndex="1">
                <font>
                   <Font size="25.0" />
                </font>
             </Label>
-            <Label disable="true" prefHeight="28.0" prefWidth="263.0" text="Email Status" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label disable="true" prefHeight="24.0" prefWidth="263.0" text="Password Status" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <JFXButton prefHeight="54.0" prefWidth="110.0" ripplerFill="#02ffe2" style="-fx-background-color: #047fa1;" text="Login" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="6">
+            <Label fx:id="lblEmail" prefHeight="28.0" prefWidth="263.0" text="Email Status" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label fx:id="lblPassword" prefHeight="24.0" prefWidth="263.0" text="Password Status" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <JFXButton onAction="#processLogin" prefHeight="54.0" prefWidth="110.0" ripplerFill="#02ffe2" style="-fx-background-color: #047fa1; -fx-background-radius: 30;" text="Login" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="6">
                <GridPane.margin>
                   <Insets left="140.0" />
                </GridPane.margin>
