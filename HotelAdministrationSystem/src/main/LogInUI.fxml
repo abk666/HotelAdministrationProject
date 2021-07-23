@@ -69,7 +69,7 @@
             <Label fx:id="lblEmail" prefHeight="44.0" prefWidth="308.0" text="Email Status" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <JFXButton onAction="#processLogin" prefHeight="54.0" prefWidth="110.0" ripplerFill="#02ffe2" style="-fx-background-color: #047fa1; -fx-background-radius: 30;" text="Login" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="5">
                <GridPane.margin>
-                  <Insets left="140.0" />
+                  <Insets left="180.0" />
                </GridPane.margin>
                <font>
                   <Font size="25.0" />

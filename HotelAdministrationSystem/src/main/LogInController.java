@@ -148,9 +148,9 @@ public class LogInController implements Initializable {
 		
 		cobStaff.setItems(roleList);
 		
-		tfEmail.setText("kyaw@gmail.com");
+		tfEmail.setText("khin@gmail.com");
 		pfPassword.setText("1234");
-		cobStaff.setValue("Manager");
+		cobStaff.setValue("Admin");
 		
 	}
 
