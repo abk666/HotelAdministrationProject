@@ -1,15 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="700.0" prefWidth="900.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #48616f;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="admin.AdminMainController">
    <children>
-      <Label alignment="CENTER" layoutY="-1.0" prefHeight="60.0" prefWidth="900.0" text="Hotel Main" textFill="#093f91">
+      <Label alignment="CENTER" prefHeight="60.0" prefWidth="900.0" text="Admin Main Section" textFill="#08e3fc">
          <font>
             <Font size="36.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="84.0" layoutY="110.0" onMouseClicked="#processAdmin" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/admin.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="375.0" layoutY="110.0" onMouseClicked="#processStaff" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/Staff.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="668.0" layoutY="110.0" onMouseClicked="#processRoom" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/Room.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="84.0" layoutY="359.0" onMouseClicked="#processDining" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/dining.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="375.0" layoutY="359.0" onMouseClicked="#processRefrigerator" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/refrigenator.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="668.0" layoutY="352.0" onMouseClicked="#processLogOut" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/logout.png" />
+         </image>
+      </ImageView>
+      <Label alignment="CENTER" layoutX="84.0" layoutY="283.0" onMouseClicked="#processAdmin" prefHeight="35.0" prefWidth="150.0" text="Admin Section" textFill="#08e3fc">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="375.0" layoutY="275.0" onMouseClicked="#processStaff" prefHeight="35.0" prefWidth="150.0" text="Staff Section" textFill="#08e3fc">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="84.0" layoutY="523.0" onMouseClicked="#processDining" prefHeight="35.0" prefWidth="150.0" text="Dining Room" textFill="#08e3fc">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="375.0" layoutY="523.0" onMouseClicked="#processRefrigerator" prefHeight="35.0" prefWidth="150.0" text="Refrigerator" textFill="#08e3fc">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="668.0" layoutY="523.0" onMouseClicked="#processLogOut" prefHeight="35.0" prefWidth="150.0" text="LogOut" textFill="#08e3fc">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="668.0" layoutY="275.0" onMouseClicked="#processRoom" prefHeight="35.0" prefWidth="150.0" text="Room" textFill="#08e3fc">
+         <font>
+            <Font size="18.0" />
          </font>
       </Label>
    </children>
