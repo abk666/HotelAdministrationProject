@@ -19,6 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import utiltiy.CheckUserCredentials;
 
@@ -36,9 +37,6 @@ public class LogInController implements Initializable {
 
     @FXML
     private Label lblEmail;
-
-    @FXML
-    private Label lblPassword;
     
     private final CheckUserCredentials checkUser = new CheckUserCredentials();
     @FXML
@@ -132,6 +130,9 @@ public class LogInController implements Initializable {
     	
     	else {
     	System.out.println("Input fields must not be null");
+    	lblEmail.setVisible(true);
+    	lblEmail.setText("Email must contain @ sign and must no be null.");
+    	lblEmail.setTextFill(Paint.valueOf("Red"));
 
     	}
 
@@ -147,9 +148,9 @@ public class LogInController implements Initializable {
 		
 		cobStaff.setItems(roleList);
 		
-		tfEmail.setText("kyaw@gmail.com");
+		tfEmail.setText("khin@gmail.com");
 		pfPassword.setText("1234");
-		cobStaff.setValue("Manager");
+		cobStaff.setValue("Admin");
 		
 	}
 
