@@ -173,21 +173,30 @@ public class ImportController implements Initializable{
 
 	    @FXML
 	    void processBack(ActionEvent event) throws IOException {
-	    	Stage primaryStage=(Stage)((Node)event.getSource()).getScene().getWindow();
-	    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("AccountantMainUI.fxml"));
-			Scene scene = new Scene(root);
-            primaryStage.setTitle("Accountant Main Section");
-			primaryStage.setScene(scene);
-			primaryStage.show();
+	    	Optional<ButtonType> result=noti.getConfirmationAlert("Comfimation Dialog", "Comfirmation", "Do you really want to Exit?");
+			if(result.get()==ButtonType.OK) {
+				Stage primaryStage=(Stage)((Node)event.getSource()).getScene().getWindow();
+		    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("AccountantMainUI.fxml"));
+				Scene scene = new Scene(root);
+	            primaryStage.setTitle("Accountant Main Section");
+				primaryStage.setScene(scene);
+				primaryStage.show();
+			}
+	    	
+	    
 	    }
 	    @FXML
 	    void processLogOut(ActionEvent event) throws IOException {
-	    	Stage primaryStage=(Stage)((Node)event.getSource()).getScene().getWindow();
-	    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("../main/LogInUI.fxml"));
-			Scene scene = new Scene(root);
-		    primaryStage.setTitle("Hotel Administration LogIn");
-			primaryStage.setScene(scene);
-			primaryStage.show();
+	    	Optional<ButtonType> result=noti.getConfirmationAlert("Comfimation Dialog", "Comfirmation", "Do you really want to Exit?");
+			if(result.get()==ButtonType.OK) {
+			 	Stage primaryStage=(Stage)((Node)event.getSource()).getScene().getWindow();
+		    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("../main/LogInUI.fxml"));
+				Scene scene = new Scene(root);
+			    primaryStage.setTitle("Hotel Administration LogIn");
+				primaryStage.setScene(scene);
+				primaryStage.show();
+			}
+	   
 	    }
  //Radio button action
 	    @FXML

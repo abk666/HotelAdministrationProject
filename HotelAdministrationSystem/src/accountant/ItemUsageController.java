@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXComboBox;
@@ -20,13 +21,17 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import tray.animations.AnimationType;
+import tray.notification.NotificationType;
 import utiltiy.ItemUsageDataUtils;
+import utiltiy.MyNotification;
 import utiltiy.StockDataUtils;
 
 
@@ -60,7 +65,7 @@ public class ItemUsageController implements Initializable{
 
 	    @FXML
 	    private TableColumn<ItemUsage, String> itemUsageDate;
-	    
+	    private final MyNotification noti= new MyNotification();
 	    private final StockDataUtils stockDataUtils=new StockDataUtils();
 	    private final ItemUsageDataUtils itemUsageDataUtils=new ItemUsageDataUtils();
 	    private boolean isSaveButtonClicked;
@@ -70,11 +75,15 @@ public class ItemUsageController implements Initializable{
 	   
 	    @FXML
 	    void processBack(ActionEvent event) throws IOException {
-	    	Stage primaryStage=(Stage)((Node)event.getSource()).getScene().getWindow();
-	    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("AccountantMainUI.fxml"));
-			Scene scene = new Scene(root);
-            primaryStage.setScene(scene);
-			primaryStage.show();
+	    	Optional<ButtonType> result=noti.getConfirmationAlert("Comfimation Dialog", "Comfirmation", "Do you really want to Exit?");
+			if(result.get()==ButtonType.OK) {
+				Stage primaryStage=(Stage)((Node)event.getSource()).getScene().getWindow();
+		    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("AccountantMainUI.fxml"));
+				Scene scene = new Scene(root);
+	            primaryStage.setTitle("Accountant Main Section");
+				primaryStage.setScene(scene);
+				primaryStage.show();
+			}
 	    }
 
 	    @FXML
@@ -89,12 +98,16 @@ public class ItemUsageController implements Initializable{
 
 	    @FXML
 	    void processLogOut(ActionEvent event) throws IOException {
-	    	Stage primaryStage=(Stage)((Node)event.getSource()).getScene().getWindow();
-	    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("../main/LogInUI.fxml"));
-			Scene scene = new Scene(root);
-		
-			primaryStage.setScene(scene);
-			primaryStage.show();
+	    	Optional<ButtonType> result=noti.getConfirmationAlert("Comfimation Dialog", "Comfirmation", "Do you really want to Exit?");
+			if(result.get()==ButtonType.OK) {
+				Stage primaryStage=(Stage)((Node)event.getSource()).getScene().getWindow();
+		    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("../main/LogInUI.fxml"));
+				Scene scene = new Scene(root);
+			
+				primaryStage.setScene(scene);
+				primaryStage.show();
+			}
+	    	
 	    }
 	    
 	    @FXML
@@ -126,17 +139,18 @@ public class ItemUsageController implements Initializable{
 	             	   if(!isSaveOk) {
 	             		   boolean isReduckOk=stockDataUtils.reduceStock(stockQty, itemQty, stockId);
 	             		   if(!isReduckOk) {
-	             			   System.out.println("Successfully Saved");
+	             			  noti.getNotification(NotificationType.SUCCESS, "Success!", "Successfully Saved", AnimationType.SLIDE, 2000.0);
 	             			  showTable("select * from itemusage;");
+	             			 ClearAll();
 	             		   }else {
-	             			   System.out.println("Error in reducing");
+	             			  noti.getNotification(NotificationType.ERROR, "Failed!", "Fail to save,Errors in stock!", AnimationType.SLIDE, 2000.0);
 	             		   }
 	             		 
 	             	   }else{
-	             		   System.out.println("Fail to save!");
+	             		  noti.getNotification(NotificationType.ERROR, "Failed!", "Fail to save!", AnimationType.SLIDE, 2000.0);
 	             	   }
 	       		 }else {
-	             	   System.out.println("Insuffient stock");
+	       			noti.getNotification(NotificationType.ERROR, "Failed!", "Insufficient Stock!", AnimationType.SLIDE, 2000.0);
 	                }
 	       		 
 	           	  
@@ -156,16 +170,17 @@ public class ItemUsageController implements Initializable{
 	               	   if(updatedRows>0) {
 	               		boolean isReducedOk=stockDataUtils.reduceStock(stockQty, updatedItemQty, stockId);
 	               		if(!isReducedOk) {
-	               		   System.out.println("Successfully Updated");
+	               			noti.getNotification(NotificationType.SUCCESS, "Success!", "Successfully Updated!", AnimationType.SLIDE, 2000.0);
 	               		   showTable("select * from itemusage");
+	               		ClearAll();
 	               		}else{
-	               			System.out.println("Fail to reduce!");
+	               			noti.getNotification(NotificationType.ERROR, "Failed!", "Fail to save,Errors in stock!", AnimationType.SLIDE, 2000.0);
 	               		}
 	               	   }else {
-	               		   System.out.println("Fail to update!");
+	               		noti.getNotification(NotificationType.ERROR, "Failed!", "Fail to Update!", AnimationType.SLIDE, 2000.0);
 	               	   }
 	               }else {
-	            	   System.out.println("Insuffient stock");
+	            	   noti.getNotification(NotificationType.ERROR, "Failed!", "Insufficient Stock!", AnimationType.SLIDE, 2000.0);
 	               }
 	           	   
 	              }
@@ -181,7 +196,7 @@ public class ItemUsageController implements Initializable{
 	    	  String query=tfSearch.getText().trim();
 	    	  showTable("select * from itemusage where "+column+" = '"+query+"';");
 	      }else {
-	    	  System.out.println("Fields must not be null!");
+	    	  noti.getNotification(NotificationType.ERROR, "Failed!", "Fields Must no be null!", AnimationType.SLIDE, 2000.0);
 	      }
 	    }
 
@@ -209,6 +224,10 @@ public class ItemUsageController implements Initializable{
 	    	primaryStage.setScene(scene);
 	    	primaryStage.show();
 	    }
+	    @FXML
+	    void processClear(ActionEvent event) {
+ClearAll();
+	    }
 	    
 	    public void disableAllFields() {
 	    cobName.setDisable(true);
@@ -228,6 +247,7 @@ public class ItemUsageController implements Initializable{
 				e.printStackTrace();
 			}
 	    }
+	    
 	    public boolean isInteger(String num) {
 	                try {
 		                    Integer.parseInt(num);
@@ -236,7 +256,11 @@ public class ItemUsageController implements Initializable{
 		
 	                    }return false;
 	              }
-
+public void ClearAll() {
+	tfItemQty.clear();
+	cobName.setValue(null);
+	dpDate.setValue(null);
+}
 		@Override
 		public void initialize(URL arg0, ResourceBundle arg1) {
 			try {

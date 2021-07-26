@@ -101,7 +101,7 @@
                                     <Font size="18.0" />
                                  </font>
                               </Label>
-                              <JFXButton onAction="#processSave" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: lightblue; -fx-background-radius: 30;" text="Save" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                              <JFXButton onAction="#processClear" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: pink; -fx-background-radius: 30;" text="Clear" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                  <GridPane.margin>
                                     <Insets left="120.0" />
                                  </GridPane.margin>
@@ -109,6 +109,7 @@
                               <JFXTextField fx:id="tfItemQty" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <JFXDatePicker fx:id="dpDate" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <JFXComboBox fx:id="cobName" prefWidth="250.0" GridPane.columnIndex="1" />
+                              <JFXButton onAction="#processSave" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: lightblue; -fx-background-radius: 30;" text="Save" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                            </children>
                         </GridPane>
                      </children>

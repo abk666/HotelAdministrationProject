@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXRadioButton;
@@ -18,6 +19,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -26,7 +28,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import tray.animations.AnimationType;
+import tray.notification.NotificationType;
 import utiltiy.ImportDataUtils;
+import utiltiy.MyNotification;
 import utiltiy.StockDataUtils;
 
 
@@ -56,8 +61,10 @@ public class StockController implements Initializable{
     
     @FXML
     private TableColumn<Stock, Integer> stockId;
+    private final MyNotification noti =new MyNotification();
     private final ImportDataUtils importDataUtils=new ImportDataUtils();
     private final StockDataUtils stockDataUtils=new StockDataUtils();
+   
     
     //Refresh button Action
     @FXML
@@ -81,7 +88,7 @@ if(!tfSearch.getText().trim().isEmpty()) {
 		}
 	
 }else {
-	System.out.println("Fields must not be null");
+	noti.getNotification(NotificationType.ERROR, "Failed!", "Fields must not be Null!", AnimationType.SLIDE, 2000.0);
 }
     }
     
@@ -111,12 +118,15 @@ if(!tfSearch.getText().trim().isEmpty()) {
     
     @FXML
     void processLogOut(ActionEvent event) throws IOException {
-    	Stage primaryStage=(Stage)((Node)event.getSource()).getScene().getWindow();
-    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("../main/LogInUI.fxml"));
-		Scene scene = new Scene(root);
-	    primaryStage.setTitle("Hotel Administration LogIn");
-		primaryStage.setScene(scene);
-		primaryStage.show();
+    	Optional<ButtonType> result=noti.getConfirmationAlert("Comfimation Dialog", "Comfirmation", "Do you really want to Exit?");
+		if(result.get()==ButtonType.OK) {
+			Stage primaryStage=(Stage)((Node)event.getSource()).getScene().getWindow();
+	    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("../main/LogInUI.fxml"));
+			Scene scene = new Scene(root);
+		
+			primaryStage.setScene(scene);
+			primaryStage.show();
+    }
     }
     
     
@@ -128,6 +138,7 @@ if(!tfSearch.getText().trim().isEmpty()) {
 			e.printStackTrace();
 		}
     }
+    
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// Check the existing items if they are expired or not

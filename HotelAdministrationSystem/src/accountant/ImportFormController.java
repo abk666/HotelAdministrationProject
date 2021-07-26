@@ -74,7 +74,10 @@ public class ImportFormController implements Initializable{
 		tfName.clear();
 		tfPrice.clear();
 		tfQuantity.clear();
-
+        cobCategory.setValue(null);
+        cobUnit.setValue(null);
+        dpExpiredDate.setValue(null);
+        dpImportDate.setValue(null);
     }
 
     @FXML
@@ -149,6 +152,8 @@ public class ImportFormController implements Initializable{
 
 
     }
+   
+    
     public boolean isDouble(String num) {
    try {
 	   Double.parseDouble(num);
