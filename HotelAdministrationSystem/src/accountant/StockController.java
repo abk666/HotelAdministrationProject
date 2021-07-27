@@ -64,7 +64,7 @@ public class StockController implements Initializable{
     private final MyNotification noti =new MyNotification();
     private final ImportDataUtils importDataUtils=new ImportDataUtils();
     private final StockDataUtils stockDataUtils=new StockDataUtils();
-   
+    
     
     //Refresh button Action
     @FXML
@@ -164,7 +164,15 @@ if(!tfSearch.getText().trim().isEmpty()) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		try {
+			Integer isStockSaveOk=stockDataUtils.saveStock();
+			if(isStockSaveOk>0) {
+				System.out.println("ok");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 		
