@@ -1,0 +1,24 @@
+package database1;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class DBConnection {
+	
+	private String url = "jdbc:mysql://localhost:3308/librarydb?useSSL=false";
+	private String user = "root";
+	private String password = "12345";
+	
+	public Connection getConnection() {
+		Connection connection=null;
+		try {
+			connection =  DriverManager.getConnection(url, user, password);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return connection;
+	}
+
+}

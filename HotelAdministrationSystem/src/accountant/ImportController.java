@@ -32,8 +32,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import tray.animations.AnimationType;
 import tray.notification.NotificationType;
-import utiltiy.ImportDataUtils;
-import utiltiy.MyNotification;
+import utility.ImportDataUtils;
+import utility.MyNotification;
+
+
 
 
 

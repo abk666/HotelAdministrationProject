@@ -11,7 +11,8 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import utiltiy.MyNotification;
+import utility.MyNotification;
+
 
 
 public class AccountantMainController {

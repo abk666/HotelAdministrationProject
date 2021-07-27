@@ -30,9 +30,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import tray.animations.AnimationType;
 import tray.notification.NotificationType;
-import utiltiy.ItemUsageDataUtils;
-import utiltiy.MyNotification;
-import utiltiy.StockDataUtils;
+import utility.ItemUsageDataUtils;
+import utility.MyNotification;
+import utility.StockDataUtils;
+
 
 
 public class ItemUsageController implements Initializable{

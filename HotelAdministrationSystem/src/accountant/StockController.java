@@ -30,9 +30,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import tray.animations.AnimationType;
 import tray.notification.NotificationType;
-import utiltiy.ImportDataUtils;
-import utiltiy.MyNotification;
-import utiltiy.StockDataUtils;
+import utility.ImportDataUtils;
+import utility.MyNotification;
+import utility.StockDataUtils;
 
 
 public class StockController implements Initializable{

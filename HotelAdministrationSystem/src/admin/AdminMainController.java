@@ -17,9 +17,9 @@ public class AdminMainController {
     	
     	Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
     	primaryStage.setResizable(false);
-    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("AdminUI.fxml"));
+    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("AdminSaveUI.fxml"));
 		Scene scene = new Scene(root);
-		primaryStage.setTitle("Admin Section");
+		primaryStage.setTitle("Admin Save Section");
 		primaryStage.setScene(scene);
 		primaryStage.show();
 
@@ -30,7 +30,7 @@ public class AdminMainController {
     	
     	Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
     	primaryStage.setResizable(false);
-    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("AdminDiningUI.fxml"));
+    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("DiningRoomFoodUI.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("Admin Dining Section");
 		primaryStage.setScene(scene);
@@ -55,7 +55,7 @@ public class AdminMainController {
     	
     	Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
     	primaryStage.setResizable(false);
-    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("AdminRefrigeratorUI.fxml"));
+    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("RefrigeratorFoodUI.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("Admin Refrigerator Section");
 		primaryStage.setScene(scene);

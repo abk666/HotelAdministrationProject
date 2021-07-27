@@ -22,7 +22,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
-import utiltiy.CheckUserCredentials;
+import utility.CheckUserCredentials;
+
 
 
 
@@ -105,7 +106,7 @@ public class LogInController implements Initializable {
     				Stage diningroomStage = (Stage) ((Button)event.getSource()).getScene().getWindow();
     				diningroomStage.hide();
     				
-    				AnchorPane diningroomRoot = (AnchorPane)FXMLLoader.load(getClass().getResource("../diningroom/DiningRoomMainUI.fxml"));
+    				AnchorPane diningroomRoot = (AnchorPane)FXMLLoader.load(getClass().getResource("../dining_room/FoodMenuListUI.fxml"));
     				Scene diningroomScene = new Scene(diningroomRoot);
     				diningroomStage.setTitle("DiningRoom Main Section");
     				diningroomStage.setScene(diningroomScene);
@@ -150,7 +151,11 @@ public class LogInController implements Initializable {
 		
 		cobStaff.setItems(roleList);
 		
-		tfEmail.setText("khin@gmail.com");
+		/*tfEmail.setText("khin@gmail.com");
+		pfPassword.setText("1234");
+		cobStaff.setValue("Admin");*/
+		
+		tfEmail.setText("a@gmail.com");
 		pfPassword.setText("1234");
 		cobStaff.setValue("Admin");
 		

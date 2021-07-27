@@ -10,7 +10,7 @@
    <children>
       <Label alignment="CENTER" prefHeight="60.0" prefWidth="900.0" text="Admin Main Section" textFill="#08e3fc">
          <font>
-            <Font size="36.0" />
+            <Font name="System Bold Italic" size="36.0" />
          </font>
       </Label>
       <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="84.0" layoutY="110.0" onMouseClicked="#processAdmin" pickOnBounds="true" preserveRatio="true">
@@ -45,32 +45,32 @@
       </ImageView>
       <Label alignment="CENTER" layoutX="84.0" layoutY="283.0" onMouseClicked="#processAdmin" prefHeight="35.0" prefWidth="150.0" text="Admin Section" textFill="#08e3fc">
          <font>
-            <Font size="18.0" />
+            <Font name="System Italic" size="18.0" />
          </font>
       </Label>
       <Label alignment="CENTER" layoutX="375.0" layoutY="275.0" onMouseClicked="#processStaff" prefHeight="35.0" prefWidth="150.0" text="Staff Section" textFill="#08e3fc">
          <font>
-            <Font size="18.0" />
+            <Font name="System Italic" size="18.0" />
          </font>
       </Label>
       <Label alignment="CENTER" layoutX="84.0" layoutY="523.0" onMouseClicked="#processDining" prefHeight="35.0" prefWidth="150.0" text="Dining Room" textFill="#08e3fc">
          <font>
-            <Font size="18.0" />
+            <Font name="System Italic" size="18.0" />
          </font>
       </Label>
       <Label alignment="CENTER" layoutX="375.0" layoutY="523.0" onMouseClicked="#processRefrigerator" prefHeight="35.0" prefWidth="150.0" text="Refrigerator" textFill="#08e3fc">
          <font>
-            <Font size="18.0" />
+            <Font name="System Italic" size="18.0" />
          </font>
       </Label>
       <Label alignment="CENTER" layoutX="668.0" layoutY="523.0" onMouseClicked="#processLogOut" prefHeight="35.0" prefWidth="150.0" text="LogOut" textFill="#08e3fc">
          <font>
-            <Font size="18.0" />
+            <Font name="System Italic" size="18.0" />
          </font>
       </Label>
       <Label alignment="CENTER" layoutX="668.0" layoutY="275.0" onMouseClicked="#processRoom" prefHeight="35.0" prefWidth="150.0" text="Room" textFill="#08e3fc">
          <font>
-            <Font size="18.0" />
+            <Font name="System Italic" size="18.0" />
          </font>
       </Label>
    </children>
