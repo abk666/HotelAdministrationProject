@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="accountant.ImportController">
+   <children>
+      <Label alignment="CENTER" layoutX="465.0" layoutY="29.0" prefHeight="80.0" text="Import Items" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <SplitPane dividerPositions="0.2" layoutX="6.0" layoutY="60.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" SplitPane.resizableWithParent="false">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="140.0" prefWidth="272.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <ImageView fitHeight="64.0" fitWidth="64.0" onMouseClicked="#processAdd" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/add.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </ImageView>
+                        <ImageView fitHeight="64.0" fitWidth="64.0" onMouseClicked="#processEdit" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/update.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="64.0" fitWidth="64.0" onMouseClicked="#processDelete" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/delete.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="499.0" layoutY="1.0" prefHeight="140.0" prefWidth="377.0" spacing="20.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.rightAnchor="122.0" AnchorPane.topAnchor="1.0">
+                     <children>
+                        <JFXComboBox fx:id="cobSearch" prefHeight="31.0" prefWidth="147.0" promptText="Column Name" />
+                        <JFXTextField fx:id="tfSearch" alignment="TOP_LEFT" prefHeight="31.0" prefWidth="145.0" promptText="Items" />
+                        <ImageView fitHeight="64.0" fitWidth="64.0" onMouseClicked="#processSearch" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/search.png" />
+                           </image>
+                           <HBox.margin>
+                              <Insets right="20.0" />
+                           </HBox.margin>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="798.0" layoutY="6.0" prefHeight="140.0" prefWidth="145.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <ImageView fitHeight="64.0" fitWidth="64.0" onMouseClicked="#processRefresh" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/refresh.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
+                  <RadioButton fx:id="rbExpired" layoutX="383.0" layoutY="61.0" mnemonicParsing="false" onAction="#processRadio" prefHeight="21.0" prefWidth="87.0" text="Expired" AnchorPane.leftAnchor="380.0" AnchorPane.topAnchor="60.0">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="status" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="rbGood" layoutX="303.0" layoutY="61.0" mnemonicParsing="false" onAction="#processRadio" prefHeight="21.0" prefWidth="80.0" selected="true" text="Good" toggleGroup="$status" AnchorPane.leftAnchor="303.0" AnchorPane.topAnchor="60.0" />
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <TableView fx:id="importTable" layoutX="-14.0" layoutY="14.0" prefHeight="619.0" prefWidth="998.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <columns>
+                      <TableColumn fx:id="importId" prefWidth="75.0" text="id" />
+                      <TableColumn fx:id="importItemName" prefWidth="92.0" text="Item Name" />
+                        <TableColumn fx:id="importItemCategory" prefWidth="79.0" text="Category" />
+                        <TableColumn fx:id="importItemPrice" prefWidth="66.0" text="Price" />
+                        <TableColumn fx:id="importItemQty" prefWidth="82.0" text="Quantity" />
+                        <TableColumn fx:id="importItemUnit" prefWidth="56.0" text="Unit" />
+                        <TableColumn fx:id="importDate" prefWidth="107.0" text="Import Date" />
+                        <TableColumn fx:id="importItemExpiredDate" prefWidth="43.0" text="Item Expired Date" />
+                        <TableColumn fx:id="accountantUserName" prefWidth="100.0" text="ReceivedBy" />
+                        <TableColumn fx:id="totalPrice" prefWidth="75.0" text="Total Price" />
+                        <TableColumn fx:id="itemStatus" prefWidth="75.0" text="itemStatus" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+      <JFXButton layoutX="26.0" layoutY="15.0" onAction="#processBack" prefHeight="50.0" prefWidth="80.0" style="-fx-background-color: #bdbdbd; -fx-background-radius: 30;" text="Back" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="10.0" />
+      <JFXButton layoutX="895.0" layoutY="15.0" onAction="#processLogOut" prefHeight="50.0" prefWidth="80.0" style="-fx-background-color: #bdbdbd; -fx-background-radius: 30;" text="Log Out" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0" />
+      <JFXButton layoutX="781.0" layoutY="10.0" onAction="#processStock" prefHeight="50.0" prefWidth="80.0" style="-fx-background-color: #bdbdbd; -fx-background-radius: 30;" text="Stock" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="10.0" />
+   </children>
+</AnchorPane>
