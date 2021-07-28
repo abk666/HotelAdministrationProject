@@ -106,15 +106,12 @@ public class ImportFormController implements Initializable{
     				Boolean isSaveOk=importDataUtils.saveImportItems(importItem);
         			           if(!isSaveOk) {
         			        	   //Save imported item in stocks
-        			        	   Integer isSaveOk1=stockDataUtils.saveStock();
-        			        	   if(isSaveOk1>0) {
+        			        	       stockDataUtils.saveStock();
+        			        	  
         			        		   noti.getNotification(NotificationType.SUCCESS, "Success!", "Successfully Saved", AnimationType.SLIDE, 2000.0);
             			        	   Stage stage=(Stage) btnSave.getScene().getWindow();
             			        	   stage.close();
-        			        	   }
-        			        	   else {
-        			        		   noti.getNotification(NotificationType.ERROR, "Fail!", "Fail to Save in Stock", AnimationType.SLIDE, 2000.0);
-        			        	   }
+        			        	  
         			        	  
         			           }
         			           else {
@@ -131,8 +128,8 @@ public class ImportFormController implements Initializable{
         			Integer isUpdateOk=importDataUtils.updateImportItems(importItem);
         			if(isUpdateOk>0) {
         				//Save in stock
-        				Integer isSaveOk=stockDataUtils.saveStock();
-        				if(isSaveOk>0) {
+        				stockDataUtils.saveStock();
+        				
         					noti.getNotification(NotificationType.SUCCESS, "Success!", "Successfully Updated", AnimationType.SLIDE, 2000.0);
            				 Stage stage=(Stage) btnSave.getScene().getWindow();
        		        	   stage.close();
@@ -143,16 +140,16 @@ public class ImportFormController implements Initializable{
         			}
     			}
     			
-    		}
+    		}else {
+        		noti.getNotification(NotificationType.ERROR, "Error", "Something went wrong ,Please check your input", AnimationType.SLIDE, 2000.0);
+        	}
 
     		
-    	}else {
-    		noti.getNotification(NotificationType.ERROR, "Error", "Something went wrong ,Please check your input", AnimationType.SLIDE, 2000.0);
     	}
 
 
 
-    }
+
    
     
     public boolean isDouble(String num) {

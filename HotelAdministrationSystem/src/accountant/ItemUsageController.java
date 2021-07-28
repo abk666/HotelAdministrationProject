@@ -164,6 +164,7 @@ public class ItemUsageController implements Initializable{
 	            	  }else {
 	            		  updatedItemQty=itemQty;
 	            	  }
+	            	  System.out.println(updatedItemQty);
 	             
 	               if(stockQty-updatedItemQty>=0) {
 	            	   ItemUsage updateItemUsage=new ItemUsage(this.itemId, itemName, itemQty, itemUsageDate);

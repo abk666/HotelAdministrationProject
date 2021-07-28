@@ -120,7 +120,7 @@ public class DiningRoomFoodEditController implements Initializable{
     	Double foodMenuPrice = Double.parseDouble(tfPrice.getText());
     	
     	String imageName = "";
-    	if (this.foodMenuImageName != null || !this.foodMenuImageName.isEmpty()) {
+    	if (this.foodMenuImageName != null) {
     		
 	    	int indexDot = this.foodMenuImageName.indexOf(".");
 			imageName = this.foodMenuImageName.substring(0,indexDot)+".jpg";

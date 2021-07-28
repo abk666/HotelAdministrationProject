@@ -23,6 +23,13 @@ public class ItemUsage {
 		this.itemQty = new SimpleIntegerProperty(itemQty);
 		this.itemUsageDate = new SimpleStringProperty(itemUsageDate);
 	}
+	public ItemUsage( String itemName, Integer itemQty) {
+		super();
+		this.itemName =new SimpleStringProperty(itemName);
+		this.itemQty = new SimpleIntegerProperty(itemQty);
+
+	}
+	
 	public Integer getItemUsageId() {
 		return itemUsageId.get();
 	}

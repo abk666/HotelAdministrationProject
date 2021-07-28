@@ -138,7 +138,7 @@ public class RefrigeratorFoodController implements Initializable{
     	tfItemPrice.clear();
     	cobItemCategory.setValue("Category");
     	tfItemQty.clear();
-    	itemImage.setImage(new Image(getClass().getResourceAsStream("../img/photo.png")));//Default Image
+    	itemImage.setImage(new Image(getClass().getResourceAsStream("../img/upload.png")));//Default Image
     	
     }
 
@@ -152,6 +152,10 @@ public class RefrigeratorFoodController implements Initializable{
 		primaryStage.setTitle("RefrigeratorFoodDetailsUI");
 		primaryStage.setScene(scene);
 		primaryStage.show();
+    }
+    @FXML
+    void processBack(MouseEvent event) {
+
     }
 
 	@Override

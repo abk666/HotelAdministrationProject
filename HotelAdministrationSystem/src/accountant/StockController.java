@@ -164,15 +164,7 @@ if(!tfSearch.getText().trim().isEmpty()) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		try {
-			Integer isStockSaveOk=stockDataUtils.saveStock();
-			if(isStockSaveOk>0) {
-				System.out.println("ok");
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 		
 		
 		

@@ -8,6 +8,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import bean.Import;
 import bean.ItemUsage;
 import database.DbConnection;
 import javafx.collections.FXCollections;
@@ -33,6 +34,21 @@ public class ItemUsageDataUtils {
 		}
 		connection.close();
 		return itemUsageList;
+	}
+	public ObservableList<ItemUsage> getTotalUsage(String sql) throws SQLException{
+		ObservableList<ItemUsage> itemLists=FXCollections.observableArrayList();
+		connection=dbConnection.getConnection();
+		statement=connection.createStatement();
+		resultSet=statement.executeQuery(sql);
+		
+		while(resultSet.next()) {
+			itemLists.add(new ItemUsage(resultSet.getString("itemName"), resultSet.getInt("TOTAL_QUANTITY")));
+		}
+		connection.close();
+		return itemLists;
+		
+
+		
 	}
 	public Boolean saveItemUsage(ItemUsage itemUsage) throws SQLException {
 		connection=dbConnection.getConnection();
@@ -85,5 +101,6 @@ public class ItemUsageDataUtils {
 		connection.close();
 		return columnNameLists;
 	}
+	
 
 }
