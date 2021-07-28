@@ -4,11 +4,14 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 import bean.Admin;
 import database.DbConnection;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class AdminDataUtils {
 	
@@ -24,8 +27,11 @@ public class AdminDataUtils {
 			
 			connection = dbConnection.getConnection();
 			
-			preStmt = connection.prepareStatement("INSERT INTO `admin` ( `adminFName`, `adminLName`, `adminUserName`, `adminEmail`, `adminPassword`, `adminPhNo`, `adminAddress`, `adminDOB`, `adminStatus`, `adminImageName`) "
-					                                + " VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
+			preStmt = connection.prepareStatement("INSERT INTO `admin` (`adminFName`, `adminLName`, `adminUserName`, "
+					+ "`adminEmail`, `adminPassword`, `adminPhNo`,"
+					+ " `adminAddress`, `adminDOB`, `adminStatus`, `adminImageName`)"
+					+ " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
+					);
 			
 			preStmt.setString(1, admin.getFirstName());
 			preStmt.setString(2, admin.getLastName());
@@ -66,7 +72,7 @@ public class AdminDataUtils {
 					);
 			
 			preStmt.setString(1, admin.getFirstName());
-			preStmt.setString(2, admin.getFirstName());
+			preStmt.setString(2, admin.getLastName());
 			preStmt.setString(3, admin.getUsername());
 			preStmt.setString(4, admin.getEmail());
 			preStmt.setString(5, admin.getPassword());
@@ -83,5 +89,80 @@ public class AdminDataUtils {
 			connection.close();
 			return rowUpdated;
 		}
+		
+		//Read
+		public ObservableList<Admin> getAllAdmin(String sql) throws SQLException {
+			
+			ObservableList<Admin> adminList = FXCollections.observableArrayList();
+			
+			connection = dbConnection.getConnection();
+			
+			statement = connection.createStatement();
+			
+			resultSet = statement.executeQuery(sql);
+			
+			while (resultSet.next()) {
+				
+				adminList.add(new Admin(resultSet.getInt("adminId"),
+						resultSet.getString("adminFName"),
+						resultSet.getString("adminLName"),
+						resultSet.getString("adminUserName"),
+						resultSet.getString("adminEmail"),
+						resultSet.getString("adminPassword"),
+						resultSet.getString("adminPhNo"),
+						resultSet.getString("adminAddress"),
+						resultSet.getDate("adminDOB").toString(),
+						resultSet.getString("adminStatus"),
+						resultSet.getString("adminImageName")
+
+						));
+				
+			}
+			
+			connection.close();
+			return adminList;
+		}
+		
+		
+		//Delete 
+		public Boolean deleteAdmin(Integer adminId) throws SQLException {
+					
+					connection = dbConnection.getConnection();
+					
+					preStmt = connection.prepareStatement("delete from admin where adminId = ?;");
+					preStmt.setInt(1, adminId);
+					
+					Boolean isDeleteOk = preStmt.execute();
+					connection.close();
+					 return isDeleteOk;
+				}
+		
+		
+		// Read column label
+		
+		public ObservableList<String> getAllColumnLabel() throws SQLException {
+					
+				ObservableList<String> columnLabelList = FXCollections.observableArrayList();
+					
+				connection = dbConnection.getConnection();
+					
+				statement = connection.createStatement();
+					
+				resultSet = statement.executeQuery("select * from admin;");
+					
+				ResultSetMetaData metaData = resultSet.getMetaData();
+					
+				Integer count = metaData.getColumnCount();
+					
+					for(int x=1; x<= count ; x++) {
+						
+						columnLabelList.add(metaData.getColumnLabel(x));
+						
+					}
+					return columnLabelList;
+					
+					
+				}
+		
 
 }

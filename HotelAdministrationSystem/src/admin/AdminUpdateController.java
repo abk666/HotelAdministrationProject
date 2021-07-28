@@ -39,7 +39,7 @@ import tray.notification.NotificationType;
 import utility.AdminDataUtils;
 import utility.MyNotification;
 
-public class AdminSaveController implements Initializable {
+public class AdminUpdateController implements Initializable {
 
 	@FXML
 	private ImageView imageAdmin;
@@ -75,8 +75,9 @@ public class AdminSaveController implements Initializable {
     
     private String oldImageName;
     
-//    public Boolean isNewButtonClick = false;
+
     
+    private Integer adminId;
     
     AdminDataUtils adminDataUtils = new AdminDataUtils();
     
@@ -122,7 +123,7 @@ public class AdminSaveController implements Initializable {
 
     @FXML
     void processNew(ActionEvent event) {
-//    	isNewButtonClick = true;
+
     	
     	enableAllField();
 
@@ -143,10 +144,9 @@ public class AdminSaveController implements Initializable {
     	String dob = dpDOB.getValue().toString();
     	String status = cobStatus.getValue();
     	
+    	String imagename="";
     	
-    	String imagename = "";
-    	
-    	if (this.adminImageName!= null || this.adminImageName.isEmpty()) {
+    	if (this.adminImageName!= null) {
     	 
     	Integer indexDot = this.adminImageName.indexOf(".");
     	imagename = this.adminImageName.substring(0, indexDot)+".jpg";
@@ -157,12 +157,12 @@ public class AdminSaveController implements Initializable {
 		
 
     	
-		Admin admin = new Admin(fName, lName, userName, email, password, phone, address, dob, status, imagename);
+		Admin admin = new Admin(this.adminId,fName, lName, userName, email, password, phone, address, dob, status, imagename);
 				
-    	Boolean isSaveOK = adminDataUtils.saveAdmin(admin);
+    	Integer isUpdateOk = adminDataUtils.updateAdmin(admin);
     	
-    	if (!isSaveOK) {
-			System.out.println("Successfully saved");
+    	if (isUpdateOk>0) {
+			System.out.println("Successfully Updated");
 			
 			File imageFile = new File("src/img/admin/"+imagename);
 			
@@ -179,10 +179,7 @@ public class AdminSaveController implements Initializable {
 			myNoti.getNotification(NotificationType.ERROR, "Save Fail!", "Fail to Save "+userName+" to DB", AnimationType.SLIDE, 3000.0);
 
 			}
-    	
-		
-			
-		
+ 
 
     }
 
@@ -209,7 +206,24 @@ public class AdminSaveController implements Initializable {
 			
 			cobStatus.setItems(statusList);
 			
-			disableAllField();
+			AdminHolder holder =AdminHolder.getAdminInstance();
+			
+			Admin admin = holder.getAdmin();
+			
+			imageAdmin.setImage(new Image(getClass().getResourceAsStream("../img/admin/"+admin.getImageName())));
+			
+			adminId = admin.getId();
+			tfFName.setText(admin.getFirstName());
+			tfLName.setText(admin.getLastName());
+			tfUsername.setText(admin.getUsername());
+			tfEmail.setText(admin.getEmail());
+			tfPassword.setText(admin.getPassword());
+			tfPhone.setText(admin.getPhone());
+			tfAddress.setText(admin.getAddress());
+			dpDOB.setValue(LocalDate.parse(admin.getDob()));
+			cobStatus.setValue(admin.getStatus());
+		    this.adminId=admin.getId();
+		    this.oldImageName=admin.getImageName();
 		
 	}
 
