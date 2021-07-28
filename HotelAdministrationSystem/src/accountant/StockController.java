@@ -164,9 +164,15 @@ if(!tfSearch.getText().trim().isEmpty()) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+        
+		//Refreshing Stock
 		
-		
+		try {
+			stockDataUtils.saveStock();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		stockTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		stockId.setCellValueFactory(new PropertyValueFactory<>("stockId"));
