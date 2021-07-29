@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="accountant.AccountantMainController">
+<AnchorPane prefHeight="700.0" prefWidth="800.0" style="-fx-background-color: #d1e0ea;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="accountant.AccountantMainController">
    <children>
       <Label alignment="CENTER" prefHeight="60.0" text="Hotel WareHouse" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <font>
