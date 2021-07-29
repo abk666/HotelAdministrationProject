@@ -206,6 +206,7 @@ public class ImportController implements Initializable{
 
 	if(rbGood.isSelected()) {
 		showTable("select * from import where itemStatus='Good';");
+		
 	}else {
 		showTable("select * from import where itemStatus='Expired';");
 	}
@@ -253,7 +254,7 @@ public class ImportController implements Initializable{
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-		
+	
 
 			importId.setCellValueFactory(new PropertyValueFactory<>("importId"));
 			importItemName.setCellValueFactory(new PropertyValueFactory<>("importItemName"));

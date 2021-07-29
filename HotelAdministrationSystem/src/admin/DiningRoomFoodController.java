@@ -48,13 +48,10 @@ public class DiningRoomFoodController implements Initializable{
 
     @FXML
     private JFXComboBox<String> cobFoodCategory;
-    @FXML
-    private ImageView itemImage;
     
     private String foodMenuImageName;
     
     private String oldImageName;
-  
     
     private final MyNotification myNoti = new MyNotification();
     

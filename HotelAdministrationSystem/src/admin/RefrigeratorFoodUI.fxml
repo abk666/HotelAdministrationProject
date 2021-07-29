@@ -85,7 +85,7 @@
             <Image url="@../img/wine-bottle.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="itemImage" fitHeight="192.0" fitWidth="198.0" layoutX="355.0" layoutY="96.0" onMouseClicked="#processImage" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="foodMenuImage" fitHeight="192.0" fitWidth="198.0" layoutX="355.0" layoutY="96.0" onMouseClicked="#processImage" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/upload.png" />
          </image>
