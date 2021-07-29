@@ -1,10 +1,11 @@
 package bean;
 
 public class StaffHolder {
-
+	
 	private Staff staff;
+	
+	private final static StaffHolder STAFF_INSTANCE = new StaffHolder();
 
-	private final static StaffHolder STAFF_INSTANCE=new StaffHolder();
 
 	public Staff getStaff() {
 		return staff;

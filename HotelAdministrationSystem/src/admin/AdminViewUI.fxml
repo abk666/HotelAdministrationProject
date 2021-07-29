@@ -135,5 +135,10 @@
             <Font size="14.0" />
          </font>
       </Label>
+      <Label layoutX="14.0" layoutY="6.0" onMouseClicked="#processBack" text="&lt;&lt;Back">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -75,12 +75,14 @@ public class AdminSaveController implements Initializable {
     
     private String oldImageName;
     
-//    public Boolean isNewButtonClick = false;
+    public Boolean isNewButtonClick = false;
     
     
     AdminDataUtils adminDataUtils = new AdminDataUtils();
     
     private final  MyNotification myNoti = new MyNotification();
+    
+    Integer adminId;
     
     @FXML
     void processClear(ActionEvent event) {
@@ -122,7 +124,7 @@ public class AdminSaveController implements Initializable {
 
     @FXML
     void processNew(ActionEvent event) {
-//    	isNewButtonClick = true;
+    	isNewButtonClick = true;
     	
     	enableAllField();
 
@@ -143,10 +145,9 @@ public class AdminSaveController implements Initializable {
     	String dob = dpDOB.getValue().toString();
     	String status = cobStatus.getValue();
     	
+    	String imagename="";
     	
-    	String imagename = "";
-    	
-    	if (this.adminImageName!= null || this.adminImageName.isEmpty()) {
+    	if (this.adminImageName!= null) {
     	 
     	Integer indexDot = this.adminImageName.indexOf(".");
     	imagename = this.adminImageName.substring(0, indexDot)+".jpg";
@@ -155,7 +156,7 @@ public class AdminSaveController implements Initializable {
     		imagename = this.oldImageName;
     	}
 		
-
+		if(isNewButtonClick) {
     	
 		Admin admin = new Admin(fName, lName, userName, email, password, phone, address, dob, status, imagename);
 				
@@ -180,9 +181,51 @@ public class AdminSaveController implements Initializable {
 
 			}
     	
-		
-			
-		
+//		}else {
+//			
+//			
+//			AdminHolder holder =AdminHolder.getAdminInstance();
+//			
+//			Admin admin = holder.getAdmin();
+//			
+//			imageAdmin.setImage(new Image(getClass().getResourceAsStream("../img/admin/"+admin.getImageName())));
+//			
+//			adminId = admin.getId();
+//			tfFName.setText(admin.getFirstName());
+//			tfLName.setText(admin.getLastName());
+//			tfUsername.setText(admin.getUsername());
+//			tfEmail.setText(admin.getEmail());
+//			tfPassword.setText(admin.getPassword());
+//			tfPhone.setText(admin.getPhone());
+//			tfAddress.setText(admin.getAddress());
+//			dpDOB.setValue(LocalDate.parse(admin.getDob()));
+//			cobStatus.setPromptText(admin.getStatus());
+//			
+//			Admin adminUpdated = new Admin(this.adminId, fName, lName, userName, email, password, phone, address, dob, status, imagename);
+//			
+//			Integer rowUpdated = adminDataUtils.updateAdmin(adminUpdated);
+//			
+//			if (rowUpdated > 0 ) {
+//				
+//				
+//				
+//				myNoti.getNotification(NotificationType.SUCCESS, "Updated Success!", "Successfully Update "+userName+" to DB", AnimationType.SLIDE, 3000.0);
+//				File deletedFile = new File("src/img/admin/"+this.oldImageName);
+//					deletedFile.delete();
+//					
+//					File imageFile = new File("src/img/admin/"+imagename);
+//					
+//					BufferedImage bufferedImage = SwingFXUtils.fromFXImage(imageAdmin.getImage(), null);
+//					
+//					ImageIO.write(bufferedImage, "jpg", imageFile);
+//					
+//					
+//					clearAllField();	
+//					
+//			}
+//			
+		}
+    	
 
     }
 

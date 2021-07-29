@@ -6,67 +6,64 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.scene.control.Toggle;
 
 public class Staff {
-
-	private IntegerProperty staffId;
-	private StringProperty staffFName;
-	private StringProperty staffLName;
-	private StringProperty staffUserName;
-	private StringProperty staffEmail;
-	private StringProperty staffPassword;
-	private StringProperty staffRole;
-	private StringProperty staffGender;
-	private StringProperty staffPhNo;
-	private StringProperty staffAddress;
-	private StringProperty staffDOB;
-	private StringProperty staffStatus;
-	private StringProperty staffImageName;
+	
+	private IntegerProperty id;
+	private StringProperty firstName;
+	private StringProperty lastName;
+	private StringProperty username;
+	private StringProperty email;
+	private StringProperty password;
+	private StringProperty role;
+	private StringProperty gender;
+	private StringProperty phone;
+	private StringProperty address;
+	private StringProperty dob;
+	private StringProperty status;
+	private StringProperty imageName;
 	private DoubleProperty genderCount;
 	private DoubleProperty  roleCount;
 	
-	public Staff(Integer staffId, String staffFName, String staffLName, String staffUserName, String staffEmail,
-			String staffPassword, String staffRole, String staffGender, String staffPhNo, String staffAddress,
-			String staffDOB, String staffStatus, String staffImageName) {
+	public Staff(Integer id, String firstName, String lastName, String username, String email, String password,
+			String role, String gender, String phone, String address, String dob, String status, String imageName) {
 		super();
-		this.staffId = new SimpleIntegerProperty(staffId);
-		this.staffFName = new SimpleStringProperty(staffFName);
-		this.staffLName = new SimpleStringProperty(staffLName);
-		this.staffUserName = new SimpleStringProperty(staffUserName);
-		this.staffEmail = new SimpleStringProperty(staffEmail);
-		this.staffPassword = new SimpleStringProperty(staffPassword);
-		this.staffRole = new SimpleStringProperty(staffRole);
-		this.staffGender = new SimpleStringProperty(staffGender);
-		this.staffPhNo = new SimpleStringProperty(staffPhNo);
-		this.staffAddress = new SimpleStringProperty(staffAddress);
-		this.staffDOB = new SimpleStringProperty(staffDOB);
-		this.staffStatus = new SimpleStringProperty(staffStatus);
-		this.staffImageName = new SimpleStringProperty(staffImageName);
+		this.id = new SimpleIntegerProperty(id);
+		this.firstName =new SimpleStringProperty(firstName);
+		this.lastName = new SimpleStringProperty(lastName);
+		this.username = new SimpleStringProperty(username);
+		this.email = new SimpleStringProperty(email) ;
+		this.password = new SimpleStringProperty(password);
+		this.role = new SimpleStringProperty(role);
+		this.gender =new SimpleStringProperty(gender);
+		this.phone =new SimpleStringProperty(phone);
+		this.address =new SimpleStringProperty(address);
+		this.dob =new SimpleStringProperty(dob);
+		this.status =new SimpleStringProperty(status);
+		this.imageName = new SimpleStringProperty(imageName);
 	}
 
-	public Staff(String staffFName, String staffLName, String staffUserName, String staffEmail, String staffPassword,
-			String staffRole, String staffGender, String staffPhNo, String staffAddress, String staffDOB,
-			String staffStatus, String staffImageName) {
-		super();
-		this.staffFName = new SimpleStringProperty(staffFName);
-		this.staffLName = new SimpleStringProperty(staffLName);
-		this.staffUserName = new SimpleStringProperty(staffUserName);
-		this.staffEmail = new SimpleStringProperty(staffEmail);
-		this.staffPassword = new SimpleStringProperty(staffPassword);
-		this.staffRole = new SimpleStringProperty(staffRole);
-		this.staffGender = new SimpleStringProperty(staffGender);
-		this.staffPhNo = new SimpleStringProperty(staffPhNo);
-		this.staffAddress = new SimpleStringProperty(staffAddress);
-		this.staffDOB = new SimpleStringProperty(staffDOB);
-		this.staffStatus = new SimpleStringProperty(staffStatus);
-		this.staffImageName = new SimpleStringProperty(staffImageName);
-	}
-	
-	
 
+	public Staff(String firstName, String lastName, String username, String email, String password, String role,
+			String gender, String phone, String address, String dob, String status, String imageName) {
+		super();
+		this.firstName =new SimpleStringProperty(firstName);
+		this.lastName = new SimpleStringProperty(lastName);
+		this.username = new SimpleStringProperty(username);
+		this.email = new SimpleStringProperty(email) ;
+		this.password = new SimpleStringProperty(password);
+		this.role = new SimpleStringProperty(role);
+		this.gender =new SimpleStringProperty(gender);
+		this.phone =new SimpleStringProperty(phone);
+		this.address =new SimpleStringProperty(address);
+		this.dob =new SimpleStringProperty(dob);
+		this.status =new SimpleStringProperty(status);
+		this.imageName = new SimpleStringProperty(imageName);
+	}
 	public Staff(String staffGender, Double genderCount) {
 		super();
-		this.staffGender = new SimpleStringProperty(staffGender);
+		this.gender = new SimpleStringProperty(staffGender);
 		this.genderCount = new SimpleDoubleProperty(genderCount);
 	}
 
@@ -74,115 +71,140 @@ public class Staff {
 
 	public Staff(String staffRole, Double roleCount,Integer staffId) {
 		super();
-		this.staffRole = new SimpleStringProperty(staffRole);
+		this.role = new SimpleStringProperty(staffRole);
 		this.roleCount = new SimpleDoubleProperty(roleCount);
-		this.staffId = new SimpleIntegerProperty(staffId);
+		this.id = new SimpleIntegerProperty(staffId);
 	}
 
-	public Integer getStaffId() {
-		return staffId.get();
+
+	public Integer getId() {
+		return id.get();
 	}
 
-	public void setStaffId(Integer staffId) {
-		this.staffId = new SimpleIntegerProperty(staffId);
+
+	public void setId(Integer id) {
+		this.id = new SimpleIntegerProperty(id);
 	}
 
-	public String getStaffFName() {
-		return staffFName.get();
+
+	public String getFirstName() {
+		return firstName.get();
 	}
 
-	public void setStaffFName(String staffFName) {
-		this.staffFName = new SimpleStringProperty(staffFName);
+
+	public void setFirstName(String firstName) {
+		this.firstName = new SimpleStringProperty(firstName);
 	}
 
-	public String getStaffLName() {
-		return staffLName.get();
+
+	public String getLastName() {
+		return lastName.get();
 	}
 
-	public void setStaffLName(String staffLName) {
-		this.staffLName = new SimpleStringProperty(staffLName);
+
+	public void setLastName(String lastName) {
+		this.lastName = new SimpleStringProperty(lastName);
 	}
 
-	public String getStaffUserName() {
-		return staffUserName.get();
+
+	public String getUsername() {
+		return username.get();
 	}
 
-	public void setStaffUserName(String staffUserName) {
-		this.staffUserName = new SimpleStringProperty(staffUserName);
+
+	public void setUsername(String username) {
+		this.username =new SimpleStringProperty(username); 
 	}
 
-	public String getStaffEmail() {
-		return staffEmail.get();
+
+	public String getEmail() {
+		return email.get();
 	}
 
-	public void setStaffEmail(String staffEmail) {
-		this.staffEmail = new SimpleStringProperty(staffEmail);
+
+	public void setEmail(String email) {
+		this.email = new SimpleStringProperty(email) ;
 	}
 
-	public String getStaffPassword() {
-		return staffPassword.get();
+
+	public String getPassword() {
+		return password.get();
 	}
 
-	public void setStaffPassword(String staffPassword) {
-		this.staffPassword = new SimpleStringProperty(staffPassword);
+
+	public void setPassword(String password) {
+		this.password =new SimpleStringProperty(password) ; 
 	}
 
-	public String getStaffRole() {
-		return staffRole.get();
+
+	public String getRole() {
+		return role.get();
 	}
 
-	public void setStaffRole(String staffRole) {
-		this.staffRole = new SimpleStringProperty(staffRole);
+
+	public void setRole(String role) {
+		this.role = new SimpleStringProperty(role);
 	}
 
-	public String getStaffGender() {
-		return staffGender.get();
+
+	public String getGender() {
+		return gender.get();
 	}
 
-	public void setStaffGender(String staffGender) {
-		this.staffGender = new SimpleStringProperty(staffGender);
+
+	public void setGender(String gender) {
+		this.gender =new SimpleStringProperty(gender);
 	}
 
-	public String getStaffPhNo() {
-		return staffPhNo.get();
+
+	public String getPhone() {
+		return phone.get();
 	}
 
-	public void setStaffPhNo(String staffPhNo) {
-		this.staffPhNo = new SimpleStringProperty(staffPhNo);
+
+	public void setPhone(String phone) {
+		this.phone =  new SimpleStringProperty(phone);
 	}
 
-	public String getStaffAddress() {
-		return staffAddress.get();
+
+	public String getAddress() {
+		return address.get();
 	}
 
-	public void setStaffAddress(String staffAddress) {
-		this.staffAddress = new SimpleStringProperty(staffAddress);
+
+	public void setAddress(String address) {
+		this.address =new SimpleStringProperty(address);
 	}
 
-	public String getStaffDOB() {
-		return staffDOB.get();
+
+	public String getDob() {
+		return dob.get();
 	}
 
-	public void setStaffDOB(String staffDOB) {
-		this.staffDOB = new SimpleStringProperty(staffDOB);
+
+	public void setDob(String dob) {
+		this.dob =new SimpleStringProperty(dob);
 	}
 
-	public String getStaffStatus() {
-		return staffStatus.get();
+
+	public String getStatus() {
+		return status.get();
 	}
 
-	public void setStaffStatus(String staffStatus) {
-		this.staffStatus = new SimpleStringProperty(staffStatus);
+
+	public void setStatus(String status) {
+		this.status =new SimpleStringProperty(status); 
 	}
 
-	public String getStaffImageName() {
-		return staffImageName.get();
+
+	public String getImageName() {
+		return imageName.get();
 	}
 
-	public void setStaffImageName(String staffImageName) {
-		this.staffImageName = new SimpleStringProperty(staffImageName);
-	}
 
+	public void setImageName(String imageName) {
+		this.imageName = new SimpleStringProperty(imageName);
+	}
 	public Double getGenderCount() {
 		return genderCount.get();
 	}
@@ -198,6 +220,7 @@ public class Staff {
 	public void setRoleCount(Double roleCount) {
 		this.roleCount = new SimpleDoubleProperty(roleCount);
 	}
+	
 	
 	
 

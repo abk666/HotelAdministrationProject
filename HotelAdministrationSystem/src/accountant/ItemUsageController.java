@@ -11,6 +11,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 
+import bean.ImportStatusHolder;
 import bean.ItemUsage;
 import bean.Stock;
 import javafx.collections.FXCollections;
@@ -218,10 +219,11 @@ public class ItemUsageController implements Initializable{
 	    }
 	    @FXML
 	    void processStock(ActionEvent event) throws IOException {
+	    	ImportStatusHolder.setButtonStatus("FromItemUsage");
 	      	Stage primaryStage=new Stage();
 	    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("StockUI.fxml"));
 	    	Scene scene = new Scene(root);
-
+	    	
 	    	primaryStage.setTitle("Stock Lists");
 	    	primaryStage.setScene(scene);
 	    	primaryStage.show();

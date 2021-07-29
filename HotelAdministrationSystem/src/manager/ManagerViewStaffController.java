@@ -112,7 +112,7 @@ public class ManagerViewStaffController implements Initializable{
 			ObservableList<Staff>staffList=managerDataUtils.getStaffGender("select staffGender,count(*) as genderCount from staff group by staffGender;");
 			ObservableList<Data>genderData=FXCollections.observableArrayList();
 			for(Staff staff:staffList) {
-				genderData.add(new Data(staff.getStaffGender(), staff.getGenderCount()));
+				genderData.add(new Data(staff.getGender(), staff.getGenderCount()));
 			}
 			genderChart.setData(genderData);
 			for(Data data: genderData) {
@@ -135,7 +135,7 @@ public class ManagerViewStaffController implements Initializable{
 			ObservableList<Staff>staffList=managerDataUtils.getStaffRole("select staffId,staffRole,count(*) as roleCount from staff group by staffRole;");
 			ObservableList<Data>roleData=FXCollections.observableArrayList();
 			for(Staff staff:staffList) {
-				roleData.add(new Data(staff.getStaffRole(), staff.getRoleCount()));
+				roleData.add(new Data(staff.getRole(), staff.getRoleCount()));
 			}
 			roleChart.setData(roleData);
 			for(Data data: roleData) {

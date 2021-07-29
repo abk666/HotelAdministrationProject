@@ -7,10 +7,12 @@ import java.time.LocalDate;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 
 import bean.Import;
+import bean.ImportStatusHolder;
 import bean.Stock;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -58,6 +60,11 @@ public class StockController implements Initializable{
 
     @FXML
     private TableColumn<Stock, Integer> itemStock;
+    @FXML
+    private JFXButton backButton;
+
+    @FXML
+    private JFXButton logOutButton;
     
     @FXML
     private TableColumn<Stock, Integer> stockId;
@@ -108,12 +115,21 @@ if(!tfSearch.getText().trim().isEmpty()) {
     
     @FXML
     void processBack(ActionEvent event) throws IOException {
-    	Stage primaryStage=(Stage)((Node)event.getSource()).getScene().getWindow();
-    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("AccountantMainUI.fxml"));
-		Scene scene = new Scene(root);
-        primaryStage.setTitle("Accountant Main Section");
-		primaryStage.setScene(scene);
-		primaryStage.show();
+    	if(ImportStatusHolder.getButtonStatus()=="FromImport" || ImportStatusHolder.getButtonStatus()=="FromItemUsage") {
+    		ImportStatusHolder.setButtonStatus("FromStock");
+    		Stage stage= (Stage)backButton.getScene().getWindow();
+    		stage.close();
+    		
+    	}else {
+    		Stage primaryStage=(Stage)((Node)event.getSource()).getScene().getWindow();
+        	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("AccountantMainUI.fxml"));
+        	Scene scene = new Scene(root);
+            primaryStage.setTitle("Accountant Main Section");
+    		primaryStage.setScene(scene);
+    		primaryStage.show();
+    	}
+    		
+    	
     }
     
     @FXML
@@ -173,6 +189,12 @@ if(!tfSearch.getText().trim().isEmpty()) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		if(ImportStatusHolder.getButtonStatus()=="FromImport" || ImportStatusHolder.getButtonStatus()=="FromItemUsage") {
+			backButton.setText("Close");
+			logOutButton.setVisible(false);
+			logOutButton.setDisable(true);
+		}
+	
 		
 		stockTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		stockId.setCellValueFactory(new PropertyValueFactory<>("stockId"));

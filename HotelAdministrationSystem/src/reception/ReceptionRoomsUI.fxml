@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="reception.ReceptionRoomsController">
+   <children>
+      <SplitPane dividerPositions="0.8" orientation="VERTICAL" prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <Label alignment="CENTER" layoutX="1.0" layoutY="5.0" prefHeight="40.0" prefWidth="800.0" text="Rooms List" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <AnchorPane layoutX="-1.0" layoutY="71.0" prefHeight="315.0" prefWidth="798.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
+                     <children>
+                        <TableView fx:id="roomTable" layoutY="-19.0" prefHeight="335.0" prefWidth="798.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-19.0">
+                          <columns>
+                            <TableColumn fx:id="roomId" prefWidth="75.0" text="Room ID" />
+                            <TableColumn fx:id="roomType" prefWidth="75.0" text="Room Type" />
+                              <TableColumn fx:id="roomNo" prefWidth="75.0" text="Room No" />
+                              <TableColumn fx:id="roomPrice" prefWidth="75.0" text="Room Price" />
+                              <TableColumn fx:id="roomMaxNo" prefWidth="75.0" text="Room Max No." />
+                              <TableColumn fx:id="roomStatus" prefWidth="75.0" text="Room Status" />
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="117.0" prefWidth="798.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label fx:id="lblToday" prefHeight="36.0" prefWidth="118.0" text="Today" textFill="#bf12a5">
+                           <HBox.margin>
+                              <Insets left="50.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <Pane prefHeight="100.0" prefWidth="98.0" HBox.hgrow="ALWAYS" />
+                        <JFXComboBox fx:id="cobColumn" prefHeight="26.0" prefWidth="131.0">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <padding>
+                              <Insets right="10.0" />
+                           </padding>
+                        </JFXComboBox>
+                        <JFXTextField fx:id="tfSearch" prefHeight="26.0" prefWidth="150.0">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </JFXTextField>
+                        <JFXButton onAction="#processSearch" prefHeight="50.0" prefWidth="105.0" style="-fx-background-radius: 20; -fx-background-color: #3d1490;" text="Search" textFill="WHITE">
+                           <font>
+                              <Font size="13.0" />
+                           </font></JFXButton>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

@@ -20,7 +20,7 @@ public class Main extends Application {
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Hotel Adminstration Login");
 			primaryStage.getScene().getWindow();
-			primaryStage.setResizable(false);
+
 			primaryStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();

@@ -35,10 +35,6 @@ import tray.notification.NotificationType;
 import utility.ImportDataUtils;
 import utility.MyNotification;
 
-
-
-
-
 public class ImportController implements Initializable{
 	 @FXML
 	    private JFXTextField tfSearch;
@@ -214,9 +210,11 @@ public class ImportController implements Initializable{
 	    
 	    @FXML
 	    void processStock(ActionEvent event) throws IOException {
+	    	ImportStatusHolder.setButtonStatus("FromImport");
 	      	Stage primaryStage=new Stage();
 	    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("StockUI.fxml"));
 	    	Scene scene = new Scene(root);
+	
 	    	primaryStage.setTitle("Stock Lists");
 	    	primaryStage.setScene(scene);
 	    	primaryStage.show();

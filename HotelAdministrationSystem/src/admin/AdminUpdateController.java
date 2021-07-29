@@ -75,7 +75,7 @@ public class AdminUpdateController implements Initializable {
     
     private String oldImageName;
     
-
+    public Boolean isNewButtonClick = false;
     
     private Integer adminId;
     
@@ -123,7 +123,7 @@ public class AdminUpdateController implements Initializable {
 
     @FXML
     void processNew(ActionEvent event) {
-
+    	isNewButtonClick = true;
     	
     	enableAllField();
 
@@ -131,7 +131,6 @@ public class AdminUpdateController implements Initializable {
 
     @FXML
     void processSave(ActionEvent event) throws IOException, SQLException {
-    	
     	
     	
     	String fName = tfFName.getText().trim();
@@ -144,7 +143,7 @@ public class AdminUpdateController implements Initializable {
     	String dob = dpDOB.getValue().toString();
     	String status = cobStatus.getValue();
     	
-    	String imagename="";
+    	String imagename;
     	
     	if (this.adminImageName!= null) {
     	 
@@ -155,14 +154,14 @@ public class AdminUpdateController implements Initializable {
     		imagename = this.oldImageName;
     	}
 		
-
+		if(isNewButtonClick) {
     	
-		Admin admin = new Admin(this.adminId,fName, lName, userName, email, password, phone, address, dob, status, imagename);
+		Admin admin = new Admin(fName, lName, userName, email, password, phone, address, dob, status, imagename);
 				
-    	Integer isUpdateOk = adminDataUtils.updateAdmin(admin);
+    	Boolean isSaveOK = adminDataUtils.saveAdmin(admin);
     	
-    	if (isUpdateOk>0) {
-			System.out.println("Successfully Updated");
+    	if (!isSaveOK) {
+			System.out.println("Successfully saved");
 			
 			File imageFile = new File("src/img/admin/"+imagename);
 			
@@ -179,7 +178,36 @@ public class AdminUpdateController implements Initializable {
 			myNoti.getNotification(NotificationType.ERROR, "Save Fail!", "Fail to Save "+userName+" to DB", AnimationType.SLIDE, 3000.0);
 
 			}
- 
+    	
+		}else {
+			
+			
+			
+			Admin adminUpdated = new Admin(this.adminId, fName, lName, userName, email, password, phone, address, dob, status, imagename);
+			
+			Integer rowUpdated = adminDataUtils.updateAdmin(adminUpdated);
+			
+			if (rowUpdated > 0 ) {
+				
+				
+				
+				myNoti.getNotification(NotificationType.SUCCESS, "Updated Success!", "Successfully Update "+userName+" to DB", AnimationType.SLIDE, 3000.0);
+				File deletedFile = new File("src/img/admin/"+this.oldImageName);
+					deletedFile.delete();
+					
+					File imageFile = new File("src/img/admin/"+imagename);
+					
+					BufferedImage bufferedImage = SwingFXUtils.fromFXImage(imageAdmin.getImage(), null);
+					
+					ImageIO.write(bufferedImage, "jpg", imageFile);
+					
+					
+					clearAllField();	
+					disableAllField();
+					
+			}
+			
+		}
 
     }
 
@@ -222,8 +250,9 @@ public class AdminUpdateController implements Initializable {
 			tfAddress.setText(admin.getAddress());
 			dpDOB.setValue(LocalDate.parse(admin.getDob()));
 			cobStatus.setValue(admin.getStatus());
-		    this.adminId=admin.getId();
-		    this.oldImageName=admin.getImageName();
+			oldImageName=admin.getImageName();
+			
+		
 		
 	}
 

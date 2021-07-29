@@ -2,14 +2,20 @@
 
 .text-field{
 	-fx-prompt-text-fill: #4ebcff;
+	-fx-text-fill:#4ebcff;
 }
 
 .jfx-combo-box {
 	-fx-prompt-text-fill: #4ebcff;
 	-fx-font-size: 15;
+
+}
+.combo-box .list-cell{
+	-fx-text-fill: #4ebcff;
 }
 
 .password-field{
 	-fx-prompt-text-fill: #4ebcff;
+	-fx-text-fill:#4ebcff;
 }
 

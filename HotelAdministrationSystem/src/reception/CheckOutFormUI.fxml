@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="800.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="reception.CheckOutFormController">
+   <children>
+      <JFXListView fx:id="lvItem" layoutX="22.0" layoutY="156.0" prefHeight="515.0" prefWidth="223.0" verticalGap="20.0" />
+      <JFXListView fx:id="lvCosts" layoutX="346.0" layoutY="156.0" prefHeight="515.0" prefWidth="140.0" verticalGap="20.0" />
+      <Label alignment="CENTER" layoutX="233.0" layoutY="24.0" prefHeight="60.0" text="Check Out Form" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <JFXButton layoutX="382.0" layoutY="736.0" onAction="#processCheckOut" prefHeight="52.0" prefWidth="91.0" style="-fx-background-color: lightgreen;" text="CheckOut" />
+      <Label layoutX="22.0" layoutY="135.0" prefHeight="21.0" prefWidth="84.0" text="Items" />
+      <Label layoutX="346.0" layoutY="135.0" text="Costs" />
+      <Label layoutX="28.0" layoutY="736.0" text="Total Price-" textFill="BLUE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblTotalPrice" layoutX="134.0" layoutY="736.0" prefHeight="21.0" prefWidth="122.0" textFill="BLUE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <JFXListView fx:id="lvQty" layoutX="276.0" layoutY="156.0" prefHeight="515.0" prefWidth="36.0" verticalGap="20.0" />
+      <Label layoutX="282.0" layoutY="135.0" text="Qty" />
+      <JFXTextField fx:id="tfItemPrice" editable="false" layoutX="346.0" layoutY="671.0" prefHeight="31.0" prefWidth="140.0" />
+      <Label layoutX="264.0" layoutY="689.0" prefHeight="21.0" prefWidth="75.0" text="Total-">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Separator layoutX="20.0" layoutY="134.0" prefWidth="200.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" />
+      <Label layoutX="119.0" layoutY="60.0" text="Room Price" />
+      <TextField fx:id="tfRoomPrice" editable="false" layoutX="117.0" layoutY="90.0" prefHeight="31.0" prefWidth="122.0" />
+      <TextField fx:id="tfDays" editable="false" layoutX="276.0" layoutY="90.0" prefHeight="31.0" prefWidth="36.0" />
+      <TextField fx:id="tfTotalRoomPrice" editable="false" layoutX="366.0" layoutY="90.0" prefHeight="31.0" prefWidth="108.0" />
+      <Label layoutX="240.0" layoutY="60.0" text="Number of Days" />
+      <Label layoutX="404.0" layoutY="60.0" text="Total" />
+      <Label layoutX="22.0" layoutY="60.0" text="Room No." />
+      <TextField fx:id="tfRoomNo" editable="false" layoutX="22.0" layoutY="90.0" prefHeight="31.0" prefWidth="84.0" />
+   </children>
+</AnchorPane>

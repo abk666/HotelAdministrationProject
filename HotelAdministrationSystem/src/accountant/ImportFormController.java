@@ -13,6 +13,8 @@ import com.jfoenix.controls.JFXTextField;
 import bean.Import;
 import bean.ImportHolder;
 import bean.ImportStatusHolder;
+import bean.Staff;
+import bean.StaffHolder;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -93,7 +95,9 @@ public class ImportFormController implements Initializable{
     		String importItemUnit=cobUnit.getValue();
     		String importDate=dpImportDate.getValue().toString();
     		String importItemExpiredDate=dpExpiredDate.getValue().toString();
-    		String accountantUserName="abk";
+    		StaffHolder holder=StaffHolder.getStaffInstance();
+    		Staff staff=holder.getStaff();
+    		String accountantUserName=staff.getUsername();
     		Double totalPrice=importItemPrice*importItemQty;
     		String itemStatus="Good";
     		

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="reception.BookingTableController">
+   <children>
+      <SplitPane dividerPositions="0.18" orientation="VERTICAL" prefHeight="550.0" prefWidth="750.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <HBox alignment="CENTER" layoutY="39.0" prefHeight="78.0" prefWidth="800.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="39.0">
+                     <children>
+                        <JFXButton onAction="#processView" prefHeight="50.0" prefWidth="97.0" style="-fx-background-color: #3d1490;" text="View Details" textFill="WHITE">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton onAction="#processDelete" prefHeight="50.0" prefWidth="80.0" style="-fx-background-color: #c40d0d;" text="Delete" textFill="WHITE">
+                           <font>
+                              <Font size="13.0" />
+                           </font></JFXButton>
+                        <JFXButton onAction="#processRefresh" prefHeight="50.0" prefWidth="80.0" style="-fx-background-color: #14b339;" text="Refresh" textFill="WHITE">
+                           <font>
+                              <Font size="13.0" />
+                           </font></JFXButton>
+                        <JFXComboBox fx:id="cobColumn" prefHeight="26.0" prefWidth="118.0" promptText="Column" />
+                        <JFXTextField fx:id="tfSearch" />
+                        <JFXButton onAction="#processSearch" prefHeight="50.0" prefWidth="80.0" style="-fx-background-color: #3d1490; -fx-background-radius: 20;" text="Search" textFill="WHITE">
+                           <font>
+                              <Font size="13.0" />
+                           </font></JFXButton>
+                     </children>
+                  </HBox>
+                  <Label alignment="TOP_LEFT" prefHeight="40.0" prefWidth="800.0" text="Booking Table Section">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="800.0">
+               <children>
+                  <TableView fx:id="bookingTable" prefHeight="450.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="0.0">
+                    <columns>
+                      <TableColumn fx:id="bookingId" prefWidth="54.0" text="ID" />
+                      <TableColumn fx:id="guestName" prefWidth="65.0" text="GuestName" />
+                        <TableColumn fx:id="guestPhNo" prefWidth="68.0" text="GuestPhNo" />
+                        <TableColumn fx:id="roomType" prefWidth="62.0" text="RoomType" />
+                        <TableColumn fx:id="roomNo" prefWidth="51.0" text="RoomNo" />
+                        <TableColumn fx:id="roomPrice" prefWidth="92.0" text="RoomPrice" />
+                        <TableColumn fx:id="noOfGuest" prefWidth="71.0" text="NoOfGuest" />
+                        <TableColumn fx:id="bookedDate" prefWidth="74.0" text="BookingDate" />
+                        <TableColumn fx:id="checkInDate" prefWidth="72.0" text="CheckInDate" />
+                        <TableColumn fx:id="numberOfDays" prefWidth="53.0" text="NumberofDays" />
+                        <TableColumn fx:id="checkOutDate" prefWidth="100.0" text="CheckOutDate" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

@@ -69,7 +69,7 @@
             </AnchorPane>
         </items>
       </SplitPane>
-      <JFXButton layoutX="42.0" layoutY="5.0" onAction="#processBack" prefHeight="50.0" prefWidth="80.0" style="-fx-background-color: #9e9e9e; -fx-background-radius: 30;" text="Main " AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0" />
-      <JFXButton layoutX="620.0" layoutY="5.0" onAction="#processLogOut" prefHeight="50.0" prefWidth="80.0" style="-fx-background-color: #9e9e9e; -fx-background-radius: 30;" text="LogOut" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0" />
+      <JFXButton fx:id="backButton" layoutX="42.0" layoutY="5.0" onAction="#processBack" prefHeight="50.0" prefWidth="80.0" style="-fx-background-color: #9e9e9e; -fx-background-radius: 30;" text="Back" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0" />
+      <JFXButton fx:id="logOutButton" layoutX="620.0" layoutY="5.0" onAction="#processLogOut" prefHeight="50.0" prefWidth="80.0" style="-fx-background-color: #9e9e9e; -fx-background-radius: 30;" text="LogOut" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0" />
    </children>
 </AnchorPane>

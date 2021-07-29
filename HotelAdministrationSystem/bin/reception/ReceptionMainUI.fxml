@@ -1,16 +1,354 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="700.0" prefWidth="900.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="reception.ReceptionMainController">
    <children>
-      <Label alignment="CENTER" layoutY="-1.0" prefHeight="60.0" prefWidth="900.0" text="Reception Main UI" textFill="#093f91">
-         <font>
-            <Font size="36.0" />
-         </font>
-      </Label>
+      <BorderPane prefHeight="600.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <left>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox layoutY="-2.0" prefHeight="508.0" prefWidth="200.0" style="-fx-background-color: #c2f1f2;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-2.0">
+                     <children>
+                        <JFXButton onAction="#processCheckIn" prefHeight="80.0" prefWidth="200.0" ripplerFill="#c2f1f2" style="-fx-background-color: #c2f1f2;" text=" CheckIn">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="32.0" fitWidth="34.0">
+                                 <image>
+                                    <Image url="@../img/checkin.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton onAction="#processCheckOut" prefHeight="80.0" prefWidth="200.0" ripplerFill="#9deda0" text="CheckOut">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <graphic>
+                              <ImageView>
+                                 <image>
+                                    <Image url="@../img/hotelcheckout.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton onAction="#processBooking" prefHeight="80.0" prefWidth="200.0" ripplerFill="#9deda0" text=" Booking">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="32.0" fitWidth="32.0">
+                                 <image>
+                                    <Image url="@../img/check-out.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton onAction="#processRooms" prefHeight="80.0" prefWidth="200.0" ripplerFill="#9deda0" text="Rooms">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <graphic>
+                              <ImageView>
+                                 <image>
+                                    <Image url="@../img/room-key.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton onAction="#processGuests" prefHeight="80.0" prefWidth="200.0" ripplerFill="#9deda0" text=" Guests">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="37.0" fitWidth="33.0">
+                                 <image>
+                                    <Image url="@../img/guest.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+         </left>
+         <top>
+            <AnchorPane prefHeight="80.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="80.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Label prefHeight="46.0" prefWidth="310.0" text="Reception Section">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font size="26.0" />
+                           </font>
+                        </Label>
+                        <Pane prefHeight="80.0" prefWidth="85.0" HBox.hgrow="ALWAYS" />
+                        <Label fx:id="lblToday" prefHeight="46.0" prefWidth="111.0" text="Today" textFill="#3320c7">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Pane prefHeight="80.0" prefWidth="113.0" HBox.hgrow="ALWAYS" />
+                        <JFXButton prefHeight="50.0" prefWidth="123.0" style="-fx-background-color: #3d1490; -fx-background-radius: 30;" text="Logout" textFill="WHITE">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </JFXButton>
+                     </children>
+                  </HBox>
+               </children>
+            </AnchorPane>
+         </top>
+         <center>
+            <AnchorPane prefHeight="520.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+               <children>
+                  <TabPane prefHeight="520.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <tabs>
+                      <Tab text="Single Room">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <ImageView fitHeight="128.0" fitWidth="228.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                                    <ImageView fitHeight="300.0" fitWidth="500.0" layoutX="40.0" layoutY="66.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
+                                       <image>
+                                          <Image url="@../img/singleroom.jpg" />
+                                       </image>
+                                    </ImageView>
+                                    <GridPane layoutX="139.0" layoutY="369.0" prefHeight="100.0" prefWidth="300.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="369.0">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <Label text="Air Conditioning">
+                                             <font>
+                                                <Font size="12.0" />
+                                             </font></Label>
+                                          <Label text="Bathroom" GridPane.rowIndex="1">
+                                             <font>
+                                                <Font size="12.0" />
+                                             </font></Label>
+                                          <Label text="Breakfast" GridPane.columnIndex="1">
+                                             <font>
+                                                <Font size="12.0" />
+                                             </font></Label>
+                                          <Label text="Free WiFi" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                             <font>
+                                                <Font size="12.0" />
+                                             </font></Label>
+                                       </children>
+                                    </GridPane>
+                                    <Label layoutX="14.0" layoutY="14.0" prefHeight="33.0" prefWidth="356.0" text="Single Room Interior" textFill="#5d0c6e" AnchorPane.topAnchor="15.0">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font></Label>
+                                    <Label alignment="CENTER" layoutX="25.0" layoutY="66.0" prefHeight="60.0" prefWidth="89.0" style="-fx-background-color: #9e0da1; -fx-background-radius: 20;" text="49$" textFill="WHITE">
+                                       <font>
+                                          <Font size="36.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                        </content>
+                      </Tab>
+                      <Tab text="Double Room">
+                        <content>
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <Label layoutX="14.0" layoutY="14.0" text="Double Room Interior" textFill="#a10d28" AnchorPane.topAnchor="15.0">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <ImageView fitHeight="300.0" fitWidth="500.0" layoutX="93.0" layoutY="58.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
+                                       <image>
+                                          <Image url="@../img/doubleroom.jpg" />
+                                       </image>
+                                    </ImageView>
+                                    <Label alignment="CENTER" layoutX="21.0" layoutY="58.0" prefHeight="60.0" prefWidth="89.0" style="-fx-background-color: #a10d28; -fx-background-radius: 20;" text="129$" textFill="WHITE">
+                                       <font>
+                                          <Font size="36.0" />
+                                       </font>
+                                    </Label>
+                                    <GridPane layoutX="132.0" layoutY="369.0" prefHeight="100.0" prefWidth="300.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="369.0">
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                                          <Label text="Air Conditioning">
+                                             <font>
+                                                <Font size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Bathroom" GridPane.rowIndex="1">
+                                             <font>
+                                                <Font size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Breakfast" GridPane.columnIndex="1">
+                                             <font>
+                                                <Font size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Free WiFi" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                             <font>
+                                                <Font size="12.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </GridPane>
+                                 </children></AnchorPane>
+                        </content>
+                      </Tab>
+                        <Tab text="Triple Room">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <Label layoutY="5.0" text="Triple Room Interior" textFill="#9e0da1" AnchorPane.topAnchor="15.0">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <ImageView fitHeight="300.0" fitWidth="500.0" layoutX="106.0" layoutY="47.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
+                                       <image>
+                                          <Image url="@../img/tripleroom.jpg" />
+                                       </image>
+                                    </ImageView>
+                                    <Label alignment="CENTER" layoutX="23.0" layoutY="47.0" prefHeight="60.0" prefWidth="89.0" style="-fx-background-color: #9e0da1; -fx-background-radius: 20;" text="229$" textFill="WHITE">
+                                       <font>
+                                          <Font size="36.0" />
+                                       </font>
+                                    </Label>
+                                    <GridPane layoutX="129.0" layoutY="363.0" prefHeight="100.0" prefWidth="300.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="369.0">
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                                          <Label text="Air Conditioning">
+                                             <font>
+                                                <Font size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Bathroom" GridPane.rowIndex="1">
+                                             <font>
+                                                <Font size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Breakfast" GridPane.columnIndex="1">
+                                             <font>
+                                                <Font size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Free WiFi" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                             <font>
+                                                <Font size="12.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </GridPane>
+                                 </children></AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab text="Family Room">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <Label layoutX="14.0" layoutY="23.0" text="Family Room Interior" textFill="#a8b314" AnchorPane.topAnchor="15.0">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                    <ImageView fitHeight="300.0" fitWidth="500.0" layoutX="90.0" layoutY="55.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
+                                       <image>
+                                          <Image url="@../img/familyroom2.jpg" />
+                                       </image>
+                                    </ImageView>
+                                    <Label alignment="CENTER" layoutX="29.0" layoutY="55.0" prefHeight="60.0" prefWidth="89.0" style="-fx-background-color: #a8b314; -fx-background-radius: 20;" text="499$" textFill="WHITE">
+                                       <font>
+                                          <Font size="36.0" />
+                                       </font>
+                                    </Label>
+                                    <GridPane layoutX="118.0" layoutY="369.0" prefHeight="100.0" prefWidth="300.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="369.0">
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                       <children>
+                                          <Label text="Air Conditioning">
+                                             <font>
+                                                <Font size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Bathroom" GridPane.rowIndex="1">
+                                             <font>
+                                                <Font size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Breakfast" GridPane.columnIndex="1">
+                                             <font>
+                                                <Font size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Free WiFi" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                             <font>
+                                                <Font size="12.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </GridPane>
+                                 </children></AnchorPane>
+                           </content>
+                        </Tab>
+                    </tabs>
+                  </TabPane>
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
    </children>
 </AnchorPane>

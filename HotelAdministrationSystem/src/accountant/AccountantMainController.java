@@ -22,7 +22,6 @@ public class AccountantMainController {
 	    	Stage primaryStage=(Stage)((Node)event.getSource()).getScene().getWindow();
 	    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("ImportUI.fxml"));
 			Scene scene = new Scene(root);
-			
 			primaryStage.setScene(scene);
 			primaryStage.show();
 	    }
@@ -32,7 +31,6 @@ public class AccountantMainController {
 	    	Stage primaryStage=(Stage)((Node)event.getSource()).getScene().getWindow();
 	    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("ItemUsageUI.fxml"));
 			Scene scene = new Scene(root);
-			
 			primaryStage.setScene(scene);
 			primaryStage.show();
 	    }
@@ -44,7 +42,6 @@ public class AccountantMainController {
 				Stage primaryStage=(Stage)((Node)event.getSource()).getScene().getWindow();
 		    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("../main/LogInUI.fxml"));
 				Scene scene = new Scene(root);
-			
 				primaryStage.setScene(scene);
 				primaryStage.show();
 			}
@@ -56,8 +53,7 @@ public class AccountantMainController {
 	    	Stage primaryStage=(Stage)((Node)event.getSource()).getScene().getWindow();
 	    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("StockUI.fxml"));
 			Scene scene = new Scene(root);
-
-			primaryStage.setScene(scene);
+            primaryStage.setScene(scene);
 			primaryStage.show();
 	    }
 }
