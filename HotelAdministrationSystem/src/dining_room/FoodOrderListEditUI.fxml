@@ -78,7 +78,7 @@
                               <Font name="System Bold Italic" size="14.0" />
                            </font>
                         </Label>
-                        <JFXButton onAction="#processSave" prefHeight="45.0" prefWidth="75.0" ripplerFill="#b70fc6" style="-fx-background-color: #1eb2a6; -fx-background-radius: 20;" text="Save" textFill="#ffee58" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                        <JFXButton onAction="#processUpdate" prefHeight="45.0" prefWidth="75.0" ripplerFill="#b70fc6" style="-fx-background-color: #1eb2a6; -fx-background-radius: 20;" text="Update" textFill="#ffee58" GridPane.columnIndex="1" GridPane.rowIndex="5">
                            <font>
                               <Font name="System Bold Italic" size="14.0" />
                            </font>

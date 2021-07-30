@@ -74,24 +74,24 @@ public class StaffViewController implements Initializable {
 		Staff staff = holder.getStaff();
 		
 		
-		staffImage.setImage(new Image(getClass().getResourceAsStream("../img/staff/"+staff.getImageName())));
+		staffImage.setImage(new Image(getClass().getResourceAsStream("../img/staff/"+staff.getStaffImageName())));
 		
-		lblTitle.setText(staff.getUsername()+ "  Profile");
-		lblId.setText("ID- "+staff.getId().toString());
-		lblImageName.setText(staff.getImageName());
+		lblTitle.setText(staff.getStaffUserName()+ "  Profile");
+		lblId.setText("ID- "+staff.getStaffId().toString());
+		lblImageName.setText(staff.getStaffImageName());
 		
-		lblFName.setText(staff.getFirstName());
-		lblLName.setText(staff.getLastName());
-		lblUsername.setText(staff.getUsername());
-		lblEmail.setText(staff.getEmail());
-		lblPassword.setText(staff.getPassword());
-		lblRole.setText(staff.getRole());
-		lblGender.setText(staff.getGender());
-		lblPhone.setText(staff.getPhone());
+		lblFName.setText(staff.getStaffFName());
+		lblLName.setText(staff.getStaffLName());
+		lblUsername.setText(staff.getStaffUserName());
+		lblEmail.setText(staff.getStaffEmail());
+		lblPassword.setText(staff.getStaffPassword());
+		lblRole.setText(staff.getStaffRole());
+		lblGender.setText(staff.getStaffGender());
+		lblPhone.setText(staff.getStaffPhNo());
 		
-		lblAddress.setText(staff.getAddress());
-		lblDOB.setText(staff.getDob());
-		lblStatus.setText(staff.getStatus());
+		lblAddress.setText(staff.getStaffAddress());
+		lblDOB.setText(staff.getStaffDOB());
+		lblStatus.setText(staff.getStaffStatus());
 		
 	}
 	

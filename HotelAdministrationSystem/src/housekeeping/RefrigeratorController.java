@@ -3,6 +3,7 @@ package housekeeping;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXComboBox;
@@ -19,6 +20,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -26,6 +28,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import utility.InRoomCostDataUtils;
+import utility.MyNotification;
 import utility.RefrigeratorFoodDataUtils;
 import utility.RefrigeratorUtils;
 import utility.RoomUtils;
@@ -84,19 +87,23 @@ public class RefrigeratorController implements Initializable{
     private final RefrigeratorFoodDataUtils refriFoodUtils=new RefrigeratorFoodDataUtils();
     private final InRoomCostDataUtils inRoomCostUtils=new InRoomCostDataUtils();
     private final RoomUtils roomUtils=new RoomUtils();
-    
+
+    private final MyNotification noti=new MyNotification();
 
 
     @FXML
     void processBack(MouseEvent event) throws IOException {
+    	Optional<ButtonType> result=noti.getConfirmationAlert("Comfimation Dialog", "Comfirmation", "Do you really want to Exit?");
+		if(result.get()==ButtonType.OK) {
     	Stage primaryStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
     	primaryStage.setResizable(true);
-    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("WaitingUI.fxml"));
+    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("HouseKeepingUI.fxml"));
 		Scene scene = new Scene(root);
 		
 		primaryStage.setTitle("HouseKeeping Section");
 		primaryStage.setScene(scene);
 		primaryStage.show();
+		}
     }
 
     @FXML
@@ -122,10 +129,14 @@ public class RefrigeratorController implements Initializable{
     @FXML
     void processRefresh(ActionEvent event) {
     	showTable("select * from refrigeratoritem");
+    	cobSearch.setValue("");
+    	tfSearch.clear();
     }
 
     @FXML
     void processSave(ActionEvent event) throws SQLException {
+    	Optional<ButtonType> result=noti.getConfirmationAlert("Comfimation Dialog", "Comfirmation", "Do you really want to Save?");
+		if(result.get()==ButtonType.OK) {
     	String inRoomItemName=tfitemName.getText().trim();
     	String inRoomItemCategory=cobitemCategory.getValue();
     	Double inRoomItemPrice=Double.parseDouble(tfitemPrice.getText().trim());
@@ -136,6 +147,7 @@ public class RefrigeratorController implements Initializable{
     	boolean isSaveOk=inRoomCostUtils.saveInRoomCost(inRoomCost);
     	if(!isSaveOk) {
     		System.out.println("Successfully saved");
+    	}
     	}
     	
     	

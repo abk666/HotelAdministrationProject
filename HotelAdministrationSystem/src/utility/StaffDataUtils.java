@@ -36,19 +36,19 @@ public class StaffDataUtils {
 						
 						);
 				
-				preStmt.setString(1, staff.getFirstName());
-				preStmt.setString(2, staff.getLastName());
-				preStmt.setString(3, staff.getUsername());
-				preStmt.setString(4, staff.getEmail());
-				preStmt.setString(5, staff.getPassword());
-				preStmt.setString(6, staff.getRole());
-				preStmt.setString(7, staff.getGender());
-				preStmt.setString(8, staff.getPhone());
-				preStmt.setString(9, staff.getAddress());
-				Date date = Date.valueOf(staff.getDob());
+				preStmt.setString(1, staff.getStaffFName());
+				preStmt.setString(2, staff.getStaffLName());
+				preStmt.setString(3, staff.getStaffUserName());
+				preStmt.setString(4, staff.getStaffEmail());
+				preStmt.setString(5, staff.getStaffPassword());
+				preStmt.setString(6, staff.getStaffRole());
+				preStmt.setString(7, staff.getStaffGender());
+				preStmt.setString(8, staff.getStaffPhNo());
+				preStmt.setString(9, staff.getStaffAddress());
+				Date date = Date.valueOf(staff.getStaffDOB());
 				preStmt.setDate(10, date);
-				preStmt.setString(11, staff.getStatus());
-				preStmt.setString(12, staff.getImageName());
+				preStmt.setString(11, staff.getStaffStatus());
+				preStmt.setString(12, staff.getStaffImageName());
 				
 				Boolean isSaveOK = preStmt.execute();
 				connection.close();
@@ -78,20 +78,20 @@ public class StaffDataUtils {
 				
 						);
 				
-				preStmt.setString(1, staff.getFirstName());
-				preStmt.setString(2, staff.getLastName());
-				preStmt.setString(3, staff.getUsername());
-				preStmt.setString(4, staff.getEmail());
-				preStmt.setString(5, staff.getPassword());
-				preStmt.setString(6, staff.getRole());
-				preStmt.setString(7, staff.getGender());
-				preStmt.setString(8, staff.getPhone());
-				preStmt.setString(9, staff.getAddress());
-				Date date = Date.valueOf(staff.getDob());
+				preStmt.setString(1, staff.getStaffFName());
+				preStmt.setString(2, staff.getStaffLName());
+				preStmt.setString(3, staff.getStaffUserName());
+				preStmt.setString(4, staff.getStaffEmail());
+				preStmt.setString(5, staff.getStaffPassword());
+				preStmt.setString(6, staff.getStaffRole());
+				preStmt.setString(7, staff.getStaffGender());
+				preStmt.setString(8, staff.getStaffPhNo());
+				preStmt.setString(9, staff.getStaffAddress());
+				Date date = Date.valueOf(staff.getStaffDOB());
 				preStmt.setDate(10, date);
-				preStmt.setString(11, staff.getStatus());
-				preStmt.setString(12, staff.getImageName());
-				preStmt.setInt(13, staff.getId());
+				preStmt.setString(11, staff.getStaffStatus());
+				preStmt.setString(12, staff.getStaffImageName());
+				preStmt.setInt(13, staff.getStaffId());
 				
 				Integer rowUpdated = preStmt.executeUpdate();
 				

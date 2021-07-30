@@ -31,7 +31,7 @@
       </Label>
       <ImageView fx:id="imageStaff" fitHeight="150.0" fitWidth="200.0" layoutX="39.0" layoutY="115.0" onMouseClicked="#processImage" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/staffEdit.png" />
+            <Image url="@../img/Staff.png" />
          </image>
       </ImageView>
       <GridPane layoutX="24.0" layoutY="268.0" prefHeight="428.0" prefWidth="293.0">

@@ -1,19 +1,27 @@
 package housekeeping;
 
+import java.io.IOException;
 import java.net.URL;
 
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import bean.Room;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import utility.MyNotification;
 import utility.RoomUtils;;
 
 public class WaitingRoomController implements Initializable {
@@ -38,10 +46,21 @@ public class WaitingRoomController implements Initializable {
     
     private RoomUtils roomUtils=new RoomUtils();
 
+    private final MyNotification noti=new MyNotification();
     
     @FXML
-    void processBack(MouseEvent event) {
-
+    void processBack(MouseEvent event) throws IOException {
+    	Optional<ButtonType> result=noti.getConfirmationAlert("Comfimation Dialog", "Comfirmation", "Do you really want to Exit?");
+		if(result.get()==ButtonType.OK) {
+    	Stage primaryStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+    	primaryStage.setResizable(true);
+    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("HouseKeepingUI.fxml"));
+		Scene scene = new Scene(root);
+		
+		primaryStage.setTitle("HouseKeeping Section");
+		primaryStage.setScene(scene);
+		primaryStage.show();
+		}
     }
     
     @FXML

@@ -97,7 +97,7 @@ public class ImportFormController implements Initializable{
     		String importItemExpiredDate=dpExpiredDate.getValue().toString();
     		StaffHolder holder=StaffHolder.getStaffInstance();
     		Staff staff=holder.getStaff();
-    		String accountantUserName=staff.getUsername();
+    		String accountantUserName=staff.getStaffUserName();
     		Double totalPrice=importItemPrice*importItemQty;
     		String itemStatus="Good";
     		

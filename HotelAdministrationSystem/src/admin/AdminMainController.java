@@ -80,7 +80,7 @@ public class AdminMainController {
     	
     	Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
     	primaryStage.setResizable(false);
-    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("AdminStaffUI.fxml"));
+    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("StaffSaveUI.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("Admin Staff Section");
 		primaryStage.setScene(scene);

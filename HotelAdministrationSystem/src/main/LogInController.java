@@ -162,9 +162,9 @@ if(checkUser.isUserValid(email,password,role,loginType)) {
 		
 		cobStaff.setItems(roleList);
 		
-		tfEmail.setText("khin@gmail.com");
-		pfPassword.setText("1234");
-		cobStaff.setValue("Admin");
+	tfEmail.setText("a@gmail.com");
+	pfPassword.setText("1234");
+	cobStaff.setValue("Admin");
 		
 	}
 

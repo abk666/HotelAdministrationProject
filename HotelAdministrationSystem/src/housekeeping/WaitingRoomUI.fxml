@@ -9,19 +9,25 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="housekeeping.WaitingRoomController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #7fffd4;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="housekeeping.WaitingRoomController">
    <children>
-      <Label alignment="CENTER" prefHeight="60.0" prefWidth="800.0" text="Waiting Room Section" textFill="#14d711">
+      <Label alignment="CENTER" prefHeight="60.0" prefWidth="800.0" text="Waiting Room Section" textFill="#1114d6">
          <font>
-            <Font size="24.0" />
+            <Font name="System Italic" size="24.0" />
          </font>
       </Label>
       <SplitPane dividerPositions="0.13333333333333333" layoutY="60.0" orientation="VERTICAL" prefHeight="542.0" prefWidth="800.0">
         <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: #7fffd4;">
                <children>
-                  <JFXButton layoutX="526.0" layoutY="14.0" onAction="#processCleaning" prefHeight="40.0" prefWidth="70.0" style="-fx-background-color: #fee12b; -fx-background-radius: 30;" text="Cleaning" textFill="WHITE" />
-                  <JFXButton layoutX="664.0" layoutY="14.0" onAction="#processDone" prefHeight="40.0" prefWidth="70.0" style="-fx-background-color: #00ff00; -fx-background-radius: 30;" text="Done" />
+                  <JFXButton layoutX="499.0" layoutY="5.0" onAction="#processCleaning" prefHeight="60.0" prefWidth="90.0" ripplerFill="#280dda" style="-fx-background-color: #fee12b; -fx-background-radius: 30;" text="Cleaning" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font></JFXButton>
+                  <JFXButton layoutX="649.0" layoutY="5.0" onAction="#processDone" prefHeight="60.0" prefWidth="90.0" ripplerFill="#280ce4" style="-fx-background-color: #00ff00; -fx-background-radius: 30;" text="Done" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font></JFXButton>
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
@@ -39,7 +45,7 @@
             </AnchorPane>
         </items>
       </SplitPane>
-      <Label onMouseClicked="#processBack" prefHeight="48.0" prefWidth="85.0" text="&lt;&lt;Back">
+      <Label onMouseClicked="#processBack" prefHeight="48.0" prefWidth="85.0" text="&lt;&lt;Back" textFill="#280be8">
          <padding>
             <Insets left="15.0" />
          </padding>

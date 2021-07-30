@@ -104,22 +104,22 @@ public class StaffListController implements Initializable {
     	
     	Staff staff = staffTable.getSelectionModel().getSelectedItem();
       	 
-    	  Boolean isDeleteOk = staffDataUtils.deleteStaff(staff.getId());
+    	  Boolean isDeleteOk = staffDataUtils.deleteStaff(staff.getStaffId());
     	  
     	  if(!isDeleteOk) {
-    		  myNoti.getNotification(NotificationType.SUCCESS, "Deleted!", "Deleted "+staff.getUsername()+" to DB", AnimationType.SLIDE, 3000.0);
+    		  myNoti.getNotification(NotificationType.SUCCESS, "Deleted!", "Deleted "+staff.getStaffUserName()+" to DB", AnimationType.SLIDE, 3000.0);
     		  		
     		  showTable("select * from staff;");
     		  
-    		  File imageFile = new File("src/img/staff/"+staff.getImageName());
+    		  File imageFile = new File("src/img/staff/"+staff.getStaffImageName());
     		  if(imageFile.exists()) {
     			  
     			  imageFile.delete();
     		  }
     	  }
     	  else {
-    		  myNoti.getNotification(NotificationType.ERROR, " Fail to Deleted!", " Fail to Deleted "+staff.getUsername()+" to DB", AnimationType.SLIDE, 3000.0);
-    		  System.out.println("Fail to Delete" + staff.getUsername());
+    		  myNoti.getNotification(NotificationType.ERROR, " Fail to Deleted!", " Fail to Deleted "+staff.getStaffUserName()+" to DB", AnimationType.SLIDE, 3000.0);
+    		  System.out.println("Fail to Delete" + staff.getStaffUserName());
     	  }
 
 
@@ -195,19 +195,19 @@ public class StaffListController implements Initializable {
 			e.printStackTrace();
 		}
 		
-		id.setCellValueFactory(new PropertyValueFactory<>("id"));
-		firstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
-		lastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
-		username.setCellValueFactory(new PropertyValueFactory<>("username"));
-		email.setCellValueFactory(new PropertyValueFactory<>("email"));
-		password.setCellValueFactory(new PropertyValueFactory<>("password"));
-		role.setCellValueFactory(new PropertyValueFactory<>("role"));
-		gender.setCellValueFactory(new PropertyValueFactory<>("gender"));
-		phone.setCellValueFactory(new PropertyValueFactory<>("phone"));
-		address.setCellValueFactory(new PropertyValueFactory<>("address"));
-		status.setCellValueFactory(new PropertyValueFactory<>("status"));
-		dob.setCellValueFactory(new PropertyValueFactory<>("dob"));
-		imageName.setCellValueFactory(new PropertyValueFactory<>("imageName"));
+		id.setCellValueFactory(new PropertyValueFactory<>("staffId"));
+		firstName.setCellValueFactory(new PropertyValueFactory<>("staffFName"));
+		lastName.setCellValueFactory(new PropertyValueFactory<>("staffLName"));
+		username.setCellValueFactory(new PropertyValueFactory<>("staffUserName"));
+		email.setCellValueFactory(new PropertyValueFactory<>("staffEmail"));
+		password.setCellValueFactory(new PropertyValueFactory<>("staffPassword"));
+		role.setCellValueFactory(new PropertyValueFactory<>("staffRole"));
+		gender.setCellValueFactory(new PropertyValueFactory<>("staffGender"));
+		phone.setCellValueFactory(new PropertyValueFactory<>("staffPhNo"));
+		address.setCellValueFactory(new PropertyValueFactory<>("staffAddress"));
+		status.setCellValueFactory(new PropertyValueFactory<>("staffStatus"));
+		dob.setCellValueFactory(new PropertyValueFactory<>("staffDOB"));
+		imageName.setCellValueFactory(new PropertyValueFactory<>("staffImageName"));
 		
 		showTable("select * from staff;");
 		

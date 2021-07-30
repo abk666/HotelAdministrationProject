@@ -82,27 +82,43 @@ public class FoodOrderController implements Initializable{
     @FXML
     void processSave(ActionEvent event) throws SQLException {
     	
-    	String foodOrderName = tfFoodOrderName.getText().trim();
+    	if(tfFoodOrderName.getText() == null || tfFoodOrderName.getText().length() == 0 || 
+    			tfFoodOrderPrice.getText() == null || tfFoodOrderPrice.getText().length() == 0 ||
+    			tfFoodOrderQty.getText() == null || tfFoodOrderQty.getText().length() == 0 ||
+    			tfGuestRoomNo.getText() == null || tfGuestRoomNo.getText().length() == 0 ||
+    			dpFoodOrderDate.getValue() == null) {
+    		
+    		
+    		myNoti.getNotification(NotificationType.WARNING,"Required User Input","Please Fill All Fields!",AnimationType.FADE,3000.0);
+    		
+    		//System.out.println("Empty");
+    		
+    	}else {
+    		
+    		String foodOrderName = tfFoodOrderName.getText().trim();
+        	
+        	Integer qty = Integer.parseInt(tfFoodOrderQty.getText());
+        	Double price = Double.parseDouble(tfFoodOrderPrice.getText());
+        	
+        	Double totalPrice = price * qty;
+        	
+        	String foodOrderDate = dpFoodOrderDate.getValue().toString();
+        	Integer guestRoomNo = Integer.parseInt(tfGuestRoomNo.getText());
+       
+    		FoodOrder foodOrder =  new FoodOrder(foodOrderName, price, foodOrderDate, qty, guestRoomNo,totalPrice);
+    		Boolean isSaveOk = foodOrderDataUtils.saveFoodOrder(foodOrder);
+    	    	
+    	    if(!isSaveOk) {
+    	    		
+    	    	myNoti.getNotification(NotificationType.SUCCESS,"Saved Success","Successfully Ordered from "+ guestRoomNo+" to DB",AnimationType.FADE,3000.0);
+    	    		
+    	    }
+    	    else {
+    	    	myNoti.getNotification(NotificationType.ERROR,"Saved Fail","Fail Ordered From  "+guestRoomNo+" to DB",AnimationType.FADE,3000.0);
+    	    }
+    	    
+    	}
     	
-    	Integer qty = Integer.parseInt(tfFoodOrderQty.getText());
-    	Double price = Double.parseDouble(tfFoodOrderPrice.getText());
-    	
-    	Double totalPrice = price * qty;
-    	
-    	String foodOrderDate = dpFoodOrderDate.getValue().toString();
-    	Integer guestRoomNo = Integer.parseInt(tfGuestRoomNo.getText());
-   
-		FoodOrder foodOrder =  new FoodOrder(foodOrderName, price, foodOrderDate, qty, guestRoomNo,totalPrice);
-		Boolean isSaveOk = foodOrderDataUtils.saveFoodOrder(foodOrder);
-	    	
-	    if(!isSaveOk) {
-	    		
-	    	myNoti.getNotification(NotificationType.SUCCESS,"Saved Success","Successfully Ordered from "+ guestRoomNo+" to DB",AnimationType.FADE,3000.0);
-	    		
-	    }
-	    else {
-	    	myNoti.getNotification(NotificationType.ERROR,"Saved Fail","Fail Ordered From  "+guestRoomNo+" to DB",AnimationType.FADE,3000.0);
-	    }
 	 }
   
     
@@ -165,13 +181,15 @@ public class FoodOrderController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		
 		ObservableList<String> foodMenuCategoryList = FXCollections.observableArrayList(
-				"Rice","Curry","Burger","Pizza","Soup","Fried","Salad","Cake","Ice Cream","Fruit","Juice","Cool Drink","Hot Drink","Beer","Wine"
+				"Rice","Curry","Burger","Pizza","Soup","Fried","Salad","Cake","Ice Cream","Fruit","Juice","Cool Drink","Hot Drink","Beer","Wine","Purified Water","Hotpot","Hotdog"
 				);
 		cobFoodMenuCategory.setItems(foodMenuCategoryList);
-		
+	
 		dpFoodOrderDate.setValue(LocalDate.now());
 		foodMenuName.setCellValueFactory(new PropertyValueFactory<>("foodMenuName"));
 		foodMenuPrice.setCellValueFactory(new PropertyValueFactory<>("foodMenuPrice"));
+		
+		showTable("select * from hoteldb.foodmenu;");
 		
 	}
 

@@ -274,28 +274,28 @@ public class StaffUpdateController implements Initializable {
 				
 				Staff staff = holder.getStaff();
 				
-				imageStaff.setImage(new Image(getClass().getResourceAsStream("../img/staff/"+staff.getImageName())));
+				imageStaff.setImage(new Image(getClass().getResourceAsStream("../img/staff/"+staff.getStaffImageName())));
 				
 				
-				staffId = staff.getId();
-				tfFName.setText(staff.getFirstName());
-				tfLName.setText(staff.getLastName());
-				tfUsername.setText(staff.getUsername());
-				tfEmail.setText(staff.getEmail());
-				tfPassword.setText(staff.getPassword());
-				cobRole.setValue(staff.getRole());
+				staffId = staff.getStaffId();
+				tfFName.setText(staff.getStaffFName());
+				tfLName.setText(staff.getStaffLName());
+				tfUsername.setText(staff.getStaffUserName());
+				tfEmail.setText(staff.getStaffEmail());
+				tfPassword.setText(staff.getStaffPassword());
+				cobRole.setValue(staff.getStaffRole());
 				
-		    	if(staff.getGender()=="Male") {
+		    	if(staff.getStaffGender()=="Male") {
 		    		Gender.selectToggle(rbMale);
 		    	}else {
 		    		Gender.selectToggle(rbFemale);
 		    	}
 		    	
-				tfPhone.setText(staff.getPhone());
-				tfAddress.setText(staff.getAddress());
-				dpDOB.setValue(LocalDate.parse(staff.getDob()));
-				cobStatus.setValue(staff.getStatus());
-				oldImageName=staff.getImageName();
+				tfPhone.setText(staff.getStaffPhNo());
+				tfAddress.setText(staff.getStaffAddress());
+				dpDOB.setValue(LocalDate.parse(staff.getStaffDOB()));
+				cobStatus.setValue(staff.getStaffStatus());
+				oldImageName=staff.getStaffImageName();
 				
 				
 			

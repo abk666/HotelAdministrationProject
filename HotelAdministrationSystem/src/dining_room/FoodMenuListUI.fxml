@@ -27,7 +27,7 @@
       </TableView>
       <JFXComboBox fx:id="cobFoodMenuSearch" layoutX="575.0" layoutY="69.0" prefHeight="35.0" prefWidth="187.0" style="-fx-background-color: #85ff12;" />
       <JFXTextField fx:id="tfSearch" layoutX="574.0" layoutY="125.0" prefHeight="35.0" prefWidth="187.0" style="-fx-background-color: #00bcd4;" />
-      <JFXButton layoutX="221.0" layoutY="93.0" onAction="#processView" prefHeight="50.0" prefWidth="90.0" ripplerFill="#b31ab5" style="-fx-background-color: ffa000; -fx-background-radius: 60;" text="Choose" textFill="#0a4c55">
+      <JFXButton layoutX="221.0" layoutY="93.0" onAction="#processChoose" prefHeight="50.0" prefWidth="90.0" ripplerFill="#b31ab5" style="-fx-background-color: ffa000; -fx-background-radius: 60;" text="Choose" textFill="#0a4c55">
          <font>
             <Font name="System Bold Italic" size="18.0" />
          </font>
@@ -53,7 +53,7 @@
             <Image url="@../img/hamburger.png" />
          </image>
       </ImageView>
-      <JFXButton layoutX="318.0" layoutY="93.0" onAction="#processDetail" prefHeight="50.0" prefWidth="90.0" ripplerFill="#b31ab5" style="-fx-background-color: ffa000; -fx-background-radius: 60;" text="View" textFill="#0a4c55">
+      <JFXButton layoutX="318.0" layoutY="93.0" onAction="#processView" prefHeight="50.0" prefWidth="90.0" ripplerFill="#b31ab5" style="-fx-background-color: ffa000; -fx-background-radius: 60;" text="View" textFill="#0a4c55">
          <font>
             <Font name="System Bold Italic" size="18.0" />
          </font>

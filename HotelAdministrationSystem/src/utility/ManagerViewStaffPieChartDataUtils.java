@@ -1,7 +1,6 @@
 package utility;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -11,7 +10,7 @@ import database.DbConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class ManagerDataUtils {
+public class ManagerViewStaffPieChartDataUtils {
 	private Connection connection;
 	private Statement statement;
 

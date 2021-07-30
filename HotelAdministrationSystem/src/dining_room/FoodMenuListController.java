@@ -88,7 +88,7 @@ public class FoodMenuListController implements Initializable{
     }
 
     @FXML
-    void processView(ActionEvent event) {
+    void processChoose(ActionEvent event) {
     	
     	String cobCategory = cobFoodMenuCategory.getValue();
     	showTable("select * from hoteldb.foodmenu where foodMenuCategory = '"+cobCategory+"';");
@@ -109,7 +109,7 @@ public class FoodMenuListController implements Initializable{
     }
     
     @FXML
-    void processDetail(ActionEvent event) throws IOException {
+    void processView(ActionEvent event) throws IOException {
 
     	DiningRoomFood diningRoomFood = foodMenuTable.getSelectionModel().getSelectedItem();
     	
@@ -140,7 +140,7 @@ public class FoodMenuListController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		
 		ObservableList<String> foodMenuCategoryList = FXCollections.observableArrayList(
-				"Rice","Curry","Burger","Pizza","Soup","Fried","Salad","Cake","Ice Cream","Fruit","Juice","Cool Drink","Hot Drink","Beer","Wine"
+				"Rice","Curry","Burger","Pizza","Soup","Fried","Salad","Cake","Ice Cream","Fruit","Juice","Cool Drink","Hot Drink","Beer","Wine","Purified Water","Hotpot","Hotdog"
 				);		
 		
 		cobFoodMenuCategory.setItems(foodMenuCategoryList);

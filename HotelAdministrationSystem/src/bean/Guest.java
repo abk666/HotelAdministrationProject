@@ -22,7 +22,21 @@ public class Guest {
 	public StringProperty guestCheckOutDate;
 	public IntegerProperty numberOfDays;
 	public StringProperty guestStatus;
-;
+	
+	//For ManagerViewGuestDetails
+	public Double totalPrice;
+	
+	public Double getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(Double totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+	
+	public Guest() {};
+	
+
 	public Guest(Integer guestId, String guestName, String guestNRC, Integer noOfGuests, String guestPhNo,
 			String guestRoomType, Integer guestRoomNo, Double guestRoomPrice, Double foodOrderPrice,
 			Double guestInRoomCost, String guestCheckInDate, String guestCheckOutDate, Integer numberOfDays,String guestStatus) {
@@ -42,6 +56,7 @@ public class Guest {
 		this.numberOfDays =  new SimpleIntegerProperty(numberOfDays);
 		this.guestStatus=new SimpleStringProperty(guestStatus);
 	}
+	
 	public Guest(String guestName, String guestNRC, Integer noOfGuests, String guestPhNo, String guestRoomType,
 			Integer guestRoomNo, Double guestRoomPrice, Double foodOrderPrice, Double guestInRoomCost,
 			String guestCheckInDate, String guestCheckOutDate, Integer numberOfDays,String guestStatus) {
@@ -60,9 +75,6 @@ public class Guest {
 		this.numberOfDays =  new SimpleIntegerProperty(numberOfDays);
 		this.guestStatus=new SimpleStringProperty(guestStatus);
 	}
-	
-	
-	
 	
 	public Integer getGuestId() {
 		return guestId.get();
@@ -148,8 +160,6 @@ public class Guest {
 	public void setGuestStatus(String guestStatus) {
 		this.guestStatus = new SimpleStringProperty(guestStatus);
 	}
-
-	
 	
 	
 	

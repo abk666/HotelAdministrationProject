@@ -10,17 +10,17 @@
    <children>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="67.0" layoutY="118.0" onMouseClicked="#processRefrigerator" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/refrigerator.png" />
+            <Image url="@../../../../Users/Acer/Downloads/refrigerator.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="458.0" layoutY="118.0" onMouseClicked="#processWaitingRoom" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/waiting-room.png" />
+            <Image url="@../../../../Users/Acer/Downloads/waiting-room.png" />
          </image>
       </ImageView>
-      <Label alignment="CENTER" prefHeight="50.0" prefWidth="700.0" text="House Keeping Section" textFill="#0e1fe3">
+      <Label alignment="CENTER" prefHeight="60.0" prefWidth="700.0" text="House Keeping Section" textFill="#0e1fe3">
          <font>
-            <Font name="System Italic" size="24.0" />
+            <Font name="System Italic" size="36.0" />
          </font>
       </Label>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="275.0" layoutY="327.0" onMouseClicked="#processLogout" pickOnBounds="true" preserveRatio="true">

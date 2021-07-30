@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-import java.time.LocalDate;
+
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXComboBox;
@@ -21,7 +21,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
+
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -74,7 +74,7 @@ public class AdminListController implements Initializable {
     @FXML
     private TableColumn<Admin, String> imageName;
     
-    private Boolean isNewButtonClick = false;
+   
     
     private final MyNotification myNoti = new MyNotification();
     

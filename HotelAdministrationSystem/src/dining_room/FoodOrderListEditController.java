@@ -84,42 +84,57 @@ public class FoodOrderListEditController implements Initializable{
     }
 
     @FXML
-    void processSave(ActionEvent event) throws SQLException, IOException {
+    void processUpdate(ActionEvent event) throws SQLException, IOException {
     	
-    	String foodOrderName = tfFoodOrderName.getText().trim();
-    	
-    	Integer qty = Integer.parseInt(tfFoodOrderQty.getText());
-    	Double price = Double.parseDouble(tfFoodOrderPrice.getText());
-    	
-    	Double totalPrice = price * qty;
-    	
-    	String foodOrderDate = dpFoodOrderDate.getValue().toString();
-    	Integer guestRoomNo = Integer.parseInt(tfGuestRoomNo.getText());
-   
-		FoodOrder foodOrder =  new FoodOrder(this.id,foodOrderName, price, foodOrderDate, qty, guestRoomNo,totalPrice);
-		Integer isUpdateOk = foodOrderDataUtils.updateFoodOrder(foodOrder);
-	    	
-		if(isUpdateOk > 0) {
-
-			myNoti.getNotification(NotificationType.SUCCESS,"Updated Success","Successfully Update Ordered from "+ guestRoomNo+" to DB",AnimationType.FADE,3000.0);
-			
-			FoodOrderDataUtils foodOrderDataUtils = new FoodOrderDataUtils();
-    		FoodOrder foodOrderUpdate = foodOrderDataUtils.getAllFoodOrder("select * from hoteldb.foodorder where foodorderId = '"+id+"';").get(0);
-    		FoodOrderHolder foodOrderHolder=FoodOrderHolder.getFoodorderInstance();
-    		foodOrderHolder.setFoodOrder(foodOrderUpdate);
+    	if(tfFoodOrderName.getText() == null || tfFoodOrderName.getText().length() == 0 || 
+    			tfFoodOrderPrice.getText() == null || tfFoodOrderPrice.getText().length() == 0 ||
+    			tfFoodOrderQty.getText() == null || tfFoodOrderQty.getText().length() == 0 ||
+    			tfGuestRoomNo.getText() == null || tfGuestRoomNo.getText().length() == 0 ||
+    			dpFoodOrderDate.getValue() == null) {
     		
-    		Stage primaryStage=(Stage) ((Node)event.getSource()).getScene().getWindow();
-        	primaryStage.close();
-        	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("FoodOrderListUI.fxml"));
-    		Scene scene = new Scene(root);
-    		primaryStage.setScene(scene);
-    		primaryStage.show();
-			
-	    }
-	    else {
-	    	
-	    	myNoti.getNotification(NotificationType.ERROR,"Saved Fail","Fail Update Ordered From  "+guestRoomNo+" to DB",AnimationType.FADE,3000.0);
-	    }
+    		
+    		myNoti.getNotification(NotificationType.WARNING,"Required User Input","Please Fill All Fields!",AnimationType.FADE,3000.0);
+    		
+    		//System.out.println("Empty");
+    		
+    	}else {
+    		
+    		String foodOrderName = tfFoodOrderName.getText().trim();
+        	
+        	Integer qty = Integer.parseInt(tfFoodOrderQty.getText());
+        	Double price = Double.parseDouble(tfFoodOrderPrice.getText());
+        	
+        	Double totalPrice = price * qty;
+        	
+        	String foodOrderDate = dpFoodOrderDate.getValue().toString();
+        	Integer guestRoomNo = Integer.parseInt(tfGuestRoomNo.getText());
+       
+    		FoodOrder foodOrder =  new FoodOrder(this.id,foodOrderName, price, foodOrderDate, qty, guestRoomNo,totalPrice);
+    		Integer isUpdateOk = foodOrderDataUtils.updateFoodOrder(foodOrder);
+    	    	
+    		if(isUpdateOk > 0) {
+
+    			myNoti.getNotification(NotificationType.SUCCESS,"Updated Success","Successfully Update Ordered from "+ guestRoomNo+" to DB",AnimationType.FADE,3000.0);
+    			
+    			FoodOrderDataUtils foodOrderDataUtils = new FoodOrderDataUtils();
+        		FoodOrder foodOrderUpdate = foodOrderDataUtils.getAllFoodOrder("select * from hoteldb.foodorder where foodorderId = '"+id+"';").get(0);
+        		FoodOrderHolder foodOrderHolder=FoodOrderHolder.getFoodorderInstance();
+        		foodOrderHolder.setFoodOrder(foodOrderUpdate);
+        		
+        		Stage primaryStage=(Stage) ((Node)event.getSource()).getScene().getWindow();
+            	primaryStage.close();
+            	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("FoodOrderListUI.fxml"));
+        		Scene scene = new Scene(root);
+        		primaryStage.setScene(scene);
+        		primaryStage.show();
+    			
+    	    }
+    	    else {
+    	    	
+    	    	myNoti.getNotification(NotificationType.ERROR,"Saved Fail","Fail Update Ordered From  "+guestRoomNo+" to DB",AnimationType.FADE,3000.0);
+    	    }
+    	}
+    	
 	 }
   
     
