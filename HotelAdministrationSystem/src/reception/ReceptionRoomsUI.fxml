@@ -32,7 +32,6 @@
                             <TableColumn fx:id="roomType" prefWidth="75.0" text="Room Type" />
                               <TableColumn fx:id="roomNo" prefWidth="75.0" text="Room No" />
                               <TableColumn fx:id="roomPrice" prefWidth="75.0" text="Room Price" />
-                              <TableColumn fx:id="roomMaxNo" prefWidth="75.0" text="Room Max No." />
                               <TableColumn fx:id="roomStatus" prefWidth="75.0" text="Room Status" />
                           </columns>
                            <columnResizePolicy>

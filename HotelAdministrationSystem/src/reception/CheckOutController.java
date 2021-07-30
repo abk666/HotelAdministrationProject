@@ -18,6 +18,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleGroup;
@@ -157,6 +158,27 @@ public class CheckOutController implements Initializable{
 			Scene scene = new Scene(root);
 
 			primaryStage.setResizable(false);
+			primaryStage.setScene(scene);
+			primaryStage.show();
+	    }
+	    
+
+	    @FXML
+	    void processLogOut(ActionEvent event) throws IOException {
+	    	Stage primaryStage=(Stage) ((Button)event.getSource()).getScene().getWindow();
+	    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("../main/LogInUI.fxml"));
+			Scene scene = new Scene(root);
+
+			primaryStage.setScene(scene);
+			primaryStage.show();
+	    }
+	    
+	    @FXML
+	    void processBack(ActionEvent event) throws IOException {
+	     	Stage primaryStage=(Stage) ((Button)event.getSource()).getScene().getWindow();
+	    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("ReceptionMainUI.fxml"));
+			Scene scene = new Scene(root);
+
 			primaryStage.setScene(scene);
 			primaryStage.show();
 	    }

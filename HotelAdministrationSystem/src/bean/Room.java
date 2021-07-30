@@ -12,25 +12,22 @@ public class Room {
 	public StringProperty roomType;
 	public IntegerProperty roomNumber;
 	public DoubleProperty roomPrice;
-	public IntegerProperty roomMaxNo;
 	public StringProperty roomStatus;
-	public Room(Integer roomId,String roomType, Integer roomNumber,  Double roomPrice, Integer roomMaxNo,
+	public Room(Integer roomId,String roomType, Integer roomNumber,  Double roomPrice,
 			String roomStatus) {
 		super();
 		this.roomId = new SimpleIntegerProperty(roomId);
 		this.roomType = new SimpleStringProperty(roomType);
 		this.roomNumber = new SimpleIntegerProperty(roomNumber);
 		this.roomPrice = new SimpleDoubleProperty(roomPrice);
-		this.roomMaxNo = new SimpleIntegerProperty(roomMaxNo);
 		this.roomStatus = new SimpleStringProperty(roomStatus);
 	}
-	public Room(String roomType,Integer roomNumber,  Double roomPrice, Integer roomMaxNo, String roomStatus) {
+	public Room(String roomType,Integer roomNumber,  Double roomPrice, String roomStatus) {
 		super();
 		
 		this.roomType = new SimpleStringProperty(roomType);
 		this.roomNumber = new SimpleIntegerProperty(roomNumber);
 		this.roomPrice = new SimpleDoubleProperty(roomPrice);
-		this.roomMaxNo = new SimpleIntegerProperty(roomMaxNo);
 		this.roomStatus = new SimpleStringProperty(roomStatus);
 	}
 	public Integer getRoomId() {
@@ -57,12 +54,6 @@ public class Room {
 	}
 	public void setRoomPrice(Double roomPrice) {
 		this.roomPrice = new SimpleDoubleProperty(roomPrice);
-	}
-	public Integer getRoomMaxNo() {
-		return roomMaxNo.get();
-	}
-	public void setRoomMaxNo(Integer roomMaxNo) {
-		this.roomMaxNo = new SimpleIntegerProperty(roomMaxNo);
 	}
 	public String getRoomStatus() {
 		return roomStatus.get();

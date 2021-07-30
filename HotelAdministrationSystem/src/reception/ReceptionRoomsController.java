@@ -16,7 +16,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import utility.RoomDataUtils;
+
+import utility.RoomUtils;
 
 public class ReceptionRoomsController implements Initializable{
 
@@ -35,8 +36,7 @@ public class ReceptionRoomsController implements Initializable{
     @FXML
     private TableColumn<Room,Double> roomPrice;
 
-    @FXML
-    private TableColumn<Room,Integer> roomMaxNo;
+
 
     @FXML
     private TableColumn<Room,String> roomStatus;
@@ -50,7 +50,7 @@ public class ReceptionRoomsController implements Initializable{
     @FXML
     private Label lblToday;
     
-    private final RoomDataUtils roomDataUtils=new RoomDataUtils();
+    private final RoomUtils roomDataUtils=new RoomUtils();
 
     @FXML
     void processSearch(ActionEvent event) {
@@ -86,7 +86,7 @@ public class ReceptionRoomsController implements Initializable{
 		roomType.setCellValueFactory(new PropertyValueFactory<>("roomType"));
 		roomNo.setCellValueFactory(new PropertyValueFactory<>("roomNumber"));
 		roomPrice.setCellValueFactory(new PropertyValueFactory<>("roomPrice"));
-		roomMaxNo.setCellValueFactory(new PropertyValueFactory<>("roomMaxNo"));
+		
 		roomStatus.setCellValueFactory(new PropertyValueFactory<>("roomStatus"));
 		
 		showTable("select * from room;");

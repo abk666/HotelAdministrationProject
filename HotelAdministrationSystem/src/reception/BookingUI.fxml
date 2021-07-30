@@ -68,9 +68,9 @@
                   </Label>
                   <JFXTextField fx:id="tfGuestName" prefHeight="38.0" prefWidth="168.0" GridPane.columnIndex="1" />
                   <JFXTextField fx:id="tfGuestPhNo" prefHeight="35.0" prefWidth="198.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <JFXComboBox fx:id="cobRoomType" prefHeight="36.0" prefWidth="192.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <JFXTextField fx:id="tfRoomNo" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <JFXComboBox fx:id="cobRoomType" onAction="#processRoomType" prefHeight="36.0" prefWidth="192.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <JFXTextField fx:id="tfRoomPrice" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <JFXComboBox fx:id="cobRoomNo" onAction="#processRoomNo" prefHeight="31.0" prefWidth="196.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                </children>
             </GridPane>
             <GridPane layoutX="372.0" layoutY="98.0" prefHeight="395.0" prefWidth="313.0">

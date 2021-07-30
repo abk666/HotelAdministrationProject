@@ -87,7 +87,7 @@ if(checkUser.isUserValid(email,password,role,loginType)) {
         			case "Reception":
         				Stage receptionStage = (Stage) ((Button)event.getSource()).getScene().getWindow();
         				receptionStage.hide();
-        				
+//        				receptionStage.setResizable(false);
         				AnchorPane receptionRoot = (AnchorPane)FXMLLoader.load(getClass().getResource("../reception/ReceptionMainUI.fxml"));
         				Scene receptionScene = new Scene(receptionRoot);
         				receptionStage.setTitle("Reception Main Section");
@@ -100,7 +100,7 @@ if(checkUser.isUserValid(email,password,role,loginType)) {
         				Stage housekeepingStage = (Stage) ((Button)event.getSource()).getScene().getWindow();
         				housekeepingStage.hide();
         				
-        				AnchorPane housekeepingRoot = (AnchorPane)FXMLLoader.load(getClass().getResource("../housekeeping/HouseKeepingMainUI.fxml"));
+        				AnchorPane housekeepingRoot = (AnchorPane)FXMLLoader.load(getClass().getResource("../housekeeping/WaitingUI.fxml"));
         				Scene housekeepingScene = new Scene(housekeepingRoot);
         				housekeepingStage.setTitle("HouseKeeping Main Section");
         				housekeepingStage.setScene(housekeepingScene);

@@ -45,12 +45,12 @@ public class ReceptionMainController implements Initializable {
 
     @FXML
     void processCheckOut(ActionEvent event) throws IOException {
-    	Stage primaryStage = new Stage();
+    	Stage primaryStage=(Stage) ((Button)event.getSource()).getScene().getWindow();
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("CheckOutUI.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("Reception CheckOut Section");
 		primaryStage.setScene(scene);
-		primaryStage.setResizable(false);
+
 		primaryStage.show();
     }
 

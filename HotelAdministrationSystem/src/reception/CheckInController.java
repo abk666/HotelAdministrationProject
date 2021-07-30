@@ -10,7 +10,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 
-
+import bean.Room;
 //import bean.Guest;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,6 +25,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 //import utility.GuestDataUtils;
 import utility.MyAlert;
+import utility.RoomUtils;
+
 
 public class CheckInController implements Initializable{
 
@@ -42,6 +44,9 @@ public class CheckInController implements Initializable{
 
     @FXML
     private JFXComboBox<String> cobRoomType;
+    
+    @FXML
+    private JFXComboBox<Integer> cobRoomNo;
 
     @FXML
     private JFXTextField tfGuestRoomNo;
@@ -58,7 +63,7 @@ public class CheckInController implements Initializable{
     @FXML
     private JFXDatePicker dpGuestCheckOutDate;
     
- 
+    private final RoomUtils roomDataUtils=new RoomUtils();
     
     private final MyAlert alert=new MyAlert();
 
@@ -84,6 +89,25 @@ public class CheckInController implements Initializable{
     	}
     
     
+    }
+    @FXML
+    void processRoomType(ActionEvent event) throws SQLException {
+      cobRoomNo.setDisable(false);
+      ObservableList<Integer>roomNo=FXCollections.observableArrayList();
+      ObservableList<Room>roomList=roomDataUtils.getAllRoom("select * from room where roomType = '"+cobRoomType.getValue()+"' and roomStatus ='Available';");
+      for(Room room:roomList) {
+    	  roomNo.add(room.getRoomNumber());
+      }
+      cobRoomNo.setItems(roomNo);
+    }
+    
+    @FXML
+    void processRoomNo(ActionEvent event) throws SQLException {
+    	if(cobRoomNo.getValue()!=null) {
+    		 Room room=roomDataUtils.getAllRoom("select * from room where roomNumber= '"+cobRoomNo.getValue()+"';").get(0);
+    	      tfGuestRoomPrice.setText(room.getRoomPrice().toString());
+    	}
+     
     }
     
     public void clearAllField() {
@@ -124,10 +148,20 @@ public class CheckInController implements Initializable{
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		ObservableList<String> roomTypeList = FXCollections.observableArrayList(
-				   "Single","Double","Triple","Family"		
-						);
+		ObservableList<String> roomTypeList = FXCollections.observableArrayList();
+
+		try {
+			ObservableList<Room>roomList=roomDataUtils.getAllRoom("select * from room group by roomType;");
+			for(Room room:roomList) {
+				roomTypeList.add(room.getRoomType());
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		cobRoomType.setItems(roomTypeList);
+		cobRoomNo.setDisable(true);
 	}
+	
 	
 }

@@ -35,4 +35,18 @@ public class InRoomCostDataUtils {
 		connection.close();
 		return inRoomCostList;
 	}
+	public boolean saveInRoomCost(InRoomCost inroomcost) throws SQLException {
+		connection=dbconnection.getConnection();
+		preStatement=connection.prepareStatement("INSERT INTO `inroomcost` (`inRoomItemName`, `inRoomItemCategory`, `inRoomItemPrice`, `inRoomItemQty`, `guestRoomNo`, `inRoomTotalCost`) "
+				                                 + "VALUES ( ?, ?, ?, ?, ?, ?);");
+		preStatement.setString(1,inroomcost.getInRoomItemName());
+		preStatement.setString(2, inroomcost.getInRoomItemCategory());
+		preStatement.setDouble(3, inroomcost.getInRoomItemPrice());
+		preStatement.setInt(4, inroomcost.getInRoomItemQuantity());
+		preStatement.setInt(5, inroomcost.getGuestRoomNo());
+		preStatement.setDouble(6, inroomcost.getInRoomTotalCost());
+		boolean isSaveOk=preStatement.execute();
+		connection.close();
+		return isSaveOk;
+	}
 }

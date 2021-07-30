@@ -72,6 +72,7 @@ public class GuestInfoController implements Initializable{
 
     @FXML
     private TextField tfTotalPrice;
+    private long dayDifference;
     
 
     @FXML
@@ -114,8 +115,14 @@ public class GuestInfoController implements Initializable{
 		    
 			dpCheckIn.setValue(LocalDate.parse(guest.getGuestCheckInDate()));
 			dpCheckOut.setValue(LocalDate.parse(guest.getGuestCheckOutDate()));
+
 			long dayDifference=ChronoUnit.DAYS.between(LocalDate.parse(guest.getGuestCheckInDate()),LocalDate.now());
-			Double totalPrice=(guest.getGuestRoomPrice()*dayDifference)+totalDiningRoomCost+totalInRoomCost;
+			if(dayDifference<1) {
+				this.dayDifference=1;
+			}else {
+				this.dayDifference=dayDifference;
+			}
+			Double totalPrice=(guest.getGuestRoomPrice()*this.dayDifference)+totalDiningRoomCost+totalInRoomCost;
 			
 			tfTotalPrice.setText(totalPrice.toString());
 			lblGuestId.setText(guest.getGuestId().toString());

@@ -60,7 +60,7 @@
                <font>
                   <Font size="15.0" />
                </font></JFXPasswordField>
-            <JFXComboBox fx:id="cobStaff" focusColor="#b1fff2" prefHeight="39.0" prefWidth="309.0" promptText="Staff Role" style="-fx-border-color: #2effdf; -fx-text-fill: #4ebcff;" unFocusColor="#0282b9" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <JFXComboBox fx:id="cobStaff" focusColor="#b1fff2" prefHeight="39.0" prefWidth="309.0" promptText="Staff Role" style="-fx-border-color: #2effdf;" unFocusColor="#0282b9" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="225.0" text="Login Here" textFill="WHITE" GridPane.columnIndex="1">
                <font>
                   <Font size="25.0" />

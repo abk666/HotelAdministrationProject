@@ -11,6 +11,7 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 
 import bean.Booking;
+import bean.Room;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,6 +26,8 @@ import tray.notification.NotificationType;
 import utility.BookingDataUtils;
 import utility.MyNotification;
 
+import utility.RoomUtils;
+
 public class BookingController implements Initializable {
 
     @FXML
@@ -35,6 +38,9 @@ public class BookingController implements Initializable {
 
     @FXML
     private JFXComboBox<String> cobRoomType;
+    
+    @FXML
+    private JFXComboBox<Integer> cobRoomNo;
 
     @FXML
     private JFXTextField tfRoomNo;
@@ -60,6 +66,7 @@ public class BookingController implements Initializable {
     private final BookingDataUtils bookingDataUtils=new BookingDataUtils();
     
     private final MyNotification noti=new MyNotification();
+    private final RoomUtils roomDataUtils=new RoomUtils();
 
     @FXML
     void processCancel(ActionEvent event) {
@@ -96,6 +103,27 @@ public class BookingController implements Initializable {
 			
 		}
     }
+    @FXML
+    void processRoomType(ActionEvent event) throws SQLException {
+      cobRoomNo.setDisable(false);
+      ObservableList<Integer>roomNo=FXCollections.observableArrayList();
+      ObservableList<Room>roomList=roomDataUtils.getAllRoom("select * from room where roomType = '"+cobRoomType.getValue()+"' and roomStatus ='Available';");
+      for(Room room:roomList) {
+    	  roomNo.add(room.getRoomNumber());
+      }
+      cobRoomNo.setItems(roomNo);
+    }
+    
+    @FXML
+    void processRoomNo(ActionEvent event) throws SQLException {
+    	if(cobRoomNo.getValue()!=null) {
+    		 Room room=roomDataUtils.getAllRoom("select * from room where roomNumber= '"+cobRoomNo.getValue()+"';").get(0);
+    	      tfRoomPrice.setText(room.getRoomPrice().toString());
+    	}
+     
+    }
+    
+
 
     @FXML
     void processViewBooking(ActionEvent event) throws IOException {
@@ -123,10 +151,19 @@ public class BookingController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		ObservableList<String> roomTypeList = FXCollections.observableArrayList(
-				   "Single","Double","Triple"		
-						);
+		ObservableList<String> roomTypeList = FXCollections.observableArrayList();
+
+		try {
+			ObservableList<Room>roomList=roomDataUtils.getAllRoom("select * from room group by roomType;");
+			for(Room room:roomList) {
+				roomTypeList.add(room.getRoomType());
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		cobRoomType.setItems(roomTypeList);
+		cobRoomNo.setDisable(true);
 		
 	}
 

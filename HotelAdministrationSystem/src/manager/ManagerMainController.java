@@ -16,28 +16,41 @@ public class ManagerMainController {
 	    void processStaff(MouseEvent event) throws IOException {
 	    	
 	    	Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-	
+	    	primaryStage.setResizable(false);
 	    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("ManagerViewStaffUI.fxml"));
 			Scene scene = new Scene(root);
-			primaryStage.setTitle("Manager Staff Section");
-			primaryStage.setResizable(true);
+			primaryStage.setTitle("ManagerViewStaffUI");
 			primaryStage.setScene(scene);
 			primaryStage.show();
 	
-	    }
+	    }	
 
+	    @FXML
+	    void processStaffPieChart(MouseEvent event) throws IOException {
+	    	
+	    	Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+	    	primaryStage.setResizable(false);
+	    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("ManagerViewStaffPieChartUI.fxml"));
+			Scene scene = new Scene(root);
+			primaryStage.setTitle("ManagerViewStaffPieChartUI");
+			primaryStage.setScene(scene);
+			primaryStage.show();
+
+	    }
+	    
 	    @FXML
 	    void processGuest(MouseEvent event) throws IOException {
 	    	
 	    	Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
 	    	primaryStage.setResizable(false);
-	    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("ManagerViewGuestUI.fxml"));
+	    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("ManagerViewGuestStayUI.fxml"));
 			Scene scene = new Scene(root);
-			primaryStage.setTitle("Admin Dining Section");
+			primaryStage.setTitle("ManagerViewGuestStayUI");
 			primaryStage.setScene(scene);
 			primaryStage.show();
-
+	
 	    }
+		
 
 	    
 	    @FXML
@@ -47,7 +60,7 @@ public class ManagerMainController {
 	    	primaryStage.setResizable(false);
 	    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("ManagerViewIncomeUI.fxml"));
 			Scene scene = new Scene(root);
-			primaryStage.setTitle("Admin Refrigerator Section");
+			primaryStage.setTitle("ManagerViewIncomeUI");
 			primaryStage.setScene(scene);
 			primaryStage.show();
 
@@ -60,7 +73,7 @@ public class ManagerMainController {
 	    	primaryStage.setResizable(false);
 	    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("ManagerViewOutcomeUI.fxml"));
 			Scene scene = new Scene(root);
-			primaryStage.setTitle("Admin Room Section");
+			primaryStage.setTitle("ManagerViewOutcomeUI");
 			primaryStage.setScene(scene);
 			primaryStage.show();
 	    }

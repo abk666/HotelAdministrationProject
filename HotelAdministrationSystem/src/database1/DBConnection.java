@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class DBConnection {
 	
-	private String url = "jdbc:mysql://localhost:3308/librarydb?useSSL=false";
+	private String url = "jdbc:mysql://localhost:3308/hoteldb?useSSL=false";
 	private String user = "root";
 	private String password = "12345";
 	

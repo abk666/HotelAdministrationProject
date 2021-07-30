@@ -22,7 +22,7 @@ public class GuestDataUtils {
 	private ResultSet resultSet;
 	
 	private final DbConnection dbConnection=new DbConnection();
-	private final RoomDataUtils roomDataUtils=new RoomDataUtils();
+	private final RoomUtils roomDataUtils=new RoomUtils();
 	
 	//Read R
 		public ObservableList<Guest>getAllGuest(String sql) throws SQLException{

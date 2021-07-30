@@ -76,8 +76,8 @@
                   <JFXTextField fx:id="tfGuestNRC" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <JFXTextField fx:id="tfNoOfGuest" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <JFXTextField fx:id="tfGuestPhNo" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <JFXComboBox fx:id="cobRoomType" prefHeight="26.0" prefWidth="139.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <JFXTextField fx:id="tfGuestRoomNo" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <JFXComboBox fx:id="cobRoomType" onAction="#processRoomType" prefHeight="26.0" prefWidth="139.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <JFXComboBox fx:id="cobRoomNo" onAction="#processRoomNo" prefHeight="31.0" prefWidth="141.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                </children>
             </GridPane>
             <GridPane layoutX="350.0" layoutY="35.0" prefHeight="401.0" prefWidth="321.0">
