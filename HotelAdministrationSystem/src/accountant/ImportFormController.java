@@ -175,7 +175,7 @@ public class ImportFormController implements Initializable{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		ObservableList<String> categoryList=FXCollections.observableArrayList("Crops","Meat","Fish","Seafood","Vegetables","Fruits","Beans","Dairy Produce","Drinks","Beverage","Others");
+		ObservableList<String> categoryList=FXCollections.observableArrayList("Crops","Meat","Fish","Seafood","Vegetables","Fruits","Beans","Dairy Product","Drinks","Beverage","Others");
 		ObservableList<String> unitList=FXCollections.observableArrayList("kg","litre","packs","ton");
 		
 		cobCategory.setItems(categoryList);
