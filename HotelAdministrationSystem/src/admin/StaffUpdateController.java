@@ -129,7 +129,7 @@ public class StaffUpdateController implements Initializable {
     	Stage primaryStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("../admin/AdminMainUI.fxml"));
 		Scene scene = new Scene(root);
-		
+		primaryStage.setTitle("Admin Main Section");
 		primaryStage.setScene(scene);
 		primaryStage.show();
 
@@ -256,7 +256,7 @@ public class StaffUpdateController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
 		ObservableList<String> statusList = FXCollections.observableArrayList(
-				"Enable","Disable"	
+				"Active","Inactive"		
 					
 					);
 			

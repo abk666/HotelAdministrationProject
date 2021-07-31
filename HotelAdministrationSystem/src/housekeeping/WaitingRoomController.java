@@ -18,6 +18,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -56,7 +57,8 @@ public class WaitingRoomController implements Initializable {
     	primaryStage.setResizable(true);
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("HouseKeepingUI.fxml"));
 		Scene scene = new Scene(root);
-		
+		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+		primaryStage.getIcons().add(icon);
 		primaryStage.setTitle("HouseKeeping Section");
 		primaryStage.setScene(scene);
 		primaryStage.show();

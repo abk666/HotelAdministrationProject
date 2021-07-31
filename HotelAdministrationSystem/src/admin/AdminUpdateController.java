@@ -16,7 +16,8 @@ import com.jfoenix.controls.JFXTextField;
 
 import bean.Admin;
 import bean.AdminHolder;
-
+import bean.DiningRoomFood;
+import bean.DiningRoomFoodHolder;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
@@ -114,7 +115,7 @@ public class AdminUpdateController implements Initializable {
     	Stage primaryStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("../admin/AdminMainUI.fxml"));
 		Scene scene = new Scene(root);
-		
+		primaryStage.setTitle("Admin Main Section");
 		primaryStage.setScene(scene);
 		primaryStage.show();
 
@@ -227,7 +228,7 @@ public class AdminUpdateController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
 		ObservableList<String> statusList = FXCollections.observableArrayList(
-				"Enable","Disable"	
+				"Active","Inactive"	
 					
 					);
 			

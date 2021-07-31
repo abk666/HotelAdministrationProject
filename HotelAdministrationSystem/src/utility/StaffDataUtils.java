@@ -47,7 +47,7 @@ public class StaffDataUtils {
 				preStmt.setString(9, staff.getStaffAddress());
 				Date date = Date.valueOf(staff.getStaffDOB());
 				preStmt.setDate(10, date);
-				preStmt.setString(11, staff.getStaffStatus());
+				preStmt.setString(11, "Active");
 				preStmt.setString(12, staff.getStaffImageName());
 				
 				Boolean isSaveOK = preStmt.execute();

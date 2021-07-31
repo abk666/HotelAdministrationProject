@@ -24,6 +24,7 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -73,6 +74,8 @@ public class DiningRoomFoodDetailsController implements Initializable {
     	primaryStage.setResizable(false);
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("DiningRoomFoodUI.fxml"));
 		Scene scene = new Scene(root);
+		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+		primaryStage.getIcons().add(icon);
 		primaryStage.setTitle("DiningRoomFoodUI");
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -91,6 +94,8 @@ public class DiningRoomFoodDetailsController implements Initializable {
     	primaryStage.setResizable(false);
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("DiningRoomFoodProfileUI.fxml"));
 		Scene scene = new Scene(root);
+		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+		primaryStage.getIcons().add(icon);
 		primaryStage.setTitle("Food Menu Detail");
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -144,6 +149,8 @@ public class DiningRoomFoodDetailsController implements Initializable {
     	primaryStage.setResizable(false);
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("DiningRoomFoodEditUI.fxml"));
 		Scene scene = new Scene(root);
+		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+		primaryStage.getIcons().add(icon);
 		primaryStage.setTitle("DiningRoomFoodUI");
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -157,6 +164,8 @@ public class DiningRoomFoodDetailsController implements Initializable {
     	primaryStage.setResizable(false);
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("DiningRoomFoodUI.fxml"));
 		Scene scene = new Scene(root);
+		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+		primaryStage.getIcons().add(icon);
 		primaryStage.setTitle("DiningRoomFoodUI");
 		primaryStage.setScene(scene);
 		primaryStage.show();

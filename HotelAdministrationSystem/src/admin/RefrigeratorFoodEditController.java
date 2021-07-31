@@ -116,6 +116,8 @@ public class RefrigeratorFoodEditController implements Initializable{
     		Stage primaryStage=(Stage) ((Node)event.getSource()).getScene().getWindow();
         	primaryStage.close();
         	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("RefrigeratorFoodDetailsUI.fxml"));
+        	Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+			primaryStage.getIcons().add(icon);
     		Scene scene = new Scene(root);
     		primaryStage.setScene(scene);
     		primaryStage.show();
@@ -169,6 +171,8 @@ public class RefrigeratorFoodEditController implements Initializable{
     	primaryStage.setResizable(false);
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("RefrigeratorFoodDetailsUI.fxml"));
 		Scene scene = new Scene(root);
+		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+		primaryStage.getIcons().add(icon);
 		primaryStage.setTitle("RefrigeratorFoodDetailsUI");
 		primaryStage.setScene(scene);
 		primaryStage.show();

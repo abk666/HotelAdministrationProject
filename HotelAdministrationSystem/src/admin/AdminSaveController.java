@@ -15,7 +15,9 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 
 import bean.Admin;
-
+import bean.AdminHolder;
+import bean.DiningRoomFood;
+import bean.DiningRoomFoodHolder;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
@@ -178,50 +180,7 @@ public class AdminSaveController implements Initializable {
 			myNoti.getNotification(NotificationType.ERROR, "Save Fail!", "Fail to Save "+userName+" to DB", AnimationType.SLIDE, 3000.0);
 
 			}
-    	
-//		}else {
-//			
-//			
-//			AdminHolder holder =AdminHolder.getAdminInstance();
-//			
-//			Admin admin = holder.getAdmin();
-//			
-//			imageAdmin.setImage(new Image(getClass().getResourceAsStream("../img/admin/"+admin.getImageName())));
-//			
-//			adminId = admin.getId();
-//			tfFName.setText(admin.getFirstName());
-//			tfLName.setText(admin.getLastName());
-//			tfUsername.setText(admin.getUsername());
-//			tfEmail.setText(admin.getEmail());
-//			tfPassword.setText(admin.getPassword());
-//			tfPhone.setText(admin.getPhone());
-//			tfAddress.setText(admin.getAddress());
-//			dpDOB.setValue(LocalDate.parse(admin.getDob()));
-//			cobStatus.setPromptText(admin.getStatus());
-//			
-//			Admin adminUpdated = new Admin(this.adminId, fName, lName, userName, email, password, phone, address, dob, status, imagename);
-//			
-//			Integer rowUpdated = adminDataUtils.updateAdmin(adminUpdated);
-//			
-//			if (rowUpdated > 0 ) {
-//				
-//				
-//				
-//				myNoti.getNotification(NotificationType.SUCCESS, "Updated Success!", "Successfully Update "+userName+" to DB", AnimationType.SLIDE, 3000.0);
-//				File deletedFile = new File("src/img/admin/"+this.oldImageName);
-//					deletedFile.delete();
-//					
-//					File imageFile = new File("src/img/admin/"+imagename);
-//					
-//					BufferedImage bufferedImage = SwingFXUtils.fromFXImage(imageAdmin.getImage(), null);
-//					
-//					ImageIO.write(bufferedImage, "jpg", imageFile);
-//					
-//					
-//					clearAllField();	
-//					
-//			}
-//			
+
 		}
     	
 
@@ -244,7 +203,7 @@ public class AdminSaveController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
 		ObservableList<String> statusList = FXCollections.observableArrayList(
-				"Enable","Disable"	
+				"Active","Inactive"	
 					
 					);
 			

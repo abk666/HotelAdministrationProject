@@ -26,6 +26,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -82,6 +83,8 @@ public class ItemUsageController implements Initializable{
 				Stage primaryStage=(Stage)((Node)event.getSource()).getScene().getWindow();
 		    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("AccountantMainUI.fxml"));
 				Scene scene = new Scene(root);
+				Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+				primaryStage.getIcons().add(icon);
 	            primaryStage.setTitle("Accountant Main Section");
 				primaryStage.setScene(scene);
 				primaryStage.show();
@@ -90,12 +93,17 @@ public class ItemUsageController implements Initializable{
 
 	    @FXML
 	    void processDelete(MouseEvent event) throws SQLException {
-	       ItemUsage itemUsage=itemUsageTable.getSelectionModel().getSelectedItem();
-	       boolean isDeleteOk=itemUsageDataUtils.deleteItemUsage(itemUsage.getItemUsageId());
-	       if(!isDeleteOk) {
-	    	   System.out.println("Successfully deleted!");
-	    	   showTable("select * from itemusage;");
-	       }
+	    	 if(itemUsageTable.getSelectionModel().getSelectedIndex()>=0) {
+	    		 ItemUsage itemUsage=itemUsageTable.getSelectionModel().getSelectedItem();
+	  	       boolean isDeleteOk=itemUsageDataUtils.deleteItemUsage(itemUsage.getItemUsageId());
+	  	       if(!isDeleteOk) {
+	  	    	   System.out.println("Successfully deleted!");
+	  	    	   showTable("select * from itemusage;");
+	  	       } 
+	    	 }else {
+		    	  noti.getNotification(NotificationType.ERROR, "Fail!", "You first need to select an item", AnimationType.SLIDE, 2000.0);
+		      }
+	       
 	    }
 
 	    @FXML
@@ -105,7 +113,8 @@ public class ItemUsageController implements Initializable{
 				Stage primaryStage=(Stage)((Node)event.getSource()).getScene().getWindow();
 		    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("../main/LogInUI.fxml"));
 				Scene scene = new Scene(root);
-			
+				Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+				primaryStage.getIcons().add(icon);
 				primaryStage.setScene(scene);
 				primaryStage.show();
 			}
@@ -205,16 +214,22 @@ public class ItemUsageController implements Initializable{
 
 	    @FXML
 	    void processUpdate(MouseEvent event) {
-	    	  enableAllFields();
-	          isSaveButtonClicked=false;
-	          ItemUsage itemUsage=itemUsageTable.getSelectionModel().getSelectedItem();
-	          
-	          cobName.setValue(itemUsage.getItemName());
-	          tfItemQty.setText(itemUsage.getItemQty().toString());
-	          dpDate.setValue(LocalDate.parse(itemUsage.getItemUsageDate()));
-	          this.itemId=itemUsage.getItemUsageId();
-	          this.oldItemUsageQty=itemUsage.getItemQty();
-	          this.oldItemName=itemUsage.getItemName();
+	    	
+	    	if(itemUsageTable.getSelectionModel().getSelectedIndex()>=0) {
+	    		  enableAllFields();
+		          isSaveButtonClicked=false;
+		          ItemUsage itemUsage=itemUsageTable.getSelectionModel().getSelectedItem();
+		          
+		          cobName.setValue(itemUsage.getItemName());
+		          tfItemQty.setText(itemUsage.getItemQty().toString());
+		          dpDate.setValue(LocalDate.parse(itemUsage.getItemUsageDate()));
+		          this.itemId=itemUsage.getItemUsageId();
+		          this.oldItemUsageQty=itemUsage.getItemQty();
+		          this.oldItemName=itemUsage.getItemName();
+	    	}else {
+		    	  noti.getNotification(NotificationType.ERROR, "Fail!", "You first need to select an item", AnimationType.SLIDE, 2000.0);
+		      }
+	    	
 	          
 	    }
 	    @FXML

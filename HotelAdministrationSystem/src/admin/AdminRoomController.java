@@ -1,5 +1,6 @@
 package admin;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -12,11 +13,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import utility.RoomUtils;
 
 public class AdminRoomController implements Initializable{
@@ -64,8 +71,16 @@ public class AdminRoomController implements Initializable{
     private Integer id;
 
     @FXML
-    void processBack(MouseEvent event) {
-
+    void processBack(MouseEvent event) throws IOException {
+    	Stage primaryStage = (Stage) ((Button)event.getSource()).getScene().getWindow();
+    	primaryStage.hide();
+    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("../main/LoginUI.fxml"));
+		Scene scene = new Scene(root);
+		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+		primaryStage.getIcons().add(icon);
+		primaryStage.setScene(scene);
+		
+		primaryStage.show();
     }
     
     @FXML

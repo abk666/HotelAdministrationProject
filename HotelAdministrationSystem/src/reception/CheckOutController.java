@@ -23,6 +23,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import tray.animations.AnimationType;
@@ -92,17 +93,23 @@ public class CheckOutController implements Initializable{
 
 	    @FXML
 	    void processCheckOut(ActionEvent event) throws IOException {
-	    	Guest guest=guestTable.getSelectionModel().getSelectedItem();
-	    	GuestHolder holder=GuestHolder.getGuestInstance();
-	    	holder.setGuest(guest);
+	    	if(guestTable.getSelectionModel().getSelectedIndex()>=0) {
+	    		Guest guest=guestTable.getSelectionModel().getSelectedItem();
+		    	GuestHolder holder=GuestHolder.getGuestInstance();
+		    	holder.setGuest(guest);
+		    	
+		    	Stage primaryStage=new Stage();
+		    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("CheckOutFormUI.fxml"));
+				Scene scene = new Scene(root);
+				Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+				primaryStage.getIcons().add(icon);
+				primaryStage.setResizable(false);
+				primaryStage.setScene(scene);
+				primaryStage.show();
+	    	}else {
+		    	  noti.getNotification(NotificationType.ERROR, "Fail!", "You first need to select an item", AnimationType.SLIDE, 2000.0);
+		      }
 	    	
-	    	Stage primaryStage=new Stage();
-	    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("CheckOutFormUI.fxml"));
-			Scene scene = new Scene(root);
-
-			primaryStage.setResizable(false);
-			primaryStage.setScene(scene);
-			primaryStage.show();
 	    }
 
 	    @FXML
@@ -150,16 +157,23 @@ public class CheckOutController implements Initializable{
 
 	    @FXML
 	    void processView(ActionEvent event) throws IOException {
-	    	Guest guest=guestTable.getSelectionModel().getSelectedItem();
-	    	GuestHolder holder=GuestHolder.getGuestInstance();
-	    	holder.setGuest(guest);
-	    	Stage primaryStage=new Stage();
-	    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("GuestInfoUI.fxml"));
-			Scene scene = new Scene(root);
-
-			primaryStage.setResizable(false);
-			primaryStage.setScene(scene);
-			primaryStage.show();
+	    	
+	    	if(guestTable.getSelectionModel().getSelectedIndex()>=0) {
+	    		Guest guest=guestTable.getSelectionModel().getSelectedItem();
+		    	GuestHolder holder=GuestHolder.getGuestInstance();
+		    	holder.setGuest(guest);
+		    	Stage primaryStage=new Stage();
+		    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("GuestInfoUI.fxml"));
+				Scene scene = new Scene(root);
+				Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+				primaryStage.getIcons().add(icon);
+				primaryStage.setResizable(false);
+				primaryStage.setScene(scene);
+				primaryStage.show();
+	    	}else {
+		    	  noti.getNotification(NotificationType.ERROR, "Fail!", "You first need to select an item", AnimationType.SLIDE, 2000.0);
+		      }
+	    	
 	    }
 	    
 
@@ -168,7 +182,8 @@ public class CheckOutController implements Initializable{
 	    	Stage primaryStage=(Stage) ((Button)event.getSource()).getScene().getWindow();
 	    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("../main/LogInUI.fxml"));
 			Scene scene = new Scene(root);
-
+			Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+			primaryStage.getIcons().add(icon);
 			primaryStage.setScene(scene);
 			primaryStage.show();
 	    }
@@ -178,7 +193,8 @@ public class CheckOutController implements Initializable{
 	     	Stage primaryStage=(Stage) ((Button)event.getSource()).getScene().getWindow();
 	    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("ReceptionMainUI.fxml"));
 			Scene scene = new Scene(root);
-
+			Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+			primaryStage.getIcons().add(icon);
 			primaryStage.setScene(scene);
 			primaryStage.show();
 	    }

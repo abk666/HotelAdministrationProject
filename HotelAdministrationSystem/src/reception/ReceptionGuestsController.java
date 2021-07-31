@@ -19,6 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import utility.GuestDataUtils;
@@ -75,24 +76,7 @@ public class ReceptionGuestsController implements Initializable {
     
     private final GuestDataUtils guestDataUtils=new GuestDataUtils();
 
-    @FXML
-    void processDelete(ActionEvent event) throws SQLException {
-    	Guest guest= guestTable.getSelectionModel().getSelectedItem();
-     	 
-     	 Boolean isDeleteOk =guestDataUtils.deleteGuest(guest.getGuestId());
-     	
-     	 if (!isDeleteOk) {
-     		
-  			System.out.println("Deleted "+guest.getGuestName());
-  			showTable("select * from guest;");
-  			
-
-  			
-  		}else {
-  			
-  			System.out.println("Fail To Delete "+guest.getGuestName());
-  		}
-    }
+   
 
     @FXML
     void processRefresh(ActionEvent event) {
@@ -118,7 +102,8 @@ public class ReceptionGuestsController implements Initializable {
     	Stage primaryStage = new Stage();
      	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("GuestDetailsUI.fxml"));
  		Scene scene = new Scene(root);
- 		
+ 		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+		primaryStage.getIcons().add(icon);
  		primaryStage.setTitle("Guest Details");
  		primaryStage.setScene(scene);
  		primaryStage.show();

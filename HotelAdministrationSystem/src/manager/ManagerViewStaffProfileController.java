@@ -51,6 +51,8 @@ public class ManagerViewStaffProfileController implements Initializable{
     	primaryStage.setResizable(false);
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("ManagerViewStaffUI.fxml"));
 		Scene scene = new Scene(root);
+		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+		primaryStage.getIcons().add(icon);
 		primaryStage.setTitle("ManagerViewStaffUI");
 		primaryStage.setScene(scene);
 		primaryStage.show();

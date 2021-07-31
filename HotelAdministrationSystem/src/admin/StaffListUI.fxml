@@ -70,5 +70,10 @@
             <Font size="15.0" />
          </font>
       </Label>
+      <Label layoutX="764.0" layoutY="13.0" onMouseClicked="#processInactive" prefHeight="25.0" prefWidth="122.0" text="&lt;&lt;INACTIVE&gt;&gt;">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

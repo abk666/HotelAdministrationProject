@@ -19,6 +19,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import utility.BookingDataUtils;
@@ -111,7 +112,8 @@ public class BookingTableController implements Initializable {
     	Stage primaryStage = new Stage();
      	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("BookingDetailsUI.fxml"));
  		Scene scene = new Scene(root);
- 		
+ 		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+		primaryStage.getIcons().add(icon);
  		primaryStage.setTitle("Booking Details");
  		primaryStage.setScene(scene);
  		primaryStage.setResizable(false);

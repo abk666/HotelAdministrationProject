@@ -30,6 +30,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import tray.animations.AnimationType;
@@ -116,7 +117,8 @@ public class CheckOutFormController implements Initializable{
 	         	Stage primaryStage=(Stage)((Button)event.getSource()).getScene().getWindow();
 	        	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("BillSlipUI.fxml"));
 	    		Scene scene = new Scene(root);
-
+	    		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+				primaryStage.getIcons().add(icon);
 	    		primaryStage.setResizable(false);
 	    		primaryStage.setScene(scene);
 	    		primaryStage.show();

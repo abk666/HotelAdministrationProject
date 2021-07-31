@@ -113,7 +113,7 @@
                            </font>
                         </Label>
                         <Pane prefHeight="80.0" prefWidth="113.0" HBox.hgrow="ALWAYS" />
-                        <JFXButton prefHeight="50.0" prefWidth="123.0" style="-fx-background-color: #3d1490; -fx-background-radius: 30;" text="Logout" textFill="WHITE">
+                        <JFXButton onAction="#processLogout" prefHeight="50.0" prefWidth="123.0" style="-fx-background-color: #3d1490; -fx-background-radius: 30;" text="Logout" textFill="WHITE">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>

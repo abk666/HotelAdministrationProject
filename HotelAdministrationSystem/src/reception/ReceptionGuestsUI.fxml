@@ -52,11 +52,6 @@
                <children>
                   <HBox alignment="CENTER" layoutY="20.0" prefHeight="64.0" prefWidth="800.0" spacing="20.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
                      <children>
-                        <JFXButton onAction="#processDelete" prefHeight="50.0" prefWidth="80.0" style="-fx-background-color: #c40d0d;" text="Delete" textFill="WHITE">
-                           <font>
-                              <Font size="13.0" />
-                           </font>
-                        </JFXButton>
                         <JFXButton onAction="#processView" prefHeight="50.0" prefWidth="80.0" style="-fx-background-color: #3d1490;" text="View" textFill="WHITE">
                            <font>
                               <Font size="13.0" />

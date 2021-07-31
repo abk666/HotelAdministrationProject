@@ -12,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -27,6 +28,8 @@ public class ReceptionMainController implements Initializable {
     	Stage primaryStage = new Stage();
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("BookingUI.fxml"));
 		Scene scene = new Scene(root);
+		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+		primaryStage.getIcons().add(icon);
 		primaryStage.setTitle("Reception Booking Section");
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -37,6 +40,8 @@ public class ReceptionMainController implements Initializable {
     	Stage primaryStage = new Stage();
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("CheckInUI.fxml"));
 		Scene scene = new Scene(root);
+		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+		primaryStage.getIcons().add(icon);
 		primaryStage.setTitle("Reception CheckIn Section");
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
@@ -48,6 +53,8 @@ public class ReceptionMainController implements Initializable {
     	Stage primaryStage=(Stage) ((Button)event.getSource()).getScene().getWindow();
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("CheckOutUI.fxml"));
 		Scene scene = new Scene(root);
+		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+		primaryStage.getIcons().add(icon);
 		primaryStage.setTitle("Reception CheckOut Section");
 		primaryStage.setScene(scene);
 
@@ -59,6 +66,8 @@ public class ReceptionMainController implements Initializable {
     	Stage primaryStage = new Stage();
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("ReceptionGuestsUI.fxml"));
 		Scene scene = new Scene(root);
+		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+		primaryStage.getIcons().add(icon);
 		primaryStage.setTitle("Reception Guests Section");
 		primaryStage.setScene(scene);
 		
@@ -71,6 +80,8 @@ public class ReceptionMainController implements Initializable {
     	primaryStage.hide();
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("../main/LoginUI.fxml"));
 		Scene scene = new Scene(root);
+		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+		primaryStage.getIcons().add(icon);
 		primaryStage.setScene(scene);
 		
 		primaryStage.show();
@@ -81,6 +92,8 @@ public class ReceptionMainController implements Initializable {
     	Stage primaryStage = new Stage();
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("ReceptionRoomsUI.fxml"));
 		Scene scene = new Scene(root);
+		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+		primaryStage.getIcons().add(icon);
 		primaryStage.setTitle("Reception Rooms Section");
 		primaryStage.setScene(scene);
 		primaryStage.show();

@@ -23,6 +23,7 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -83,6 +84,8 @@ public class ManagerViewStaffController implements Initializable {
     	primaryStage.setResizable(false);
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("ManagerMainUI.fxml"));
 		Scene scene = new Scene(root);
+		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+		primaryStage.getIcons().add(icon);
 		primaryStage.setTitle("ManagerMainUI");
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -171,6 +174,8 @@ public class ManagerViewStaffController implements Initializable {
     	primaryStage.setResizable(false);
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("ManagerViewStaffProfileUI.fxml"));
 		Scene scene = new Scene(root);
+		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+		primaryStage.getIcons().add(icon);
 		primaryStage.setTitle("ManagerViewStaffProfileUI");
 		primaryStage.setScene(scene);
 		primaryStage.show();

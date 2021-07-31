@@ -154,6 +154,8 @@ public class RefrigeratorFoodController implements Initializable{
     	primaryStage.setResizable(false);
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("RefrigeratorFoodDetailsUI.fxml"));
 		Scene scene = new Scene(root);
+		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+		primaryStage.getIcons().add(icon);
 		primaryStage.setTitle("RefrigeratorFoodDetailsUI");
 		primaryStage.setScene(scene);
 		primaryStage.show();

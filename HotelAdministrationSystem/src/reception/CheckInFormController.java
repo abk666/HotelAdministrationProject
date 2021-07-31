@@ -13,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import tray.animations.AnimationType;
@@ -62,6 +63,8 @@ public class CheckInFormController implements Initializable{
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("CheckInUI.fxml"));
 		Scene scene = new Scene(root);
 		primaryStage.hide();
+		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+		primaryStage.getIcons().add(icon);
 		primaryStage.setTitle("CheckIn UI Section");
 		primaryStage.setScene(scene);
 		primaryStage.show();

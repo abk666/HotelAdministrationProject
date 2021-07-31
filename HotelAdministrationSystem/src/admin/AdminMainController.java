@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -19,6 +20,8 @@ public class AdminMainController {
     	primaryStage.setResizable(false);
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("AdminSaveUI.fxml"));
 		Scene scene = new Scene(root);
+		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+		primaryStage.getIcons().add(icon);
 		primaryStage.setTitle("Admin Save Section");
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -32,6 +35,8 @@ public class AdminMainController {
     	primaryStage.setResizable(false);
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("DiningRoomFoodUI.fxml"));
 		Scene scene = new Scene(root);
+		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+		primaryStage.getIcons().add(icon);
 		primaryStage.setTitle("Admin Dining Section");
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -44,7 +49,8 @@ public class AdminMainController {
     	Stage primaryStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("../main/LogInUI.fxml"));
 		Scene scene = new Scene(root);
-		
+		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+		primaryStage.getIcons().add(icon);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 
@@ -57,6 +63,8 @@ public class AdminMainController {
     	primaryStage.setResizable(false);
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("RefrigeratorFoodUI.fxml"));
 		Scene scene = new Scene(root);
+		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+		primaryStage.getIcons().add(icon);
 		primaryStage.setTitle("Admin Refrigerator Section");
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -70,6 +78,8 @@ public class AdminMainController {
     	primaryStage.setResizable(false);
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("AdminRoomUI.fxml"));
 		Scene scene = new Scene(root);
+		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+		primaryStage.getIcons().add(icon);
 		primaryStage.setTitle("Admin Room Section");
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -82,6 +92,8 @@ public class AdminMainController {
     	primaryStage.setResizable(false);
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("StaffSaveUI.fxml"));
 		Scene scene = new Scene(root);
+		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+		primaryStage.getIcons().add(icon);
 		primaryStage.setTitle("Admin Staff Section");
 		primaryStage.setScene(scene);
 		primaryStage.show();

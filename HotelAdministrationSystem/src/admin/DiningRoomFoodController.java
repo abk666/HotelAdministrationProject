@@ -103,6 +103,8 @@ public class DiningRoomFoodController implements Initializable{
     	primaryStage.setResizable(false);
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("AdminMainUI.fxml"));
 		Scene scene = new Scene(root);
+		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+		primaryStage.getIcons().add(icon);
 		primaryStage.setTitle("DiningRoomFoodUI");
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -157,6 +159,8 @@ public class DiningRoomFoodController implements Initializable{
     	primaryStage.setResizable(false);
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("DiningRoomFoodDetailsUI.fxml"));
 		Scene scene = new Scene(root);
+		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+		primaryStage.getIcons().add(icon);
 		primaryStage.setTitle("DiningRoomFoodDetailsUI");
 		primaryStage.setScene(scene);
 		primaryStage.show();

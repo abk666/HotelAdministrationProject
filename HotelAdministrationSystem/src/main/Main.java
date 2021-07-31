@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.fxml.FXMLLoader;
 
@@ -17,6 +18,8 @@ public class Main extends Application {
 			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("LogInUI.fxml"));
 			Scene scene = new Scene(root,800,500);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+			primaryStage.getIcons().add(icon);
 			primaryStage.setScene(scene);
 			primaryStage.setTitle("Hotel Adminstration Login");
 			primaryStage.getScene().getWindow();

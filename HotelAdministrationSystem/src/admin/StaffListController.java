@@ -136,9 +136,15 @@ public class StaffListController implements Initializable {
     	Stage primaryStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("../admin/StaffUpdateUI.fxml"));
 		Scene scene = new Scene(root);
+		primaryStage.setTitle("Staff Update Section");
 		primaryStage.setScene(scene);
 		primaryStage.show();
 
+    }
+    
+    @FXML
+    void processInactive(MouseEvent event) {
+    	showTable("select * from staff where staffStatus= 'Inactive' ;");
     }
 
     @FXML
@@ -171,6 +177,7 @@ public class StaffListController implements Initializable {
     	Stage primaryStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("../admin/StaffViewUI.fxml"));
 		Scene scene = new Scene(root);
+		primaryStage.setTitle("Staff Profile Section");
 		primaryStage.setScene(scene);
 		primaryStage.show();
     	
@@ -195,19 +202,19 @@ public class StaffListController implements Initializable {
 			e.printStackTrace();
 		}
 		
-		id.setCellValueFactory(new PropertyValueFactory<>("staffId"));
-		firstName.setCellValueFactory(new PropertyValueFactory<>("staffFName"));
-		lastName.setCellValueFactory(new PropertyValueFactory<>("staffLName"));
-		username.setCellValueFactory(new PropertyValueFactory<>("staffUserName"));
-		email.setCellValueFactory(new PropertyValueFactory<>("staffEmail"));
-		password.setCellValueFactory(new PropertyValueFactory<>("staffPassword"));
-		role.setCellValueFactory(new PropertyValueFactory<>("staffRole"));
-		gender.setCellValueFactory(new PropertyValueFactory<>("staffGender"));
-		phone.setCellValueFactory(new PropertyValueFactory<>("staffPhNo"));
-		address.setCellValueFactory(new PropertyValueFactory<>("staffAddress"));
-		status.setCellValueFactory(new PropertyValueFactory<>("staffStatus"));
-		dob.setCellValueFactory(new PropertyValueFactory<>("staffDOB"));
-		imageName.setCellValueFactory(new PropertyValueFactory<>("staffImageName"));
+		id.setCellValueFactory(new PropertyValueFactory<>("id"));
+		firstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+		lastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+		username.setCellValueFactory(new PropertyValueFactory<>("username"));
+		email.setCellValueFactory(new PropertyValueFactory<>("email"));
+		password.setCellValueFactory(new PropertyValueFactory<>("password"));
+		role.setCellValueFactory(new PropertyValueFactory<>("role"));
+		gender.setCellValueFactory(new PropertyValueFactory<>("gender"));
+		phone.setCellValueFactory(new PropertyValueFactory<>("phone"));
+		address.setCellValueFactory(new PropertyValueFactory<>("address"));
+		status.setCellValueFactory(new PropertyValueFactory<>("status"));
+		dob.setCellValueFactory(new PropertyValueFactory<>("dob"));
+		imageName.setCellValueFactory(new PropertyValueFactory<>("imageName"));
 		
 		showTable("select * from staff;");
 		

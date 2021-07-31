@@ -27,6 +27,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -99,6 +100,8 @@ public class ImportController implements Initializable{
 	    	Stage primaryStage=new Stage();
 	    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("ImportFormUI.fxml"));
 			Scene scene = new Scene(root);
+			Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+			primaryStage.getIcons().add(icon);
 			primaryStage.setResizable(false);
 			primaryStage.setTitle("Import Form");
 			primaryStage.setScene(scene);
@@ -108,22 +111,27 @@ public class ImportController implements Initializable{
 // Delete Button Action
 	    @FXML
 	    void processDelete(MouseEvent event) throws SQLException {
+	    	 if(importTable.getSelectionModel().getSelectedIndex()>=0) {
+	    		 Optional<ButtonType>result=noti.getConfirmationAlert("Comfirmation Dialog", "Are you Sure You want to Delete?", "This cant be undone.");
+	    			
+	    			if(result.get()==ButtonType.OK) {
+	    				Import importItem=importTable.getSelectionModel().getSelectedItem();
+	    				
+	    					Boolean isDeleteOk=importDataUtils.deleteImportItems(importItem);
+	    					if(!isDeleteOk) {
+	    						System.out.println("successfully deleted!");
+
+	    					
+	    					}
+	    					showTable("select * from import where itemStatus='Good';");
+	    			}
+	    				
+	    	 }else {
+		    	  noti.getNotification(NotificationType.ERROR, "Fail!", "You first need to select an item", AnimationType.SLIDE, 2000.0);
+		      }
 	    	
 
-	Optional<ButtonType>result=noti.getConfirmationAlert("Comfirmation Dialog", "Are you Sure You want to Delete?", "This cant be undone.");
 	
-	if(result.get()==ButtonType.OK) {
-		Import importItem=importTable.getSelectionModel().getSelectedItem();
-		
-			Boolean isDeleteOk=importDataUtils.deleteImportItems(importItem);
-			if(!isDeleteOk) {
-				System.out.println("successfully deleted!");
-
-			
-			}
-			showTable("select * from import where itemStatus='Good';");
-	}
-		
 
 	}
 
@@ -131,21 +139,27 @@ public class ImportController implements Initializable{
 // Edit Button action
 	    @FXML
 	    void processEdit(MouseEvent event) throws IOException {
-	      
+	      if(importTable.getSelectionModel().getSelectedIndex()>=0) {
+	    	  Import importItem=importTable.getSelectionModel().getSelectedItem();
+	   	      ImportStatusHolder.setButtonStatus("edit");
+	          ImportHolder holder=ImportHolder.getImportInstance();
+	   	      holder.setImportItem(importItem);
+	   	    
+	   	     
+	   	  	Stage primaryStage=new Stage();
+	   		AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("ImportFormUI.fxml"));
+	   		Scene scene = new Scene(root);
+	   		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+	   		primaryStage.getIcons().add(icon);
+	   		primaryStage.setResizable(false);
+	   		primaryStage.setTitle("Update form");
+	   		primaryStage.setScene(scene);
+	   		primaryStage.show();
+	      }else {
+	    	  noti.getNotification(NotificationType.ERROR, "Fail!", "You first need to select an item", AnimationType.SLIDE, 2000.0);
+	      }
 	    
-	      Import importItem=importTable.getSelectionModel().getSelectedItem();
-	      ImportStatusHolder.setButtonStatus("edit");
-          ImportHolder holder=ImportHolder.getImportInstance();
-	      holder.setImportItem(importItem);
-	    
-	     
-	  	Stage primaryStage=new Stage();
-		AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("ImportFormUI.fxml"));
-		Scene scene = new Scene(root);
-		primaryStage.setResizable(false);
-		primaryStage.setTitle("Update form");
-		primaryStage.setScene(scene);
-		primaryStage.show();
+	 
 	    }
 
 	    @FXML
@@ -176,6 +190,8 @@ public class ImportController implements Initializable{
 				Stage primaryStage=(Stage)((Node)event.getSource()).getScene().getWindow();
 		    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("AccountantMainUI.fxml"));
 				Scene scene = new Scene(root);
+				Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+				primaryStage.getIcons().add(icon);
 	            primaryStage.setTitle("Accountant Main Section");
 				primaryStage.setScene(scene);
 				primaryStage.show();
@@ -190,6 +206,8 @@ public class ImportController implements Initializable{
 			 	Stage primaryStage=(Stage)((Node)event.getSource()).getScene().getWindow();
 		    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("../main/LogInUI.fxml"));
 				Scene scene = new Scene(root);
+				Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+				primaryStage.getIcons().add(icon);
 			    primaryStage.setTitle("Hotel Administration LogIn");
 				primaryStage.setScene(scene);
 				primaryStage.show();
@@ -214,7 +232,8 @@ public class ImportController implements Initializable{
 	      	Stage primaryStage=new Stage();
 	    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("StockUI.fxml"));
 	    	Scene scene = new Scene(root);
-	
+	    	Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+			primaryStage.getIcons().add(icon);
 	    	primaryStage.setTitle("Stock Lists");
 	    	primaryStage.setScene(scene);
 	    	primaryStage.show();

@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
-
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXComboBox;
@@ -21,7 +21,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -74,7 +74,7 @@ public class AdminListController implements Initializable {
     @FXML
     private TableColumn<Admin, String> imageName;
     
-   
+    private Boolean isNewButtonClick = false;
     
     private final MyNotification myNoti = new MyNotification();
     
@@ -87,7 +87,7 @@ public class AdminListController implements Initializable {
     	Stage primaryStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("../admin/AdminSaveUI.fxml"));
 		Scene scene = new Scene(root);
-		
+		primaryStage.setTitle("Admin Save Section");
 		primaryStage.setScene(scene);
 		primaryStage.show();
     }
@@ -130,6 +130,7 @@ public class AdminListController implements Initializable {
     	
     	Stage primaryStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("../admin/AdminUpdateUI.fxml"));
+    	primaryStage.setTitle("Admin Update Section");
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -166,6 +167,7 @@ public class AdminListController implements Initializable {
     	Stage primaryStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("../admin/AdminViewUI.fxml"));
 		Scene scene = new Scene(root);
+		primaryStage.setTitle("Admin Profile Section");
 		primaryStage.setScene(scene);
 		primaryStage.show();
 

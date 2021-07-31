@@ -221,7 +221,7 @@ public class StaffSaveController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
 		ObservableList<String> statusList = FXCollections.observableArrayList(
-				"Enable","Disable"	
+				"Active","Inactive"	
 					
 					);
 			
