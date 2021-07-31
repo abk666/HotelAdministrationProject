@@ -24,7 +24,6 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -74,8 +73,6 @@ public class DiningRoomFoodDetailsController implements Initializable {
     	primaryStage.setResizable(false);
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("DiningRoomFoodUI.fxml"));
 		Scene scene = new Scene(root);
-		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
-		primaryStage.getIcons().add(icon);
 		primaryStage.setTitle("DiningRoomFoodUI");
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -94,9 +91,7 @@ public class DiningRoomFoodDetailsController implements Initializable {
     	primaryStage.setResizable(false);
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("DiningRoomFoodProfileUI.fxml"));
 		Scene scene = new Scene(root);
-		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
-		primaryStage.getIcons().add(icon);
-		primaryStage.setTitle("Food Menu Detail");
+		primaryStage.setTitle("DiningRoomFoodProfileUI");
 		primaryStage.setScene(scene);
 		primaryStage.show();
     }
@@ -109,26 +104,36 @@ public class DiningRoomFoodDetailsController implements Initializable {
 
 		if (result.get() == ButtonType.OK) {
 		
-			for (DiningRoomFood diningRoomFood : diningRoomFoodList) {
+			Boolean flag = false;
 			
+			for (DiningRoomFood diningRoomFood : diningRoomFoodList) {
+				
 				Boolean isDeleteOk =diningRoomFoodDataUtils.deleteDiningRoomFood(diningRoomFood.getFoodMenuId());
 			   	
-			   	 if (!isDeleteOk) {
-					myNoti.getNotification(NotificationType.SUCCESS,"Deleted!","Successfully Deleted!",AnimationType.SLIDE,3000.0);
+				if (!isDeleteOk) {
+					
+					flag = true;
 				
 					File imageFile = new File("src/img/DiningRoomFood/"+diningRoomFood.getFoodMenuImage());
 					
 					if (imageFile.exists()) {
 						imageFile.delete();
-					}
+					}		
 						
-						
-				}else {
-					myNoti.getNotification(NotificationType.ERROR,"Delete Fail","Fail to Delete!",AnimationType.SLIDE,3000.0);
-						//System.out.println("Fail To Delete "+diningRoomFood.getFoodMenuName());
-				}
+				}		   	 
 			   	 
 			}
+			
+			if(flag == true) {
+				
+				myNoti.getNotification(NotificationType.SUCCESS,"Deleted!","Successfully Deleted!",AnimationType.SLIDE,3000.0);
+				
+			}else {
+				
+				myNoti.getNotification(NotificationType.ERROR,"Delete Fail","Fail to Delete!",AnimationType.SLIDE,3000.0);
+				
+			}
+			
 			
 		}
 		
@@ -149,9 +154,7 @@ public class DiningRoomFoodDetailsController implements Initializable {
     	primaryStage.setResizable(false);
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("DiningRoomFoodEditUI.fxml"));
 		Scene scene = new Scene(root);
-		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
-		primaryStage.getIcons().add(icon);
-		primaryStage.setTitle("DiningRoomFoodUI");
+		primaryStage.setTitle("DiningRoomFoodEditUI");
 		primaryStage.setScene(scene);
 		primaryStage.show();
     
@@ -164,8 +167,6 @@ public class DiningRoomFoodDetailsController implements Initializable {
     	primaryStage.setResizable(false);
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("DiningRoomFoodUI.fxml"));
 		Scene scene = new Scene(root);
-		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
-		primaryStage.getIcons().add(icon);
 		primaryStage.setTitle("DiningRoomFoodUI");
 		primaryStage.setScene(scene);
 		primaryStage.show();

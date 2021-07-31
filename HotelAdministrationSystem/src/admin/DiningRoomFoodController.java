@@ -103,9 +103,7 @@ public class DiningRoomFoodController implements Initializable{
     	primaryStage.setResizable(false);
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("AdminMainUI.fxml"));
 		Scene scene = new Scene(root);
-		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
-		primaryStage.getIcons().add(icon);
-		primaryStage.setTitle("DiningRoomFoodUI");
+		primaryStage.setTitle("AdminMainUI");
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		
@@ -114,42 +112,56 @@ public class DiningRoomFoodController implements Initializable{
     @FXML
     void processSave(ActionEvent event) throws SQLException, IOException {
     	
-    	String foodMenuName = tfFoodName.getText().trim();
-    	String foodMenuCategory = cobFoodCategory.getValue();
-    	Double foodMenuPrice = Double.parseDouble(tfPrice.getText());
-    	
-    	String imageName = "";
-    	if (this.foodMenuImageName != null || !this.foodMenuImageName.isEmpty()) {
+    	if(tfFoodName.getText() == null || tfFoodName.getText().length() == 0 || 
+    			tfPrice.getText() == null || tfPrice.getText().length() == 0 ||
+    					cobFoodCategory.getValue() == null || cobFoodCategory.getValue().length() == 0) {
     		
-	    	int indexDot = this.foodMenuImageName.indexOf(".");
-			imageName = this.foodMenuImageName.substring(0,indexDot)+".jpg";
-			
+    		
+    		myNoti.getNotification(NotificationType.WARNING,"Required User Input","Please Fill All Fields!",AnimationType.FADE,3000.0);
+    		
+    		//System.out.println("Empty");
+    		
     	}else {
-    		imageName = this.oldImageName;
+    		
+    		String foodMenuName = tfFoodName.getText().trim();
+        	String foodMenuCategory = cobFoodCategory.getValue();
+        	Double foodMenuPrice = Double.parseDouble(tfPrice.getText());
+        	
+        	String imageName = "";
+        	if (this.foodMenuImageName != null || !this.foodMenuImageName.isEmpty()) {
+        		
+    	    	int indexDot = this.foodMenuImageName.indexOf(".");
+    			imageName = this.foodMenuImageName.substring(0,indexDot)+".jpg";
+    			
+        	}else {
+        		imageName = this.oldImageName;
+        	}
+        	
+    		
+    		DiningRoomFood diningRoomFood = new DiningRoomFood(foodMenuName, foodMenuCategory, foodMenuPrice, imageName);
+        	
+        	Boolean isSaveOk = diningRoomFoodDataUtils.saveDiningRoomFood(diningRoomFood);
+        	
+        	if (!isSaveOk) {
+        		
+    			myNoti.getNotification(NotificationType.SUCCESS,"Saved Success","Successfully Saved "+foodMenuName+" to DB",AnimationType.FADE,3000.0);
+
+    			File imageFile = new File("src/img/DiningRoomFood/"+imageName);
+    			
+    			BufferedImage bufferedImage = SwingFXUtils.fromFXImage(foodMenuImage.getImage(),null);//ImageView
+    			
+    			ImageIO.write(bufferedImage,"jpg",imageFile);
+    			
+    			clearAllField();
+    			
+    		}else {
+    			
+    			myNoti.getNotification(NotificationType.ERROR,"Saved Fail","Fail to save "+foodMenuName+" to DB",AnimationType.FADE,3000.0);
+    			
+    		}
+    		
     	}
     	
-		
-		DiningRoomFood diningRoomFood = new DiningRoomFood(foodMenuName, foodMenuCategory, foodMenuPrice, imageName);
-    	
-    	Boolean isSaveOk = diningRoomFoodDataUtils.saveDiningRoomFood(diningRoomFood);
-    	
-    	if (!isSaveOk) {
-    		
-			myNoti.getNotification(NotificationType.SUCCESS,"Saved Success","Successfully Saved "+foodMenuName+" to DB",AnimationType.FADE,3000.0);
-
-			File imageFile = new File("src/img/DiningRoomFood/"+imageName);
-			
-			BufferedImage bufferedImage = SwingFXUtils.fromFXImage(foodMenuImage.getImage(),null);//ImageView
-			
-			ImageIO.write(bufferedImage,"jpg",imageFile);
-			
-			clearAllField();
-			
-		}else {
-			
-			myNoti.getNotification(NotificationType.ERROR,"Saved Fail","Fail to save "+foodMenuName+" to DB",AnimationType.FADE,3000.0);
-			
-		}
 	}
 
     @FXML
@@ -159,8 +171,6 @@ public class DiningRoomFoodController implements Initializable{
     	primaryStage.setResizable(false);
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("DiningRoomFoodDetailsUI.fxml"));
 		Scene scene = new Scene(root);
-		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
-		primaryStage.getIcons().add(icon);
 		primaryStage.setTitle("DiningRoomFoodDetailsUI");
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -173,7 +183,7 @@ public class DiningRoomFoodController implements Initializable{
 		
 		
 		ObservableList<String> foodMenuCategoryList = FXCollections.observableArrayList(
-				"Rice","Curry","Burger","Pizza","Soup","Fried","Salad","Cake","Ice Cream","Fruit","Juice","Cold Drinks","Hot Drinks","Beer","Wine"
+				"Rice","Curry","Burger","Pizza","Soup","Fried","Salad","Cake","Ice Cream","Fruit","Juice","Cold Drinks","Hot Drinks","Beer","Wine","Purified Water","Hotpot","Hotdog"
 				);		
 		
 		cobFoodCategory.setItems(foodMenuCategoryList);

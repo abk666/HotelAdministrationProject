@@ -12,7 +12,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -56,8 +55,6 @@ public class ManagerViewNotStayGuestDetailsController implements Initializable {
     	primaryStage.setResizable(false);
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("ManagerViewGuestNotStayUI.fxml"));
 		Scene scene = new Scene(root);
-		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
-		primaryStage.getIcons().add(icon);
 		primaryStage.setTitle("ManagerViewGuestNotStayUI");
 		primaryStage.setScene(scene);
 		primaryStage.show();

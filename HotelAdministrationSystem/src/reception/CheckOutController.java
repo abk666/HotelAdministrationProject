@@ -183,6 +183,7 @@ public class CheckOutController implements Initializable{
 	    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("../main/LogInUI.fxml"));
 			Scene scene = new Scene(root);
 			Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+			primaryStage.setResizable(false);
 			primaryStage.getIcons().add(icon);
 			primaryStage.setScene(scene);
 			primaryStage.show();
@@ -194,6 +195,7 @@ public class CheckOutController implements Initializable{
 	    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("ReceptionMainUI.fxml"));
 			Scene scene = new Scene(root);
 			Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+			primaryStage.setResizable(false);
 			primaryStage.getIcons().add(icon);
 			primaryStage.setScene(scene);
 			primaryStage.show();

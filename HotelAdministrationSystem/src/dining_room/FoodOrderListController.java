@@ -23,7 +23,6 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -78,8 +77,6 @@ public class FoodOrderListController implements Initializable{
     	primaryStage.setResizable(false);
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("FoodOrderUI.fxml"));
 		Scene scene = new Scene(root);
-		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
-		primaryStage.getIcons().add(icon);
 		primaryStage.setTitle("FoodOrderUI");
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -96,21 +93,28 @@ public class FoodOrderListController implements Initializable{
 
 		if (result.get() == ButtonType.OK) {
 		
+			Boolean flag = false;
+			
 			for (FoodOrder foodOrder : foodOrderList) {
 			
 				Boolean isDeleteOk =foodOrderDataUtils.deleteFoodOrder(foodOrder.getFoodOrderId());
 			   	
 			   	 if (!isDeleteOk) {
 			   		 
-			   		myNoti.getNotification(NotificationType.SUCCESS,"Deleted!","Successfully Deleted!",AnimationType.SLIDE,3000.0);
-					
-						
-				}else {
-					
-					myNoti.getNotification(NotificationType.ERROR,"Delete Fail","Fail to Delete!",AnimationType.SLIDE,3000.0);
-					
+			   		flag = true;
+			   			
 				}	   	 
 			   	
+			}
+			
+			if(flag == true) {
+				
+				myNoti.getNotification(NotificationType.SUCCESS,"Deleted!","Successfully Deleted!",AnimationType.SLIDE,3000.0);
+				
+			}else {
+				
+				myNoti.getNotification(NotificationType.ERROR,"Delete Fail","Fail to Delete!",AnimationType.SLIDE,3000.0);
+				
 			}
     	
 		}
@@ -130,8 +134,6 @@ public class FoodOrderListController implements Initializable{
     	primaryStage.setResizable(false);
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("FoodOrderListEditUI.fxml"));
 		Scene scene = new Scene(root);
-		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
-		primaryStage.getIcons().add(icon);
 		primaryStage.setTitle("FoodOrderUI");
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -146,8 +148,6 @@ public class FoodOrderListController implements Initializable{
     	primaryStage.setResizable(false);
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("FoodOrderUI.fxml"));
 		Scene scene = new Scene(root);
-		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
-		primaryStage.getIcons().add(icon);
 		primaryStage.setTitle("FoodOrderUI");
 		primaryStage.setScene(scene);
 		primaryStage.show();

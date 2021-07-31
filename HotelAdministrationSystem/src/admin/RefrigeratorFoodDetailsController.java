@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXComboBox;
@@ -11,21 +12,24 @@ import com.jfoenix.controls.JFXTextField;
 
 import bean.RefrigeratorFood;
 import bean.RefrigeratorFoodHolder;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import tray.animations.AnimationType;
 import tray.notification.NotificationType;
+import utility.MyAlert;
 import utility.MyNotification;
 import utility.RefrigeratorFoodDataUtils;
 
@@ -62,6 +66,8 @@ public class RefrigeratorFoodDetailsController implements Initializable{
     private final RefrigeratorFoodDataUtils refrigeratorFoodDataUtils = new RefrigeratorFoodDataUtils();
     
     private final MyNotification myNoti = new MyNotification();
+    
+    private MyAlert alert = new MyAlert();
 
     @FXML
     void processBack(MouseEvent event) throws IOException {
@@ -70,8 +76,6 @@ public class RefrigeratorFoodDetailsController implements Initializable{
     	primaryStage.setResizable(false);
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("RefrigeratorFoodUI.fxml"));
 		Scene scene = new Scene(root);
-		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
-		primaryStage.getIcons().add(icon);
 		primaryStage.setTitle("RefrigeratorFoodUI");
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -80,25 +84,46 @@ public class RefrigeratorFoodDetailsController implements Initializable{
     @FXML
     void processDelete(ActionEvent event) throws SQLException {
 
-    	RefrigeratorFood refrigeratorFood = refrigeratorTable.getSelectionModel().getSelectedItem();
+    	ObservableList<RefrigeratorFood> refrigeratorFoodList = refrigeratorTable.getSelectionModel().getSelectedItems();
     	
-    	Boolean isDeleteOk =refrigeratorFoodDataUtils.deleteRefrigeratorFood(refrigeratorFood.getItemId());
-	   	
-	   	 if (!isDeleteOk) {
-				myNoti.getNotification(NotificationType.SUCCESS,"Deleted!","Deleted "+refrigeratorFood.getItemName(),AnimationType.SLIDE,3000.0);
-				showTable("select * from hoteldb.refrigeratoritem;");
+    	Optional<ButtonType> result = alert.getConfirmationAlert("Confirmation Dialog","Are You Sure to Delete Selected Item?","This action cannot be undone.");
+
+		if (result.get() == ButtonType.OK) {
+			
+			Boolean flag = false;
+		
+			for (RefrigeratorFood refrigeratorFood : refrigeratorFoodList) {
+			
+				Boolean isDeleteOk =refrigeratorFoodDataUtils.deleteRefrigeratorFood(refrigeratorFood.getItemId());
+			   	
+			   	 if (!isDeleteOk) {
+			   		 
+			   		 	flag = true;
+			   		 	
+						File imageFile = new File("src/img/RefrigeratorFood/"+refrigeratorFood.getItemImage());
+						
+						if (imageFile.exists()) {
+							imageFile.delete();
+						}
 				
-				File imageFile = new File("src/img/RefrigeratorFood/"+refrigeratorFood.getItemImage());
-				
-				if (imageFile.exists()) {
-					imageFile.delete();
+						
 				}
+			   	 
+			}
+			
+			if(flag == true) {
 				
+				myNoti.getNotification(NotificationType.SUCCESS,"Deleted!","Successfully Deleted!",AnimationType.SLIDE,3000.0);
 				
 			}else {
-				myNoti.getNotification(NotificationType.ERROR,"Delete Fail","Fail to delete "+refrigeratorFood.getItemName(),AnimationType.SLIDE,3000.0);
-				//System.out.println("Fail To Delete "+diningRoomFood.getFoodMenuName());
+				
+				myNoti.getNotification(NotificationType.ERROR,"Delete Fail","Fail to Delete!",AnimationType.SLIDE,3000.0);
+				
 			}
+			
+		}
+		
+		showTable("select * from hoteldb.refrigeratoritem;");
     }
 
     @FXML
@@ -114,8 +139,6 @@ public class RefrigeratorFoodDetailsController implements Initializable{
     	primaryStage.setResizable(false);
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("RefrigeratorFoodEditUI.fxml"));
 		Scene scene = new Scene(root);
-		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
-		primaryStage.getIcons().add(icon);
 		primaryStage.setTitle("RefrigeratorFoodEditUI");
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -129,15 +152,13 @@ public class RefrigeratorFoodDetailsController implements Initializable{
     	primaryStage.setResizable(false);
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("RefrigeratorFoodUI.fxml"));
 		Scene scene = new Scene(root);
-		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
-		primaryStage.getIcons().add(icon);
 		primaryStage.setTitle("RefrigeratorFoodUI");
 		primaryStage.setScene(scene);
 		primaryStage.show();
     }
 
     @FXML
-    void processRefresh(ActionEvent event) {
+    void processRefresh(MouseEvent event) {
 
     	showTable("select * from hoteldb.refrigeratoritem;");
     	
@@ -146,7 +167,7 @@ public class RefrigeratorFoodDetailsController implements Initializable{
     }
 
     @FXML
-    void processSearch(ActionEvent event) {
+    void processSearch(MouseEvent event) {
 
     	String columnName = cobSearch.getValue();
     	String dataInput = tfSearch.getText().trim();
@@ -155,8 +176,20 @@ public class RefrigeratorFoodDetailsController implements Initializable{
     }
     
     @FXML
-    void processView(ActionEvent event) {
+    void processView(MouseEvent event) throws IOException {
 
+    	RefrigeratorFood refrigeratorFood = refrigeratorTable.getSelectionModel().getSelectedItem();
+    	
+    	RefrigeratorFoodHolder holder = RefrigeratorFoodHolder.getRefrigeratorfoodInstance();
+    	holder.setRefrigeratorFood(refrigeratorFood);
+    	
+    	Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+    	primaryStage.setResizable(false);
+    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("RefrigeratorFoodProfileUI.fxml"));
+		Scene scene = new Scene(root);
+		primaryStage.setTitle("RefrigeratorFoodProfileUI");
+		primaryStage.setScene(scene);
+		primaryStage.show();
     	
     }
  
@@ -181,6 +214,8 @@ public class RefrigeratorFoodDetailsController implements Initializable{
 		itemImage.setCellValueFactory(new PropertyValueFactory<>("itemImage"));
 		
 		showTable("select * from hoteldb.refrigeratoritem;");
+		
+		refrigeratorTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 		
 		try {
 			cobSearch.setItems(refrigeratorFoodDataUtils.getAllColumnLabel());

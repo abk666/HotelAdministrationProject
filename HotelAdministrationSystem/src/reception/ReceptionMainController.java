@@ -55,6 +55,7 @@ public class ReceptionMainController implements Initializable {
 		Scene scene = new Scene(root);
 		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
 		primaryStage.getIcons().add(icon);
+		primaryStage.setResizable(true);
 		primaryStage.setTitle("Reception CheckOut Section");
 		primaryStage.setScene(scene);
 

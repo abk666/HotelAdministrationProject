@@ -13,18 +13,18 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="750.0" style="-fx-background-color: #d1e0ea;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="admin.DiningRoomFoodEditController">
+<AnchorPane prefHeight="650.0" prefWidth="750.0" style="-fx-background-color: #d1e0ea;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="admin.DiningRoomFoodEditController">
    <children>
-      <Label alignment="CENTER" layoutX="1.0" prefHeight="60.0" prefWidth="750.0" text="Admin Dining-Room Food" textFill="#114ca0">
+      <Label alignment="CENTER" layoutX="1.0" prefHeight="60.0" prefWidth="900.0" text="Admin Dining-Room Food" textFill="#114ca0">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
-      <ImageView fx:id="foodMenuImage" fitHeight="192.0" fitWidth="198.0" layoutX="280.0" layoutY="99.0" onMouseClicked="#processImage" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="foodMenuImage" fitHeight="192.0" fitWidth="198.0" layoutX="355.0" layoutY="102.0" onMouseClicked="#processImage" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/upload.png" />
          </image></ImageView>
-      <GridPane alignment="CENTER" layoutX="194.0" layoutY="310.0" prefHeight="232.0" prefWidth="363.0">
+      <GridPane alignment="CENTER" layoutX="270.0" layoutY="318.0" prefHeight="250.0" prefWidth="363.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="195.0" minWidth="10.0" prefWidth="66.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="299.0" minWidth="10.0" prefWidth="254.0" />
@@ -51,34 +51,50 @@
                   <Font name="System Italic" size="18.0" />
                </font>
             </Label>
-            <JFXTextField fx:id="tfFoodName" focusColor="#0363aa" prefHeight="32.0" prefWidth="273.0" unFocusColor="#113c9e" GridPane.columnIndex="1" />
-            <JFXTextField fx:id="tfPrice" focusColor="#0363aa" prefHeight="30.0" prefWidth="249.0" unFocusColor="#114ca0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <JFXTextField fx:id="tfFoodName" focusColor="#0363aa" prefHeight="32.0" prefWidth="273.0" unFocusColor="#113c9e" GridPane.columnIndex="1">
+               <font>
+                  <Font size="15.0" />
+               </font></JFXTextField>
+            <JFXTextField fx:id="tfPrice" focusColor="#0363aa" prefHeight="30.0" prefWidth="249.0" unFocusColor="#114ca0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <font>
+                  <Font size="15.0" />
+               </font></JFXTextField>
             <JFXComboBox fx:id="cobFoodCategory" focusColor="#0363aa" prefHeight="35.0" prefWidth="284.0" unFocusColor="#114ca0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <JFXButton onAction="#processSave" prefHeight="45.0" prefWidth="80.0" ripplerFill="#08feff" style="-fx-background-color: #018abb; -fx-background-radius: 10;" text="Save" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <JFXButton onAction="#processUpdate" prefHeight="45.0" prefWidth="90.0" ripplerFill="#08feff" style="-fx-background-color: #018abb; -fx-background-radius: 10;" text="Update" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
                <GridPane.margin>
-                  <Insets left="95.0" />
+                  <Insets left="92.0" />
                </GridPane.margin>
             </JFXButton>
-            <JFXButton onAction="#processCancel" prefHeight="45.0" prefWidth="80.0" ripplerFill="#a7ff08" style="-fx-background-color: #f80909; -fx-background-radius: 10;" text="Cancel" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <JFXButton onAction="#processCancel" prefHeight="45.0" prefWidth="90.0" ripplerFill="#a7ff08" style="-fx-background-color: #f80909; -fx-background-radius: 10;" text="Cancel" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
                <GridPane.margin>
-                  <Insets left="192.0" />
+                  <Insets left="190.0" />
                </GridPane.margin>
             </JFXButton>
          </children>
       </GridPane>
-      <ImageView fitHeight="60.0" fitWidth="60.0" layoutX="3.0" layoutY="3.0" onMouseClicked="#processBack" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="55.0" fitWidth="55.0" layoutX="3.0" layoutY="3.0" onMouseClicked="#processBack" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/previous.png" />
          </image></ImageView>
-      <ImageView fitHeight="73.0" fitWidth="60.0" layoutX="691.0" layoutY="3.0" onMouseClicked="#processView" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="73.0" fitWidth="60.0" layoutX="838.0" layoutY="3.0" onMouseClicked="#processView" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/frequency%20(1).png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="63.0" layoutY="468.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/ramen.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="738.0" layoutY="468.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/chinese-food.png" />
          </image>
       </ImageView>
    </children>

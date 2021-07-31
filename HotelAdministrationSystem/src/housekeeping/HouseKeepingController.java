@@ -8,7 +8,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.ButtonType;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -23,8 +22,6 @@ public class HouseKeepingController {
 			Stage primaryStage=(Stage)((Node)event.getSource()).getScene().getWindow();
 	    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("../main/LogInUI.fxml"));
 			Scene scene = new Scene(root);
-			Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
-			primaryStage.getIcons().add(icon);
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		}
@@ -48,8 +45,7 @@ public class HouseKeepingController {
     	primaryStage.setResizable(true);
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("WaitingRoomUI.fxml"));
     	Scene scene = new Scene(root);
-    	Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
-		primaryStage.getIcons().add(icon);
+
     	primaryStage.setTitle("Waiting Room Section");
     	primaryStage.setScene(scene);
     	primaryStage.show();

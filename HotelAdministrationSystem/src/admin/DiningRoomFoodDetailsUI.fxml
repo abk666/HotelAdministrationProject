@@ -28,8 +28,11 @@
             <TableColumn fx:id="foodMenuImage" prefWidth="225.0" text="Image Name" />
         </columns>
       </TableView>
-      <JFXComboBox fx:id="cobSearch" focusColor="#0363aa" layoutX="334.0" layoutY="107.0" prefHeight="35.0" prefWidth="187.0" unFocusColor="#113c9e" AnchorPane.rightAnchor="398.0" />
-      <JFXTextField fx:id="tfSearch" focusColor="#0363aa" layoutX="521.0" layoutY="107.0" prefHeight="35.0" prefWidth="187.0" unFocusColor="#113c9e" AnchorPane.rightAnchor="211.0" />
+      <JFXComboBox fx:id="cobSearch" focusColor="#0363aa" layoutX="334.0" layoutY="107.0" prefHeight="35.0" prefWidth="187.0" promptText="Food" unFocusColor="#113c9e" AnchorPane.rightAnchor="398.0" />
+      <JFXTextField fx:id="tfSearch" focusColor="#0363aa" layoutX="521.0" layoutY="107.0" prefHeight="35.0" prefWidth="187.0" unFocusColor="#113c9e" AnchorPane.rightAnchor="211.0">
+         <font>
+            <Font size="15.0" />
+         </font></JFXTextField>
       <HBox alignment="CENTER" layoutX="14.0" layoutY="86.0" prefHeight="76.0" prefWidth="276.0" spacing="10.0" AnchorPane.leftAnchor="14.0">
          <children>
             <JFXButton alignment="CENTER" onAction="#processNew" prefHeight="45.0" prefWidth="80.0" ripplerFill="#0d444c" style="-fx-background-color: #018abb; -fx-background-radius: 10;" text="New" textFill="WHITE">

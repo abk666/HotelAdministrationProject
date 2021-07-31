@@ -15,6 +15,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
@@ -72,7 +73,7 @@ public class AdminRoomController implements Initializable{
 
     @FXML
     void processBack(MouseEvent event) throws IOException {
-    	Stage primaryStage = (Stage) ((Button)event.getSource()).getScene().getWindow();
+    	Stage primaryStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
     	primaryStage.hide();
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("../main/LoginUI.fxml"));
 		Scene scene = new Scene(root);

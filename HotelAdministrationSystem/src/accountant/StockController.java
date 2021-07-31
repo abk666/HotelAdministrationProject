@@ -127,6 +127,7 @@ if(!tfSearch.getText().trim().isEmpty()) {
         	Scene scene = new Scene(root);
         	Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
 			primaryStage.getIcons().add(icon);
+			
             primaryStage.setTitle("Accountant Main Section");
     		primaryStage.setScene(scene);
     		primaryStage.show();
@@ -142,7 +143,7 @@ if(!tfSearch.getText().trim().isEmpty()) {
 			Stage primaryStage=(Stage)((Node)event.getSource()).getScene().getWindow();
 	    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("../main/LogInUI.fxml"));
 			Scene scene = new Scene(root);
-		
+			primaryStage.setResizable(false);
 			primaryStage.setScene(scene);
 			primaryStage.show();
     }

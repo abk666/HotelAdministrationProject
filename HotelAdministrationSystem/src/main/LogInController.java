@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import com.sun.javafx.tk.quantum.PrimaryTimer;
 
 import bean.Staff;
 import bean.StaffHolder;
@@ -20,7 +21,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
@@ -66,8 +66,7 @@ if(checkUser.isUserValid(email,password,role,loginType)) {
         				
         				AnchorPane adminRoot = (AnchorPane)FXMLLoader.load(getClass().getResource("../admin/AdminMainUI.fxml"));
         				Scene adminScene = new Scene(adminRoot);
-        				Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
-        				adminStage.getIcons().add(icon);
+        				adminStage.setResizable(false);
         				adminStage.setTitle("Admin Main Section");
         				adminStage.setScene(adminScene);
         				adminStage.show();
@@ -81,8 +80,7 @@ if(checkUser.isUserValid(email,password,role,loginType)) {
         				
         				AnchorPane managerRoot = (AnchorPane)FXMLLoader.load(getClass().getResource("../manager/ManagerMainUI.fxml"));
         				Scene managerScene = new Scene(managerRoot);
-        				Image icon1=new Image(getClass().getResourceAsStream("../img/hotel.png"));
-        				managerStage.getIcons().add(icon1);
+        				managerStage.setResizable(false);
         				managerStage.setTitle("Manager Main Section");
         				managerStage.setScene(managerScene);
         				managerStage.show();
@@ -92,11 +90,9 @@ if(checkUser.isUserValid(email,password,role,loginType)) {
         			case "Reception":
         				Stage receptionStage = (Stage) ((Button)event.getSource()).getScene().getWindow();
         				receptionStage.hide();
-//        				receptionStage.setResizable(false);
+        				receptionStage.setResizable(false);
         				AnchorPane receptionRoot = (AnchorPane)FXMLLoader.load(getClass().getResource("../reception/ReceptionMainUI.fxml"));
         				Scene receptionScene = new Scene(receptionRoot);
-        				Image icon2=new Image(getClass().getResourceAsStream("../img/hotel.png"));
-        				receptionStage.getIcons().add(icon2);
         				receptionStage.setTitle("Reception Main Section");
         				receptionStage.setScene(receptionScene);
         				receptionStage.show();
@@ -109,8 +105,7 @@ if(checkUser.isUserValid(email,password,role,loginType)) {
         				
         				AnchorPane housekeepingRoot = (AnchorPane)FXMLLoader.load(getClass().getResource("../housekeeping/WaitingUI.fxml"));
         				Scene housekeepingScene = new Scene(housekeepingRoot);
-        				Image icon3=new Image(getClass().getResourceAsStream("../img/hotel.png"));
-        				housekeepingStage.getIcons().add(icon3);
+        				housekeepingStage.setResizable(false);
         				housekeepingStage.setTitle("HouseKeeping Main Section");
         				housekeepingStage.setScene(housekeepingScene);
         				housekeepingStage.show();
@@ -123,8 +118,7 @@ if(checkUser.isUserValid(email,password,role,loginType)) {
         				
         				AnchorPane diningroomRoot = (AnchorPane)FXMLLoader.load(getClass().getResource("../dining_room/FoodMenuListUI.fxml"));
         				Scene diningroomScene = new Scene(diningroomRoot);
-        				Image icon4=new Image(getClass().getResourceAsStream("../img/hotel.png"));
-        				diningroomStage.getIcons().add(icon4);
+        				diningroomStage.setResizable(false);
         				diningroomStage.setTitle("DiningRoom Main Section");
         				diningroomStage.setScene(diningroomScene);
         				diningroomStage.show();
@@ -140,8 +134,7 @@ if(checkUser.isUserValid(email,password,role,loginType)) {
         				
         				AnchorPane accountantRoot = (AnchorPane)FXMLLoader.load(getClass().getResource("../accountant/AccountantMainUI.fxml"));
         				Scene accountantScene = new Scene(accountantRoot);
-        				Image icon5=new Image(getClass().getResourceAsStream("../img/hotel.png"));
-        				accountantStage.getIcons().add(icon5);
+        				accountantStage.setResizable(true);
         				accountantStage.setTitle("Accountant Main Section");
         				accountantStage.setScene(accountantScene);
         				accountantStage.show();

@@ -6,59 +6,59 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #2a7886;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="manager.ManagerMainController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #7fffd4;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="manager.ManagerMainController">
    <children>
-      <Label alignment="CENTER" prefHeight="60.0" prefWidth="900.0" text="Manager Main Section" textFill="#08e3fc">
+      <Label alignment="CENTER" prefHeight="60.0" prefWidth="900.0" text="Manager Main Section" textFill="#171ae1">
          <font>
             <Font name="System Bold Italic" size="36.0" />
          </font>
       </Label>
-      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="161.0" layoutY="86.0" onMouseClicked="#processStaff" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="72.0" layoutY="84.0" onMouseClicked="#processGuest" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/employees.png" />
+            <Image url="@../img/managerguest.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="154.0" layoutY="373.0" onMouseClicked="#processFinance" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="72.0" layoutY="343.0" onMouseClicked="#processProfits" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/money.png" />
+            <Image url="@../img/financial-profit.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="661.0" layoutY="373.0" onMouseClicked="#processLogOut" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="673.0" layoutY="343.0" onMouseClicked="#processLogOut" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/log-out.png" />
+            <Image url="@../img/managerlogout.png" />
          </image>
       </ImageView>
-      <Label alignment="CENTER" layoutX="161.0" layoutY="266.0" onMouseClicked="#processStaff" prefHeight="35.0" prefWidth="150.0" text="Staff " textFill="#08e3fc">
+      <Label alignment="CENTER" layoutX="72.0" layoutY="258.0" onMouseClicked="#processGuest" prefHeight="35.0" prefWidth="150.0" text="Guest" textFill="#171ae1">
          <font>
             <Font name="System Italic" size="18.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="661.0" layoutY="266.0" onMouseClicked="#processGuest" prefHeight="35.0" prefWidth="150.0" text="Guest " textFill="#08e3fc">
+      <Label alignment="CENTER" layoutX="673.0" layoutY="258.0" onMouseClicked="#processStaffPieChart" prefHeight="35.0" prefWidth="150.0" text="Pie Chart For Staff" textFill="#171ae1">
          <font>
             <Font name="System Italic" size="18.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="661.0" layoutY="534.0" onMouseClicked="#processLogOut" prefHeight="35.0" prefWidth="150.0" text="LogOut" textFill="#08e3fc">
+      <Label alignment="CENTER" layoutX="673.0" layoutY="517.0" onMouseClicked="#processLogOut" prefHeight="35.0" prefWidth="150.0" text="LogOut" textFill="#171ae1">
          <font>
             <Font name="System Italic" size="18.0" />
          </font>
       </Label>
-      <ImageView fitHeight="145.0" fitWidth="145.0" layoutX="399.0" layoutY="90.0" onMouseClicked="#processStaffPieChart" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="145.0" fitWidth="145.0" layoutX="378.0" layoutY="87.0" onMouseClicked="#processStaff" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/pie-chart.png" />
+            <Image url="@../img/managerstaff.png" />
          </image>
       </ImageView>
-      <Label alignment="CENTER" layoutX="397.0" layoutY="266.0" onMouseClicked="#processStaffPieChart" prefHeight="35.0" prefWidth="150.0" text="Pie Chart For Staff" textFill="#08e3fc">
+      <Label alignment="CENTER" layoutX="375.0" layoutY="258.0" onMouseClicked="#processStaff" prefHeight="35.0" prefWidth="150.0" text="Staff" textFill="#171ae1">
          <font>
             <Font name="System Italic" size="18.0" />
          </font>
       </Label>
-      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="661.0" layoutY="87.0" onMouseClicked="#processGuest" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="673.0" layoutY="84.0" onMouseClicked="#processStaffPieChart" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/tourist.png" />
+            <Image url="@../img/managerpiechart.png" />
          </image>
       </ImageView>
-      <Label alignment="CENTER" layoutX="161.0" layoutY="544.0" onMouseClicked="#processFinance" prefHeight="35.0" prefWidth="150.0" text="Income/Outcome" textFill="#08e3fc">
+      <Label alignment="CENTER" layoutX="72.0" layoutY="517.0" onMouseClicked="#processProfits" prefHeight="35.0" prefWidth="150.0" text="Profits" textFill="#171ae1">
          <font>
             <Font name="System Italic" size="18.0" />
          </font>

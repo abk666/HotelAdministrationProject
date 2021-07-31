@@ -27,7 +27,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -126,15 +125,14 @@ public class FoodOrderListEditController implements Initializable{
             	primaryStage.close();
             	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("FoodOrderListUI.fxml"));
         		Scene scene = new Scene(root);
-        		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
-    			primaryStage.getIcons().add(icon);
+        		primaryStage.setTitle("FoodOrderListUI");
         		primaryStage.setScene(scene);
         		primaryStage.show();
     			
     	    }
     	    else {
     	    	
-    	    	myNoti.getNotification(NotificationType.ERROR,"Saved Fail","Fail Update Ordered From  "+guestRoomNo+" to DB",AnimationType.FADE,3000.0);
+    	    	myNoti.getNotification(NotificationType.ERROR,"Updated Fail","Fail Update Ordered From  "+guestRoomNo+" to DB",AnimationType.FADE,3000.0);
     	    }
     	}
     	
@@ -148,8 +146,6 @@ public class FoodOrderListEditController implements Initializable{
     	 primaryStage.hide();
     	 AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("FoodOrderListUI.fxml"));
     	 Scene scene = new Scene(root);
-    	 Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
-		 primaryStage.getIcons().add(icon);
     	 primaryStage.setScene(scene);
     	 primaryStage.show();
     }
@@ -184,8 +180,6 @@ public class FoodOrderListEditController implements Initializable{
     	primaryStage.setResizable(false);
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("../main/MainUI.fxml"));
 		Scene scene = new Scene(root);
-		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
-		primaryStage.getIcons().add(icon);
 		primaryStage.setTitle("MainUI");
 		primaryStage.setScene(scene);
 		primaryStage.show();

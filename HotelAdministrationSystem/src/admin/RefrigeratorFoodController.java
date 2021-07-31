@@ -51,7 +51,7 @@ public class RefrigeratorFoodController implements Initializable{
     @FXML
     private JFXTextField tfItemQty;
     
-    private String foodMenuImageName;
+    private String itemImageName;
     
     private String oldImageName;
 
@@ -59,61 +59,6 @@ public class RefrigeratorFoodController implements Initializable{
     
     private final RefrigeratorFoodDataUtils refrigeratorFoodDataUtils = new RefrigeratorFoodDataUtils();
     
-    @FXML
-    void processBack(MouseEvent event) {
-
-    }
-    
-    @FXML
-    void processCancel(ActionEvent event) {
-
-    	clearAllField();
-    	
-    }
-
-    @FXML
-    void processSave(ActionEvent event) throws SQLException, IOException {
-    	
-    	String itemName = tfItemName.getText().trim();
-    	String itemCategory = cobItemCategory.getValue();
-    	Double itemPrice = Double.parseDouble(tfItemPrice.getText());
-    	Integer itemQty = Integer.parseInt(tfItemQty.getText());
-    	
-    	
-    	String imageName = "";
-    	if (this.foodMenuImageName != null || !this.foodMenuImageName.isEmpty()) {
-    		
-	    	int indexDot = this.foodMenuImageName.indexOf(".");
-			imageName = this.foodMenuImageName.substring(0,indexDot)+".jpg";
-			
-    	}else {
-    		imageName = this.oldImageName;
-    	}
-    	
-		
-		RefrigeratorFood refrigeratorFood = new RefrigeratorFood(itemName, itemCategory, itemPrice, itemQty, imageName);
-    	
-    	Boolean isSaveOk = refrigeratorFoodDataUtils.saveRefrigeratorFood(refrigeratorFood);
-    	
-    	if (!isSaveOk) {
-    		
-			myNoti.getNotification(NotificationType.SUCCESS,"Saved Success","Successfully Saved "+itemName+" to DB",AnimationType.FADE,3000.0);
-
-			File imageFile = new File("src/img/RefrigeratorFood/"+imageName);
-			
-			BufferedImage bufferedImage = SwingFXUtils.fromFXImage(itemImage.getImage(),null);//ImageView
-			
-			ImageIO.write(bufferedImage,"jpg",imageFile);
-			
-			clearAllField();
-			
-		}else {
-			
-			myNoti.getNotification(NotificationType.ERROR,"Saved Fail","Fail to save "+itemName+" to DB",AnimationType.FADE,3000.0);
-			
-		}
-	}
-
     
     @FXML
     void processImage(MouseEvent event) {
@@ -130,9 +75,9 @@ public class RefrigeratorFoodController implements Initializable{
     		
     		itemImage.setImage(image);
     		
-    		this.foodMenuImageName = imageFile.getName();
+    		this.itemImageName = imageFile.getName();
     		
-    		System.out.println(this.foodMenuImageName);
+    		System.out.println(this.itemImageName);
 		}
 
     }
@@ -143,9 +88,88 @@ public class RefrigeratorFoodController implements Initializable{
     	tfItemPrice.clear();
     	cobItemCategory.setValue("Category");
     	tfItemQty.clear();
-    	itemImage.setImage(new Image(getClass().getResourceAsStream("../img/photo.png")));//Default Image
+    	itemImage.setImage(new Image(getClass().getResourceAsStream("../img/upload.png")));//Default Image
     	
     }
+    
+    @FXML
+    void processCancel(ActionEvent event) {
+
+    	clearAllField();
+    	
+    }
+    
+    @FXML
+    void processBack(MouseEvent event) throws IOException {
+
+    	Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+    	primaryStage.setResizable(false);
+    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("AdminMainUI.fxml"));
+		Scene scene = new Scene(root);
+		primaryStage.setTitle("AdminMainUI");
+		primaryStage.setScene(scene);
+		primaryStage.show();
+		
+    }
+
+    @FXML
+    void processSave(ActionEvent event) throws SQLException, IOException {
+    	
+    	if(tfItemName.getText() == null || tfItemName.getText().length() == 0 || 
+				tfItemPrice.getText() == null || tfItemPrice.getText().length() == 0 ||
+				cobItemCategory.getValue() == null || cobItemCategory.getValue().length() == 0 ||
+				tfItemQty.getText() == null || tfItemQty.getText().length() == 0) {
+    		
+    		
+    		myNoti.getNotification(NotificationType.WARNING,"Required User Input","Please Fill All Fields!",AnimationType.FADE,3000.0);
+    		
+    		//System.out.println("Empty");
+    		
+    	}else {
+    		
+    		String itemName = tfItemName.getText().trim();
+        	String itemCategory = cobItemCategory.getValue();
+        	Double itemPrice = Double.parseDouble(tfItemPrice.getText());
+        	Integer itemQty = Integer.parseInt(tfItemQty.getText());
+        	
+        	
+        	String imageName = "";
+        	if (this.itemImageName != null || !this.itemImageName.isEmpty()) {
+        		
+    	    	int indexDot = this.itemImageName.indexOf(".");
+    			imageName = this.itemImageName.substring(0,indexDot)+".jpg";
+    			
+        	}else {
+        		imageName = this.oldImageName;
+        	}
+        	
+    		
+    		RefrigeratorFood refrigeratorFood = new RefrigeratorFood(itemName, itemCategory, itemPrice, itemQty, imageName);
+        	
+        	Boolean isSaveOk = refrigeratorFoodDataUtils.saveRefrigeratorFood(refrigeratorFood);
+        	
+        	if (!isSaveOk) {
+        		
+    			myNoti.getNotification(NotificationType.SUCCESS,"Saved Success","Successfully Saved "+itemName+" to DB",AnimationType.FADE,3000.0);
+
+    			File imageFile = new File("src/img/RefrigeratorFood/"+imageName);
+    			
+    			BufferedImage bufferedImage = SwingFXUtils.fromFXImage(itemImage.getImage(),null);//ImageView
+    			
+    			ImageIO.write(bufferedImage,"jpg",imageFile);
+    			
+    			clearAllField();
+    			
+    		}else {
+    			
+    			myNoti.getNotification(NotificationType.ERROR,"Saved Fail","Fail to save "+itemName+" to DB",AnimationType.FADE,3000.0);
+    			
+    		}
+        	
+    	}
+    	
+	}
+
 
     @FXML
     void processView(MouseEvent event) throws IOException {
@@ -154,8 +178,6 @@ public class RefrigeratorFoodController implements Initializable{
     	primaryStage.setResizable(false);
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("RefrigeratorFoodDetailsUI.fxml"));
 		Scene scene = new Scene(root);
-		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
-		primaryStage.getIcons().add(icon);
 		primaryStage.setTitle("RefrigeratorFoodDetailsUI");
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -165,7 +187,7 @@ public class RefrigeratorFoodController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 	
 		ObservableList<String> itemMenuCategoryList = FXCollections.observableArrayList(
-				"Cold Drinks","Beer","Wine"
+				"Cold Drinks","Beer","Wine","Purified Water"
 				);		
 		
 		cobItemCategory.setItems(itemMenuCategoryList);

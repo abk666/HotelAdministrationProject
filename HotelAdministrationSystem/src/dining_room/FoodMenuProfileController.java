@@ -39,9 +39,7 @@ public class FoodMenuProfileController implements Initializable{
     	primaryStage.setResizable(false);
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("FoodMenuListUI.fxml"));
 		Scene scene = new Scene(root);
-		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
-		primaryStage.getIcons().add(icon);
-		primaryStage.setTitle("FoodMenuUI");
+		primaryStage.setTitle("FoodMenuListUI");
 		primaryStage.setScene(scene);
 		primaryStage.show();
     	

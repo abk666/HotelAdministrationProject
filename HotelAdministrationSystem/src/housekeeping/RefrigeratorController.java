@@ -96,15 +96,14 @@ public class RefrigeratorController implements Initializable{
     void processBack(MouseEvent event) throws IOException {
     	Optional<ButtonType> result=noti.getConfirmationAlert("Comfimation Dialog", "Comfirmation", "Do you really want to Exit?");
 		if(result.get()==ButtonType.OK) {
-    	Stage primaryStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-    	primaryStage.setResizable(true);
-    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("HouseKeepingUI.fxml"));
-		Scene scene = new Scene(root);
-		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
-		primaryStage.getIcons().add(icon);
-		primaryStage.setTitle("HouseKeeping Section");
-		primaryStage.setScene(scene);
-		primaryStage.show();
+			Stage primaryStage=(Stage)((Node)event.getSource()).getScene().getWindow();
+	    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("WaitingUI.fxml"));
+			Scene scene = new Scene(root);
+			Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+			primaryStage.getIcons().add(icon);
+            primaryStage.setTitle("Accountant Main Section");
+			primaryStage.setScene(scene);
+			primaryStage.show();
 		}
     }
 
