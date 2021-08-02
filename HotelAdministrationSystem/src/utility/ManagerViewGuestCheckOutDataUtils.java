@@ -51,7 +51,8 @@ public class ManagerViewGuestCheckOutDataUtils {
 		
 		connection = dbConnection.getConnection();
 		statement = connection.createStatement();
-		resultSet = statement.executeQuery("select checkoutId as Id,checkoutDate as Date,totalPrice as Amount from hoteldb.checkout;");
+		resultSet = statement.executeQuery("select * from hoteldb.checkout;");
+		//checkOutId as Id,checkOutGuestName as Name,checkOutGuestNRC as NRC,checkOutGuestPhNo as Phone,roomNo as RoomNo,checkOutDate as CheckOutDate,totalPrice as TotalCost
 		
 		ResultSetMetaData metaData = resultSet.getMetaData();
 		
@@ -62,6 +63,7 @@ public class ManagerViewGuestCheckOutDataUtils {
 			columnLabelList.add(metaData.getColumnLabel(x));
 		}
 		return columnLabelList;	
+		
 		
 	}
 	

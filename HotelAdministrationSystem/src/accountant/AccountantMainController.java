@@ -49,6 +49,7 @@ public class AccountantMainController {
 		    	Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
 				primaryStage.getIcons().add(icon);
 				Scene scene = new Scene(root);
+				primaryStage.setTitle("Hotel Administration Login");
 				primaryStage.setResizable(true);
 				primaryStage.setScene(scene);
 				primaryStage.show();

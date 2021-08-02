@@ -81,7 +81,8 @@ public class FoodOrderDataUtils {
 		connection = dbConnection.getConnection();
 		statement = connection.createStatement();
 		resultSet = statement.executeQuery("select * from hoteldb.foodorder;");
-			
+		//foodOrderId as Id,foodOrderName as Name,foodOrderPrice as Price,foodOrderDate as Date,foodOrderQty as Quantity,guestRoomNo as RoomNo,foodOrderTotalPrice as TotalPrice
+		
 		ResultSetMetaData metaData = resultSet.getMetaData();
 			
 		Integer count = metaData.getColumnCount();

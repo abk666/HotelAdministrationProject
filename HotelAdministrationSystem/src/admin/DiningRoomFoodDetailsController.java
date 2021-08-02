@@ -81,82 +81,99 @@ public class DiningRoomFoodDetailsController implements Initializable {
 
     @FXML
     void processView(MouseEvent event) throws IOException {
-
-    	DiningRoomFood diningRoomFood = foodMenuTable.getSelectionModel().getSelectedItem();
+        if(foodMenuTable.getSelectionModel().getSelectedIndex()>=0) {
+        	DiningRoomFood diningRoomFood = foodMenuTable.getSelectionModel().getSelectedItem();
+        	
+        
+        		
+        		DiningRoomFoodHolder holder = DiningRoomFoodHolder.getDiningRoomFoodInstance();
+            	holder.setDiningRoomFood(diningRoomFood);
+            	
+            	Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            	primaryStage.setResizable(false);
+            	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("DiningRoomFoodProfileUI.fxml"));
+        		Scene scene = new Scene(root);
+        		primaryStage.setTitle("DiningRoomFoodProfileUI");
+        		primaryStage.setScene(scene);
+        		primaryStage.show();
+        		
+        	}
+        else {
+        	myNoti.getNotification(NotificationType.WARNING,"Required Data!","Please Select The Data You Want Firstly.",AnimationType.SLIDE,3000.0);
+        }
+    
     	
-    	DiningRoomFoodHolder holder = DiningRoomFoodHolder.getDiningRoomFoodInstance();
-    	holder.setDiningRoomFood(diningRoomFood);
-    	
-    	Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-    	primaryStage.setResizable(false);
-    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("DiningRoomFoodProfileUI.fxml"));
-		Scene scene = new Scene(root);
-		primaryStage.setTitle("DiningRoomFoodProfileUI");
-		primaryStage.setScene(scene);
-		primaryStage.show();
     }
     @FXML
     void processDelete(ActionEvent event) throws SQLException {
-    	
-    	ObservableList<DiningRoomFood> diningRoomFoodList = foodMenuTable.getSelectionModel().getSelectedItems();
-    	
-    	Optional<ButtonType> result = alert.getConfirmationAlert("Confirmation Dialog","Are You Sure to Delete Selected Food Menu?","This action cannot be undone.");
+    	if(foodMenuTable.getSelectionModel().getSelectedIndex()>=0) {
+    		ObservableList<DiningRoomFood> diningRoomFoodList = foodMenuTable.getSelectionModel().getSelectedItems();
+        	
+        	Optional<ButtonType> result = alert.getConfirmationAlert("Confirmation Dialog","Are You Sure to Delete Selected Food Menu?","This action cannot be undone.");
 
-		if (result.get() == ButtonType.OK) {
-		
-			Boolean flag = false;
-			
-			for (DiningRoomFood diningRoomFood : diningRoomFoodList) {
-				
-				Boolean isDeleteOk =diningRoomFoodDataUtils.deleteDiningRoomFood(diningRoomFood.getFoodMenuId());
-			   	
-				if (!isDeleteOk) {
-					
-					flag = true;
-				
-					File imageFile = new File("src/img/DiningRoomFood/"+diningRoomFood.getFoodMenuImage());
-					
-					if (imageFile.exists()) {
-						imageFile.delete();
-					}		
-						
-				}		   	 
-			   	 
-			}
-			
-			if(flag == true) {
-				
-				myNoti.getNotification(NotificationType.SUCCESS,"Deleted!","Successfully Deleted!",AnimationType.SLIDE,3000.0);
-				
-			}else {
-				
-				myNoti.getNotification(NotificationType.ERROR,"Delete Fail","Fail to Delete!",AnimationType.SLIDE,3000.0);
-				
-			}
-			
-			
-		}
-		
-		showTable("select * from hoteldb.foodmenu;");
+    		if (result.get() == ButtonType.OK) {
+    		
+    			Boolean flag = false;
+    			
+    			for (DiningRoomFood diningRoomFood : diningRoomFoodList) {
+    				
+    				Boolean isDeleteOk =diningRoomFoodDataUtils.deleteDiningRoomFood(diningRoomFood.getFoodMenuId());
+    			   	
+    				if (!isDeleteOk) {
+    					
+    					flag = true;
+    				
+    					File imageFile = new File("src/img/DiningRoomFood/"+diningRoomFood.getFoodMenuImage());
+    					
+    					if (imageFile.exists()) {
+    						imageFile.delete();
+    					}		
+    						
+    				}		   	 
+    			   	 
+    			}
+    			
+    			if(flag == true) {
+    				
+    				myNoti.getNotification(NotificationType.SUCCESS,"Deleted!","Successfully Deleted!",AnimationType.SLIDE,3000.0);
+    				
+    			}else {
+    				
+    				myNoti.getNotification(NotificationType.ERROR,"Delete Fail","Fail to Delete!",AnimationType.SLIDE,3000.0);
+    				
+    			}
+    			
+    			
+    		}
+    		
+    		showTable("select * from hoteldb.foodmenu;");
+    	}else {
+    		myNoti.getNotification(NotificationType.WARNING,"Required Data!","Please Select The Data You Want Firstly.",AnimationType.SLIDE,3000.0);
+    	}
+    	
    
     }
 
     @FXML
     void processEdit(ActionEvent event) throws IOException {
+		if(foodMenuTable.getSelectionModel().getSelectedIndex()>=0) {
+			DiningRoomFood diningRoomFood = foodMenuTable.getSelectionModel().getSelectedItem();
+			
+			DiningRoomFoodHolder holder = DiningRoomFoodHolder.getDiningRoomFoodInstance();
+	   	 
+			holder.setDiningRoomFood(diningRoomFood);
+			
+			Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+	    	primaryStage.setResizable(false);
+	    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("DiningRoomFoodEditUI.fxml"));
+			Scene scene = new Scene(root);
+			primaryStage.setTitle("DiningRoomFoodEditUI");
+			primaryStage.setScene(scene);
+			primaryStage.show();
+		}else {
+			myNoti.getNotification(NotificationType.WARNING,"Required Data!","Please Select The Data You Want Firstly.",AnimationType.SLIDE,3000.0);
+		}
 		
-		DiningRoomFood diningRoomFood = foodMenuTable.getSelectionModel().getSelectedItem();
-		
-		DiningRoomFoodHolder holder = DiningRoomFoodHolder.getDiningRoomFoodInstance();
-   	 
-		holder.setDiningRoomFood(diningRoomFood);
-		
-		Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-    	primaryStage.setResizable(false);
-    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("DiningRoomFoodEditUI.fxml"));
-		Scene scene = new Scene(root);
-		primaryStage.setTitle("DiningRoomFoodEditUI");
-		primaryStage.setScene(scene);
-		primaryStage.show();
     
     }
 

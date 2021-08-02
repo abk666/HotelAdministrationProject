@@ -79,7 +79,7 @@ public class BookingController implements Initializable {
     	String guestName = tfGuestName.getText().trim();
     	String guestPhNo = tfGuestPhNo.getText().trim();
     	String roomType = cobRoomType.getValue();
-    	int roomNo = Integer.parseInt(tfRoomNo.getText());
+    	int roomNo = Integer.parseInt(cobRoomNo.getValue().toString());
     	double roomPrice = Double.parseDouble(tfRoomPrice.getText());
     	int noOfGuest = Integer.parseInt(tfNoOfGuest.getText());
     	String bookedDate = dpBookingDate.getValue().toString();
@@ -92,17 +92,20 @@ public class BookingController implements Initializable {
     	
     	Boolean isSaveOk = bookingDataUtils.saveBooking(booking);
 		
-    	if (!isSaveOk) {
-    		 noti.getNotification(NotificationType.SUCCESS, "Success!", "Successfully Booked!", AnimationType.POPUP, 2000.0);
-			System.out.println("Successfully Saved "+guestName+" to DB");
-			
-			
-			clearAllField();
-    	}else {
-    		noti.getNotification(NotificationType.ERROR, "Failed!", "Fail to Book!", AnimationType.POPUP, 2000.0);
-			System.out.println("Fail to Save "+guestName+" to DB");
-			
-		}
+    	 if (!isSaveOk) {
+             
+             bookingDataUtils.UpdateRoomStatus(booking.getRoomNo());
+             
+              noti.getNotification(NotificationType.SUCCESS, "Success!", "Successfully Booked!", AnimationType.POPUP, 2000.0);
+             System.out.println("Successfully Saved "+guestName+" to DB");
+             
+             
+         
+         }else {
+             noti.getNotification(NotificationType.ERROR, "Fail!", "Fail Booked!",  AnimationType.POPUP, 2000.0);
+             System.out.println("Fail to Save "+guestName+" to DB");
+             
+         }
     }
     @FXML
     void processRoomType(ActionEvent event) throws SQLException {
@@ -141,7 +144,7 @@ public class BookingController implements Initializable {
     	tfGuestName.clear();
     	tfGuestPhNo.clear();
     	cobRoomType.setValue("Type");
-    	tfRoomNo.clear();
+    	cobRoomNo.setValue(null);
     	tfRoomPrice.clear();
     	tfNoOfGuest.clear();
     	tfStayDays.clear();
@@ -167,7 +170,7 @@ public class BookingController implements Initializable {
 		}
 		cobRoomType.setItems(roomTypeList);
 		cobRoomNo.setDisable(true);
-		
+		dpBookingDate.setValue(LocalDate.now());
 	}
 
 }

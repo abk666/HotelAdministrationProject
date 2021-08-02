@@ -11,14 +11,18 @@ import com.jfoenix.controls.JFXTextField;
 
 import bean.Guest;
 import bean.GuestHolder;
+import bean.Room;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-
+import tray.animations.AnimationType;
+import tray.notification.NotificationType;
 import utility.GuestDataUtils;
+import utility.MyNotification;
+import utility.RoomUtils;
 
 public class GuestDetailsController implements Initializable {
 
@@ -62,7 +66,8 @@ public class GuestDetailsController implements Initializable {
     private JFXDatePicker dpGuestCheckOutDate;
     
     private final GuestDataUtils guestDataUtils=new GuestDataUtils();
-
+    private final RoomUtils roomDataUtils=new RoomUtils();
+    private final MyNotification noti=new MyNotification();
     @FXML
     void processCancel(ActionEvent event) {
     	
@@ -95,13 +100,13 @@ public class GuestDetailsController implements Initializable {
 		
 		if (rowUpdated > 0) {
 			
-			System.out.println("Successfully Updated "+guestName+" to DB");
+			noti.getNotification(NotificationType.SUCCESS, "Success", "Successfully Updated "+guestName+" to DB", AnimationType.SLIDE, 2000.0);
 			
 			
 		}else {
 			
 			
-			System.out.println("Fail to Update "+guestName+" to DB");
+			noti.getNotification(NotificationType.ERROR, "Failed", "Fail to update "+guestName+" in DB", AnimationType.SLIDE, 2000.0);
 		
 	}
     }
@@ -111,9 +116,17 @@ public class GuestDetailsController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		
-		ObservableList<String> roomTypeList = FXCollections.observableArrayList(
-				   "Single","Double","Triple"		
-						);
+		ObservableList<String> roomTypeList = FXCollections.observableArrayList();
+
+		try {
+			ObservableList<Room>roomList=roomDataUtils.getAllRoom("select * from room group by roomType;");
+			for(Room room:roomList) {
+				roomTypeList.add(room.getRoomType());
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		cobRoomType.setItems(roomTypeList);
 	
 		GuestHolder holder = GuestHolder.getGuestInstance();

@@ -3,6 +3,9 @@ package reception;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXComboBox;
@@ -10,19 +13,24 @@ import com.jfoenix.controls.JFXTextField;
 
 import bean.Booking;
 import bean.BookingHolder;
-
+import bean.BookingStatusHolder;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import tray.animations.AnimationType;
+import tray.notification.NotificationType;
 import utility.BookingDataUtils;
+import utility.MyNotification;
 
 public class BookingTableController implements Initializable {
 	
@@ -69,24 +77,54 @@ public class BookingTableController implements Initializable {
     private TableColumn<Booking,String> checkOutDate;
 
     private final BookingDataUtils bookingDataUtils=new BookingDataUtils();
+    private final MyNotification noti=new MyNotification();
+    
     
     @FXML
+    void processCheckIn(ActionEvent event) throws IOException {
+    	if(bookingTable.getSelectionModel().getSelectedIndex()<0) {
+    	noti.getNotification(NotificationType.WARNING, "Warning", "You must first select an item!", AnimationType.SLIDE, 2000.0);	
+    	}else {
+    		Booking booking= bookingTable.getSelectionModel().getSelectedItem();
+       	 
+        	BookingHolder holder = BookingHolder.getBookingInstance();
+        	 
+        	holder.setBooking(booking);
+        	 BookingStatusHolder.setBookingId(booking.getBookingId());
+        	Stage primaryStage = new Stage();
+         	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("CheckInBookingUI.fxml"));
+     		Scene scene = new Scene(root);
+     		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+    		primaryStage.getIcons().add(icon);
+     		primaryStage.setTitle("Check In Section");
+     		primaryStage.setScene(scene);
+     		primaryStage.setResizable(false);
+     		primaryStage.show();
+    	}
+    
+    }
+    @FXML
     void processDelete(ActionEvent event) throws SQLException {
-    	Booking booking = bookingTable.getSelectionModel().getSelectedItem();
-      	 
-      	 Boolean isDeleteOk =bookingDataUtils.deleteBooking(booking.getBookingId());
-      	
-      	 if (!isDeleteOk) {
-      		
-   			System.out.println("Deleted "+booking.getGuestName());
-   			showTable("select * from booking");
-   			
+    	if(bookingTable.getSelectionModel().getSelectedIndex()<0) {
+        	noti.getNotification(NotificationType.WARNING, "Warning", "You must first select an item!", AnimationType.SLIDE, 2000.0);	
+        	}else {
+        		Booking booking = bookingTable.getSelectionModel().getSelectedItem();
+             	 
+             	 Boolean isDeleteOk =bookingDataUtils.deleteBooking(booking.getBookingId());
+             	
+             	 if (!isDeleteOk) {
+             		
+          			System.out.println("Deleted "+booking.getGuestName());
+          			showTable("select * from booking");
+          			
 
-   			
-   		}else {
-   			
-   			System.out.println("Fail To Delete "+booking.getGuestName());
-   		}
+          			
+          		}else {
+          			
+          			System.out.println("Fail To Delete "+booking.getGuestName());
+          		}
+        	}
+    	
     }
 
     @FXML
@@ -103,21 +141,26 @@ public class BookingTableController implements Initializable {
     }
     @FXML
     void processView(ActionEvent event) throws IOException {
-    	Booking booking= bookingTable.getSelectionModel().getSelectedItem();
-     	 
-    	BookingHolder holder = BookingHolder.getBookingInstance();
-    	 
-    	holder.setBooking(booking);
-    	 
-    	Stage primaryStage = new Stage();
-     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("BookingDetailsUI.fxml"));
- 		Scene scene = new Scene(root);
- 		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
-		primaryStage.getIcons().add(icon);
- 		primaryStage.setTitle("Booking Details");
- 		primaryStage.setScene(scene);
- 		primaryStage.setResizable(false);
- 		primaryStage.show();
+     	if(bookingTable.getSelectionModel().getSelectedIndex()<0) {
+        	noti.getNotification(NotificationType.WARNING, "Warning", "You must first select an item!", AnimationType.SLIDE, 2000.0);	
+        	}else {
+        		Booking booking= bookingTable.getSelectionModel().getSelectedItem();
+            	 
+            	BookingHolder holder = BookingHolder.getBookingInstance();
+            	 
+            	holder.setBooking(booking);
+            	 
+            	Stage primaryStage = new Stage();
+             	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("BookingDetailsUI.fxml"));
+         		Scene scene = new Scene(root);
+         		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+        		primaryStage.getIcons().add(icon);
+         		primaryStage.setTitle("Booking Details");
+         		primaryStage.setScene(scene);
+         		primaryStage.setResizable(false);
+         		primaryStage.show();
+        	}
+    
     }
  public void showTable(String sql) {
     	
@@ -140,6 +183,26 @@ public class BookingTableController implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		try {
+			ObservableList<Booking>bookingList=bookingDataUtils.getAllBooking("select * from booking;");
+			for(Booking booking:bookingList) {
+				long dayDifference=ChronoUnit.DAYS.between(LocalDate.now(),LocalDate.parse(booking.getCheckInDate()));
+				System.out.println(dayDifference);
+				if(dayDifference<0) {
+				 Optional<ButtonType>result=noti.getConfirmationAlert("Comfirmation", "Guest "+booking.getGuestName()+"'s checkin date is expired", "Do you want to delete?");
+				 if(result.get()==ButtonType.OK) {
+					 boolean isDeleteOk=bookingDataUtils.deleteBooking(booking.getBookingId());
+					 if(!isDeleteOk) {
+						 bookingDataUtils.updateDeletedBooking(booking.getRoomNo());
+					 }
+				 }
+				}
+			}
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
 		
 		
 		

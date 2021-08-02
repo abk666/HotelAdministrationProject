@@ -113,7 +113,7 @@
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <Label text="Stay Days" GridPane.rowIndex="3">
+                  <Label text="Stay Days" GridPane.rowIndex="4">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -128,16 +128,16 @@
                         <Font size="13.0" />
                      </font>
                   </JFXButton>
-                  <Label text="Check-out" GridPane.rowIndex="4">
+                  <Label text="Check-out" GridPane.rowIndex="3">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
                   <JFXTextField fx:id="tfNoOfGuest" GridPane.columnIndex="1" />
-                  <JFXTextField fx:id="tfStayDays" prefHeight="34.0" prefWidth="146.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <JFXTextField fx:id="tfStayDays" prefHeight="34.0" prefWidth="146.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <JFXDatePicker fx:id="dpBookingDate" defaultColor="#10428d" prefHeight="37.0" prefWidth="186.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <JFXDatePicker fx:id="dpCheckInDate" defaultColor="#10428d" prefHeight="42.0" prefWidth="187.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <JFXDatePicker fx:id="dpCheckOutDate" defaultColor="#10428d" prefHeight="35.0" prefWidth="186.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <JFXDatePicker fx:id="dpCheckOutDate" defaultColor="#10428d" prefHeight="35.0" prefWidth="186.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                </children>
             </GridPane>
             <Separator layoutX="337.0" layoutY="91.0" orientation="VERTICAL" prefHeight="385.0" prefWidth="5.0" />

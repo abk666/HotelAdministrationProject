@@ -22,6 +22,8 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import tray.animations.AnimationType;
+import tray.notification.NotificationType;
 import utility.MyNotification;
 import utility.RoomUtils;;
 
@@ -58,7 +60,7 @@ public class WaitingRoomController implements Initializable {
 			Scene scene = new Scene(root);
 			Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
 			primaryStage.getIcons().add(icon);
-            primaryStage.setTitle("Accountant Main Section");
+			primaryStage.setTitle("Hotel Administration Login");
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		}
@@ -66,32 +68,43 @@ public class WaitingRoomController implements Initializable {
     
     @FXML
     void processCleaning(ActionEvent event) throws SQLException {
-    	Room waitingRoom = WaitingRoomTable.getSelectionModel().getSelectedItem();
+    	if(WaitingRoomTable.getSelectionModel().getSelectedIndex()>=0) {
+    		Room waitingRoom = WaitingRoomTable.getSelectionModel().getSelectedItem();
+        	
+        	String roomStatus="Waiting";
+        	Boolean isCleaningOk = roomUtils.UpdateStatus(waitingRoom.getRoomId(),roomStatus);
+        	
+        	if (!isCleaningOk) {
+//    			System.out.println("Cleaning"+waitingRoom.getRoomNumber());
+    			showTable("select * from hoteldb.room where roomStatus = 'CheckOut' or roomStatus = 'Waiting';");
+    		}else {
+    			System.out.println("Undone"+waitingRoom.getRoomNumber());
+    		}	
+    	}else {
+    		noti.getNotification(NotificationType.WARNING, "Fail", "You first need to select an item!", AnimationType.SLIDE, 2000.0);
+    	}
     	
-    	String roomStatus="Waiting";
-    	Boolean isCleaningOk = roomUtils.UpdateStatus(waitingRoom.getRoomId(),roomStatus);
-    	
-    	if (!isCleaningOk) {
-			System.out.println("Cleaning"+waitingRoom.getRoomNumber());
-			showTable("select * from hoteldb.room where roomStatus = 'CheckOut' or roomStatus = 'Waiting';");
-		}else {
-			System.out.println("Undone"+waitingRoom.getRoomNumber());
-		}
 
     }
 
     @FXML
     void processDone(ActionEvent event) throws SQLException {
-    	Room waitingRoom = WaitingRoomTable.getSelectionModel().getSelectedItem();
-    	String roomStatus="Available";
-    	Boolean isCleaningOk = roomUtils.UpdateStatus(waitingRoom.getRoomId(),roomStatus);
-    	
-    	if (!isCleaningOk) {
-			System.out.println("Done"+waitingRoom.getRoomNumber());
-			showTable("select * from hoteldb.room where roomStatus = 'CheckOut' or roomStatus = 'Waiting';");
-		}else {
-			System.out.println("Undone"+waitingRoom.getRoomNumber());
-		}
+    	if(WaitingRoomTable.getSelectionModel().getSelectedIndex()>=0) {
+    	 	Room waitingRoom = WaitingRoomTable.getSelectionModel().getSelectedItem();
+        	String roomStatus="Available";
+        	Boolean isCleaningOk = roomUtils.UpdateStatus(waitingRoom.getRoomId(),roomStatus);
+        	
+        	if (!isCleaningOk) {
+//    			System.out.println("Done"+waitingRoom.getRoomNumber());
+    			showTable("select * from hoteldb.room where roomStatus = 'CheckOut' or roomStatus = 'Waiting';");
+    		}else {
+//    			System.out.println("Undone"+waitingRoom.getRoomNumber());
+    		}
+    	}
+   
+    	else {
+    		noti.getNotification(NotificationType.WARNING, "Fail", "You first need to select an item!", AnimationType.SLIDE, 2000.0);
+    	}
     }
 
     public void showTable(String sql) {

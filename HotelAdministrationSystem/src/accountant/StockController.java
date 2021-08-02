@@ -96,7 +96,7 @@ if(!tfSearch.getText().trim().isEmpty()) {
 		}
 	
 }else {
-	noti.getNotification(NotificationType.ERROR, "Failed!", "Fields must not be Null!", AnimationType.SLIDE, 2000.0);
+	noti.getNotification(NotificationType.WARNING, "Failed!", "Fields must not be Null!", AnimationType.SLIDE, 2000.0);
 }
     }
     
@@ -144,6 +144,7 @@ if(!tfSearch.getText().trim().isEmpty()) {
 	    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("../main/LogInUI.fxml"));
 			Scene scene = new Scene(root);
 			primaryStage.setResizable(false);
+			primaryStage.setTitle("Hotel Administration Login");
 			primaryStage.setScene(scene);
 			primaryStage.show();
     }
@@ -177,13 +178,8 @@ if(!tfSearch.getText().trim().isEmpty()) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//Reduced expired items' stock to 0
-		try {
-          stockDataUtils.reduceExpiredItem();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+	
         
 		//Refreshing Stock
 		

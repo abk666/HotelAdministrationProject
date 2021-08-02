@@ -25,7 +25,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import tray.animations.AnimationType;
+import tray.notification.NotificationType;
 import utility.DiningRoomFoodDataUtils;
+import utility.MyNotification;
 
 public class FoodMenuListController implements Initializable{
 
@@ -51,6 +54,8 @@ public class FoodMenuListController implements Initializable{
     private JFXComboBox<String> cobFoodMenuCategory;
     
     private final DiningRoomFoodDataUtils diningRoomFoodDataUtils = new DiningRoomFoodDataUtils();
+    
+    private final MyNotification myNoti = new MyNotification();
 
     @FXML
     void processBack(MouseEvent event) throws IOException {
@@ -59,7 +64,8 @@ public class FoodMenuListController implements Initializable{
     	primaryStage.setResizable(false);
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("../main/LogInUI.fxml"));
 		Scene scene = new Scene(root);
-		primaryStage.setTitle("MainUI");
+		primaryStage.setTitle("Hotel Administration Login");
+
 		primaryStage.setScene(scene);
 		primaryStage.show();
     }
@@ -102,7 +108,7 @@ public class FoodMenuListController implements Initializable{
     	primaryStage.setResizable(false);
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("../dining_room/FoodOrderUI.fxml"));
 		Scene scene = new Scene(root);
-		primaryStage.setTitle("MainUI");
+		primaryStage.setTitle("FoodOrderUI");
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		
@@ -110,19 +116,29 @@ public class FoodMenuListController implements Initializable{
     
     @FXML
     void processView(ActionEvent event) throws IOException {
-
+  
     	DiningRoomFood diningRoomFood = foodMenuTable.getSelectionModel().getSelectedItem();
     	
-    	DiningRoomFoodHolder holder = DiningRoomFoodHolder.getDiningRoomFoodInstance();
-    	holder.setDiningRoomFood(diningRoomFood);
+
+    	if(diningRoomFood == null) {
+    		
+    		myNoti.getNotification(NotificationType.WARNING,"Required Data!","Please Select The Data You Want Firstly.",AnimationType.SLIDE,3000.0);
+    		
+    	}else {
+    		
+    		DiningRoomFoodHolder holder = DiningRoomFoodHolder.getDiningRoomFoodInstance();
+        	holder.setDiningRoomFood(diningRoomFood);
+        	
+        	Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        	primaryStage.setResizable(false);
+        	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("FoodMenuProfileUI.fxml"));
+    		Scene scene = new Scene(root);
+    		primaryStage.setTitle("Food Menu Detail");
+    		primaryStage.setScene(scene);
+    		primaryStage.show();
+    		
+    	}
     	
-    	Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-    	primaryStage.setResizable(false);
-    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("FoodMenuProfileUI.fxml"));
-		Scene scene = new Scene(root);
-		primaryStage.setTitle("Food Menu Detail");
-		primaryStage.setScene(scene);
-		primaryStage.show();
     }
 
     
@@ -139,10 +155,18 @@ public class FoodMenuListController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
-		ObservableList<String> foodMenuCategoryList = FXCollections.observableArrayList(
-				"Rice","Curry","Burger","Pizza","Soup","Fried","Salad","Cake","Ice Cream","Fruit","Juice","Cool Drink","Hot Drink","Beer","Wine","Purified Water","Hotpot","Hotdog"
-				);		
-		
+		ObservableList<String> foodMenuCategoryList = FXCollections.observableArrayList();
+//				"Rice","Curry","Burger","Pizza","Soup","Fried","Salad","Cake","Ice Cream","Fruit","Juice","Cold Drinks","Hot Drinks","Beer","Wine","Purified Water","Hotpot","Hotdog"
+//				);		
+		try {
+			ObservableList<DiningRoomFood>foodList=diningRoomFoodDataUtils.getAllDiningRoomFood("select * from foodmenu group by foodMenuCategory;");
+		    for (DiningRoomFood food:foodList) {
+		    	foodMenuCategoryList.add(food.getFoodMenuCategory());
+		    }
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		cobFoodMenuCategory.setItems(foodMenuCategoryList);
 	
 		foodMenuName.setCellValueFactory(new PropertyValueFactory<>("foodMenuName"));

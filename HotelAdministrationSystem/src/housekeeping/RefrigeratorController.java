@@ -28,16 +28,17 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import tray.animations.AnimationType;
+import tray.notification.NotificationType;
 import utility.InRoomCostDataUtils;
 import utility.MyNotification;
 import utility.RefrigeratorFoodDataUtils;
-import utility.RefrigeratorUtils;
+
 import utility.RoomUtils;
 
 public class RefrigeratorController implements Initializable{
 
-    @FXML
-    private JFXTextField tfroomNumber;
+   
 
     @FXML
     private JFXTextField tfitemName;
@@ -59,8 +60,7 @@ public class RefrigeratorController implements Initializable{
     @FXML
     private TableColumn<RefrigeratorFood, Integer> itemId;
 
-    @FXML
-    private TableColumn<RefrigeratorFood, String> itemRoomNo;
+   
 
     @FXML
     private TableColumn<RefrigeratorFood, String> itemName;
@@ -84,7 +84,7 @@ public class RefrigeratorController implements Initializable{
     @FXML
     private JFXComboBox<Integer> cobRoomNumber;
     
-    private final RefrigeratorUtils refrigeratorUtils = new RefrigeratorUtils();
+  
     private final RefrigeratorFoodDataUtils refriFoodUtils=new RefrigeratorFoodDataUtils();
     private final InRoomCostDataUtils inRoomCostUtils=new InRoomCostDataUtils();
     private final RoomUtils roomUtils=new RoomUtils();
@@ -109,7 +109,7 @@ public class RefrigeratorController implements Initializable{
 
     @FXML
     void processCancel(ActionEvent event) {
-
+        
     	clearAllField();
     }
 
@@ -136,19 +136,27 @@ public class RefrigeratorController implements Initializable{
 
     @FXML
     void processSave(ActionEvent event) throws SQLException {
-    	Optional<ButtonType> result=noti.getConfirmationAlert("Comfimation Dialog", "Comfirmation", "Do you really want to Save?");
-		if(result.get()==ButtonType.OK) {
-    	String inRoomItemName=tfitemName.getText().trim();
-    	String inRoomItemCategory=cobitemCategory.getValue();
-    	Double inRoomItemPrice=Double.parseDouble(tfitemPrice.getText().trim());
-    	Integer inRoomItemQuantity=Integer.parseInt(tfitemQty.getText().trim());
-    	Integer guestRoomNo=cobRoomNumber.getValue();
-    	Double inRoomTotalCost=inRoomItemPrice*inRoomItemQuantity;
-    	InRoomCost inRoomCost=new InRoomCost(inRoomItemName, inRoomItemCategory, inRoomItemPrice, inRoomItemQuantity, guestRoomNo, inRoomTotalCost);
-    	boolean isSaveOk=inRoomCostUtils.saveInRoomCost(inRoomCost);
-    	if(!isSaveOk) {
-    		System.out.println("Successfully saved");
-    	}
+    	if(!tfitemName.getText().trim().isEmpty() && !tfitemPrice.getText().trim().isEmpty()&& !tfitemQty.getText().trim().isEmpty() && cobRoomNumber.getValue()!=null ) {
+    		Optional<ButtonType> result=noti.getConfirmationAlert("Comfimation Dialog", "Comfirmation", "Do you really want to Save?");
+    		if(result.get()==ButtonType.OK) {
+        	String inRoomItemName=tfitemName.getText().trim();
+        	String inRoomItemCategory=cobitemCategory.getValue();
+        	Double inRoomItemPrice=Double.parseDouble(tfitemPrice.getText().trim());
+        	Integer inRoomItemQuantity=Integer.parseInt(tfitemQty.getText().trim());
+        	Integer guestRoomNo=cobRoomNumber.getValue();
+        	Double inRoomTotalCost=inRoomItemPrice*inRoomItemQuantity;
+        	InRoomCost inRoomCost=new InRoomCost(inRoomItemName, inRoomItemCategory, inRoomItemPrice, inRoomItemQuantity, guestRoomNo, inRoomTotalCost);
+        	boolean isSaveOk=inRoomCostUtils.saveInRoomCost(inRoomCost);
+        	if(!isSaveOk) {
+                noti.getNotification(NotificationType.SUCCESS, "Success", "Successfully Saved", AnimationType.SLIDE, 2000.0);
+        	}else
+        	{
+        		noti.getNotification(NotificationType.ERROR, "Failed", "Fail to save ", AnimationType.SLIDE, 2000.0);
+        	}
+        	}
+        	
+    	}else {
+    		noti.getNotification(NotificationType.WARNING, "Failed", "Fields must not be null", AnimationType.SLIDE, 2000.0);
     	}
     	
     	
@@ -166,7 +174,7 @@ public class RefrigeratorController implements Initializable{
     
     public void enableAllField() {
     	
-    	tfroomNumber.setDisable(false);
+    	cobRoomNumber.setDisable(false);
     	tfitemName.setDisable(false);
     	cobitemCategory.setDisable(false);
     	tfitemPrice.setDisable(false);
@@ -175,7 +183,7 @@ public class RefrigeratorController implements Initializable{
     
     public void disableAllField() {
     	
-    	tfroomNumber.setDisable(true);
+    	cobRoomNumber.setDisable(true);
     	tfitemName.setDisable(true);
     	cobitemCategory.setDisable(true);
     	tfitemPrice.setDisable(true);
@@ -183,11 +191,11 @@ public class RefrigeratorController implements Initializable{
     }
     
     public void clearAllField() {
-    	tfroomNumber.clear();
+    	cobRoomNumber.setValue(null);
     	tfitemName.clear();
     	tfitemPrice.clear();
     	tfitemQty.clear();
-    	cobitemCategory.setValue("");
+    	cobitemCategory.setValue(null);
 
     }
     
@@ -229,7 +237,7 @@ public class RefrigeratorController implements Initializable{
 		cobitemCategory.setItems(foodCategory);
 		
 		try {
-			cobSearch.setItems(refriFoodUtils.getAllColumnLabel());
+			cobSearch.setItems(refriFoodUtils.foodForRoom());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -238,7 +246,6 @@ public class RefrigeratorController implements Initializable{
 	
 		
 		itemId.setCellValueFactory(new PropertyValueFactory<>("itemId"));
-		itemRoomNo.setCellValueFactory(new PropertyValueFactory<>("itemRoomNo"));
 		itemName.setCellValueFactory(new PropertyValueFactory<>("itemName"));
 		itemCategory.setCellValueFactory(new PropertyValueFactory<>("itemCategory"));
 		itemPrice.setCellValueFactory(new PropertyValueFactory<>("itemPrice"));

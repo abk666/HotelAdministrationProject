@@ -166,7 +166,8 @@ public class ManagerViewGuestDataUtils {
 		ObservableList<String> columnLabelList = FXCollections.observableArrayList();
 		connection = dbConnection.getConnection();
 		statement = connection.createStatement();
-		resultSet = statement.executeQuery("select * from hoteldb.guest;");
+		resultSet = statement.executeQuery("select guestId,guestName,guestNRC,guestPhNo,noOfGuests,guestRoomNo,guestRoomType,guestCheckInDate from hoteldb.guest;");
+		//guestId as Id,guestName as Name,guestNRC as NRC,guestPhNo as Phone,noOfGuests as NumberOfGuest,guestRoomNo as RoomNo,guestRoomType as RoomType,guestCheckInDate as CheckInDate
 		
 		ResultSetMetaData metaData = resultSet.getMetaData();
 		

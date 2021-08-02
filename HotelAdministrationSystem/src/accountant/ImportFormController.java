@@ -15,6 +15,7 @@ import bean.ImportHolder;
 import bean.ImportStatusHolder;
 import bean.Staff;
 import bean.StaffHolder;
+import bean.Stock;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -28,6 +29,7 @@ import tray.notification.NotificationType;
 import utility.ImportDataUtils;
 import utility.MyNotification;
 import utility.StockDataUtils;
+import utility.TableAutoIncrementsUtils;
 ;
 
 
@@ -58,7 +60,7 @@ public class ImportFormController implements Initializable{
     
     @FXML
     private JFXButton btnSave;
-    
+    private final TableAutoIncrementsUtils autoIncrementsUtils=new TableAutoIncrementsUtils();
     private final ImportDataUtils importDataUtils=new ImportDataUtils();
     private final MyNotification noti=new MyNotification();
     private final StockDataUtils stockDataUtils=new StockDataUtils();
@@ -85,6 +87,29 @@ public class ImportFormController implements Initializable{
 
     @FXML
     void processSave(ActionEvent event) throws SQLException {
+    	//Autocrements import table according with last id in table
+    	Integer tempId;
+    	ObservableList<Import>importList=importDataUtils.getAllImportItems("select * from import where itemStatus = 'Good';");
+    	if(importList.size()==0) {
+    		tempId=1;
+    	}else {
+    		Integer index=importList.size();
+        	Import tempImport=importList.get(index-1);
+        	tempId=tempImport.getImportId();
+    	}
+    	
+    	autoIncrementsUtils.setAutocrementId("import",tempId);
+    	//for stock table
+    	Integer tempStockId;
+    	ObservableList<Stock>stockList=stockDataUtils.getAllStock("select * from stock;");
+    	if(stockList.size()==0) {
+    		tempStockId=1;
+    	}else {
+    		Integer index=stockList.size();
+    		Stock tempStock=stockList.get(index-1);
+    		tempStockId=tempStock.getStockId();
+    	}
+    	autoIncrementsUtils.setAutocrementId("stock", tempStockId);
     	//Check validation for every Inputs
     	if(isDouble(tfPrice.getText().trim())&& isInteger(tfQuantity.getText().trim())&&!tfName.getText().trim().isEmpty() && cobCategory.getValue()!=null && !tfPrice.getText().trim().isEmpty() && !tfQuantity.getText().trim().isEmpty() && cobUnit.getValue()!=null
     	  && dpExpiredDate.getValue()!=null && dpImportDate.getValue()!=null ) {
@@ -145,7 +170,7 @@ public class ImportFormController implements Initializable{
     			}
     			
     		}else {
-        		noti.getNotification(NotificationType.ERROR, "Error", "Something went wrong ,Please check your input", AnimationType.SLIDE, 2000.0);
+        		noti.getNotification(NotificationType.WARNING, "Error", "Something went wrong ,Please check your input", AnimationType.SLIDE, 2000.0);
         	}
 
     		

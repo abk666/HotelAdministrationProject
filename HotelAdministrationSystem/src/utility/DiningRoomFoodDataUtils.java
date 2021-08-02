@@ -104,13 +104,14 @@ public class DiningRoomFoodDataUtils {
 		 return isDeleteOk;
 	}
 	
-	//Read ColumnLabel For Admin
+	//Read ColumnLabel For AdminDiningRoom
 	public ObservableList<String> getAllColumnLabel() throws SQLException{
 		
 		ObservableList<String> columnLabelList = FXCollections.observableArrayList();
 		connection = dbConnection.getConnection();
 		statement = connection.createStatement();
 		resultSet = statement.executeQuery("select * from hoteldb.foodmenu;");
+		//foodMenuId as Id,foodMenuName as Name,foodMenuCategory as Category,foodMenuPrice as Price,foodMenuImage as ImageName
 		
 		ResultSetMetaData metaData = resultSet.getMetaData();
 		

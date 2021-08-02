@@ -137,7 +137,7 @@ public class RefrigeratorFoodEditController implements Initializable{
         	
         	
         	String imageName = "";
-        	if (this.itemImageName != null || !this.itemImageName.isEmpty()) {
+        	if (this.itemImageName != null) {
         		
     	    	int indexDot = this.itemImageName.indexOf(".");
     			imageName = this.itemImageName.substring(0,indexDot)+".jpg";
@@ -220,6 +220,7 @@ public class RefrigeratorFoodEditController implements Initializable{
 		tfItemPrice.setText(food.getItemPrice().toString());
 		tfItemQty.setText(food.getItemQty().toString());
 		this.id = food.getItemId();
+		this.oldImageName=food.getItemImage();
 	}
 
     

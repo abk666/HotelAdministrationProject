@@ -18,12 +18,12 @@
             <Image url="@../img/managerguest.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="72.0" layoutY="343.0" onMouseClicked="#processProfits" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="222.0" layoutY="332.0" onMouseClicked="#processProfits" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/financial-profit.png" />
+            <Image url="@../img/financial-profit%20.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="673.0" layoutY="343.0" onMouseClicked="#processLogOut" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="554.0" layoutY="348.0" onMouseClicked="#processLogOut" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/managerlogout.png" />
          </image>
@@ -38,7 +38,7 @@
             <Font name="System Italic" size="18.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="673.0" layoutY="517.0" onMouseClicked="#processLogOut" prefHeight="35.0" prefWidth="150.0" text="LogOut" textFill="#171ae1">
+      <Label alignment="CENTER" layoutX="554.0" layoutY="516.0" onMouseClicked="#processLogOut" prefHeight="35.0" prefWidth="150.0" text="LogOut" textFill="#171ae1">
          <font>
             <Font name="System Italic" size="18.0" />
          </font>
@@ -58,7 +58,7 @@
             <Image url="@../img/managerpiechart.png" />
          </image>
       </ImageView>
-      <Label alignment="CENTER" layoutX="72.0" layoutY="517.0" onMouseClicked="#processProfits" prefHeight="35.0" prefWidth="150.0" text="Profits" textFill="#171ae1">
+      <Label alignment="CENTER" layoutX="222.0" layoutY="516.0" onMouseClicked="#processProfits" prefHeight="35.0" prefWidth="150.0" text="Profits" textFill="#171ae1">
          <font>
             <Font name="System Italic" size="18.0" />
          </font>

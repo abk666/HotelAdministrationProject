@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import bean.Booking;
+import bean.Room;
 import database.DbConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,6 +20,7 @@ public class BookingDataUtils {
 	private PreparedStatement preStmt;
 	private ResultSet resultSet;
 	
+	private final RoomUtils roomDataUtils=new RoomUtils();
 	private final DbConnection dbConnection=new DbConnection();
 	
 	//Read R
@@ -127,6 +129,20 @@ public class BookingDataUtils {
 					return rowUpdated;
 
 				}
+				
+				
+				public void UpdateRoomStatus(Integer RoomNo) throws SQLException {
+				                    Room roomList=roomDataUtils.getAllRoom("select * from room where roomNumber = '"+RoomNo+"'").get(0);
+				                    connection = dbConnection.getConnection();
+				                    statement=connection.createStatement();
+				                    statement.execute("update `room` set `roomStatus` = 'Booked' where (`roomId` = '"+roomList.getRoomId()+"');");
+				                }
+				public void updateDeletedBooking(Integer RoomNo) throws SQLException {
+                    Room roomList=roomDataUtils.getAllRoom("select * from room where roomNumber = '"+RoomNo+"'").get(0);
+                    connection = dbConnection.getConnection();
+                    statement=connection.createStatement();
+                    statement.execute("update `room` set `roomStatus` = 'Available' where (`roomId` = '"+roomList.getRoomId()+"');");
+                }
 		
 		//Delete D
 				public Boolean deleteBooking(Integer bookingId) throws SQLException {

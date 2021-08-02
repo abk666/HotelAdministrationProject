@@ -10,14 +10,14 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #d1e0ea;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="admin.StaffListController">
+<AnchorPane prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #d1e0ea;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="admin.StaffListController">
    <children>
       <Label alignment="CENTER" prefHeight="50.0" prefWidth="900.0" text="Staff List View" textFill="#48616f">
          <font>
             <Font name="System Bold Italic" size="30.0" />
          </font>
       </Label>
-      <HBox alignment="CENTER" layoutY="50.0" prefHeight="100.0" prefWidth="900.0" spacing="30.0">
+      <HBox alignment="CENTER" layoutY="50.0" prefHeight="100.0" prefWidth="900.0" spacing="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
             <JFXButton onAction="#processView" prefHeight="50.0" prefWidth="80.0" style="-fx-background-color: #018abb;" text="View" textFill="WHITE">
                <font>
@@ -48,21 +48,21 @@
             </JFXButton>
          </children>
       </HBox>
-      <TableView fx:id="staffTable" layoutY="150.0" prefHeight="550.0" prefWidth="900.0">
+      <TableView fx:id="staffTable" layoutY="150.0" prefHeight="550.0" prefWidth="900.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <columns>
-          <TableColumn fx:id="id" prefWidth="31.0" text="ID" />
-          <TableColumn fx:id="firstName" prefWidth="68.0" text="Firstname" />
-            <TableColumn fx:id="lastName" prefWidth="68.0" text="Lastname" />
-            <TableColumn fx:id="username" prefWidth="88.0" text="Username" />
-            <TableColumn fx:id="email" prefWidth="67.0" text="Email" />
-            <TableColumn fx:id="password" prefWidth="72.0" text="Password" />
-            <TableColumn fx:id="role" text="Role" />
-            <TableColumn fx:id="gender" prefWidth="65.0" text="Gender" />
-            <TableColumn fx:id="phone" prefWidth="69.0" text="PhoneNo" />
-            <TableColumn fx:id="address" prefWidth="75.0" text="Address" />
-            <TableColumn fx:id="dob" prefWidth="57.0" text="DOB" />
-            <TableColumn fx:id="status" prefWidth="67.0" text="Status" />
-            <TableColumn fx:id="imageName" prefWidth="91.0" text="ImageName" />
+          <TableColumn fx:id="id" prefWidth="39.0" text="ID" />
+          <TableColumn fx:id="firstName" prefWidth="86.0" text="Firstname" />
+            <TableColumn fx:id="lastName" prefWidth="90.0" text="Lastname" />
+            <TableColumn fx:id="username" text="Username" />
+            <TableColumn fx:id="email" prefWidth="92.0" text="Email" />
+            <TableColumn fx:id="password" prefWidth="73.0" text="Password" />
+            <TableColumn fx:id="role" prefWidth="67.0" text="Role" />
+            <TableColumn fx:id="gender" prefWidth="71.0" text="Gender" />
+            <TableColumn fx:id="phone" prefWidth="84.0" text="PhoneNo" />
+            <TableColumn fx:id="address" prefWidth="76.0" text="Address" />
+            <TableColumn fx:id="dob" prefWidth="74.0" text="DOB" />
+            <TableColumn fx:id="status" prefWidth="64.0" text="Status" />
+            <TableColumn fx:id="imageName" prefWidth="100.0" text="ImageName" />
         </columns>
       </TableView>
       <Label layoutX="7.0" layoutY="9.0" onMouseClicked="#processBack" prefHeight="25.0" prefWidth="63.0" text="&lt;&lt;Back">
@@ -70,7 +70,7 @@
             <Font size="15.0" />
          </font>
       </Label>
-      <Label layoutX="764.0" layoutY="13.0" onMouseClicked="#processInactive" prefHeight="25.0" prefWidth="122.0" text="&lt;&lt;INACTIVE&gt;&gt;">
+      <Label layoutX="764.0" layoutY="13.0" onMouseClicked="#processInactive" prefHeight="25.0" prefWidth="122.0" text="&lt;&lt;INACTIVE&gt;&gt;" AnchorPane.rightAnchor="10.0">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>

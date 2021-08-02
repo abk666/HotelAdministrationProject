@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="600.0" prefWidth="500.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="reception.BillSlipController">
+<AnchorPane prefHeight="600.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="reception.BillSlipController">
    <children>
       <Label alignment="CENTER" layoutX="215.0" layoutY="31.0" prefHeight="60.0" text="THANK YOU" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <font>
@@ -46,7 +45,7 @@
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <Label text="Toal" GridPane.rowIndex="3">
+            <Label text="Total" GridPane.rowIndex="3">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>

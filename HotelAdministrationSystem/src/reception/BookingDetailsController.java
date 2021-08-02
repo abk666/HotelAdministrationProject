@@ -11,14 +11,18 @@ import com.jfoenix.controls.JFXTextField;
 
 import bean.Booking;
 import bean.BookingHolder;
-
+import bean.Room;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import tray.animations.AnimationType;
+import tray.notification.NotificationType;
 import utility.BookingDataUtils;
+import utility.MyNotification;
+import utility.RoomUtils;
 
 
 public class BookingDetailsController implements Initializable{
@@ -57,11 +61,22 @@ public class BookingDetailsController implements Initializable{
     private JFXDatePicker dpCheckOutDate;
     
     private final BookingDataUtils bookingDataUtils=new BookingDataUtils();
+    private final RoomUtils roomDataUtils=new RoomUtils();
+    private final MyNotification noti=new MyNotification();
 
 
     @FXML
     void processCancel(ActionEvent event) {
-
+     tfGuestName.clear();
+     tfGuestPhNo.clear();
+     tfNoOfGuest.clear();
+     tfRoomNo.clear();
+     tfRoomPrice.clear();
+     tfStayDays.clear();
+     dpBookingDate.setValue(null);
+     dpCheckInDate.setValue(null);
+     dpCheckOutDate.setValue(null);
+     cobRoomType.setValue(null);
     }
 
     @FXML
@@ -85,22 +100,30 @@ public class BookingDetailsController implements Initializable{
 		
 		if (rowUpdated > 0) {
 			
-			System.out.println("Successfully Updated "+guestName+" to DB");
+			noti.getNotification(NotificationType.SUCCESS, "Success", "Successfully Updated "+guestName+" to DB", AnimationType.SLIDE, 2000.0);
 			
 			
 		}else {
 			
 			
-			System.out.println("Fail to Update "+guestName+" to DB");
+			noti.getNotification(NotificationType.ERROR, "Failed", "Fail to Update "+guestName+" in DB", AnimationType.SLIDE, 2000.0);
 		
 	}
     }
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		ObservableList<String> roomTypeList = FXCollections.observableArrayList(
-				   "Single","Double","Triple"		
-						);
+		ObservableList<String> roomTypeList = FXCollections.observableArrayList();
+
+		try {
+			ObservableList<Room>roomList=roomDataUtils.getAllRoom("select * from room group by roomType;");
+			for(Room room:roomList) {
+				roomTypeList.add(room.getRoomType());
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		cobRoomType.setItems(roomTypeList);
 	
 		BookingHolder holder = BookingHolder.getBookingInstance();
@@ -119,7 +142,7 @@ public class BookingDetailsController implements Initializable{
 		tfRoomPrice.setText(booking.getRoomPrice().toString());
 		tfNoOfGuest.setText(booking.getNoOfGuest().toString());
 		
-		
+		cobRoomType.setValue(booking.getRoomType());
 		dpBookingDate.setValue(LocalDate.parse(booking.getBookedDate().toString()));
 		dpCheckInDate.setValue(LocalDate.parse(booking.getCheckInDate().toString()));
 		tfStayDays.setText(booking.getNumberOfDays().toString());

@@ -113,8 +113,9 @@ public class AdminUpdateController implements Initializable {
     void processLogOut(MouseEvent event) throws IOException {
     	
     	Stage primaryStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("../admin/AdminMainUI.fxml"));
+    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("AdminMainUI.fxml"));
 		Scene scene = new Scene(root);
+		
 		primaryStage.setTitle("Admin Main Section");
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -131,83 +132,88 @@ public class AdminUpdateController implements Initializable {
 
     @FXML
     void processSave(ActionEvent event) throws IOException, SQLException {
-    	
-    	
-    	String fName = tfFName.getText().trim();
-    	String lName = tfLName.getText().trim();
-    	String userName = tfUsername.getText().trim();
-    	String email = tfEmail.getText().trim();
-    	String password = tfPassword.getText();
-    	String phone = tfPhone.getText().trim();
-    	String address = tfAddress.getText().trim();
-    	String dob = dpDOB.getValue().toString();
-    	String status = cobStatus.getValue();
-    	
-    	String imagename;
-    	
-    	if (this.adminImageName!= null) {
-    	 
-    	Integer indexDot = this.adminImageName.indexOf(".");
-    	imagename = this.adminImageName.substring(0, indexDot)+".jpg";
-		
-    	}else {
-    		imagename = this.oldImageName;
-    	}
-		
-		if(isNewButtonClick) {
-    	
-		Admin admin = new Admin(fName, lName, userName, email, password, phone, address, dob, status, imagename);
-				
-    	Boolean isSaveOK = adminDataUtils.saveAdmin(admin);
-    	
-    	if (!isSaveOK) {
-			System.out.println("Successfully saved");
-			
-			File imageFile = new File("src/img/admin/"+imagename);
-			
-			BufferedImage bufferedImage = SwingFXUtils.fromFXImage(imageAdmin.getImage(), null);
-			
-			ImageIO.write(bufferedImage, "jpg", imageFile);
-			
-			myNoti.getNotification(NotificationType.SUCCESS, "Save Success!", "Successfully Save "+userName+" to DB", AnimationType.SLIDE, 3000.0);
-			
-			clearAllField();
-			
-		}else
-		{
-			myNoti.getNotification(NotificationType.ERROR, "Save Fail!", "Fail to Save "+userName+" to DB", AnimationType.SLIDE, 3000.0);
+    	if(!tfFName.getText().trim().isEmpty()&& !tfLName.getText().trim().isEmpty() && !tfUsername.getText().trim().isEmpty() &&!tfEmail.getText().trim().isEmpty()
+    			&&!tfPassword.getText().trim().isEmpty()&& !tfPhone.getText().trim().isEmpty()&&!tfAddress.getText().trim().isEmpty() && dpDOB.getValue()!=null && cobStatus.getValue()!=null) {
+    		String fName = tfFName.getText().trim();
+        	String lName = tfLName.getText().trim();
+        	String userName = tfUsername.getText().trim();
+        	String email = tfEmail.getText().trim();
+        	String password = tfPassword.getText();
+        	String phone = tfPhone.getText().trim();
+        	String address = tfAddress.getText().trim();
+        	String dob = dpDOB.getValue().toString();
+        	String status = cobStatus.getValue();
+        	
+        	String imagename;
+        	
+        	if (this.adminImageName!= null) {
+        	 
+        	Integer indexDot = this.adminImageName.indexOf(".");
+        	imagename = this.adminImageName.substring(0, indexDot)+".jpg";
+    		
+        	}else {
+        		imagename = this.oldImageName;
+        	}
+    		
+    		if(isNewButtonClick) {
+        	
+    		Admin admin = new Admin(fName, lName, userName, email, password, phone, address, dob, status, imagename);
+    				
+        	Boolean isSaveOK = adminDataUtils.saveAdmin(admin);
+        	
+        	if (!isSaveOK) {
+    			System.out.println("Successfully saved");
+    			
+    			File imageFile = new File("src/img/admin/"+imagename);
+    			
+    			BufferedImage bufferedImage = SwingFXUtils.fromFXImage(imageAdmin.getImage(), null);
+    			
+    			ImageIO.write(bufferedImage, "jpg", imageFile);
+    			
+    			myNoti.getNotification(NotificationType.SUCCESS, "Save Success!", "Successfully Save "+userName+" to DB", AnimationType.SLIDE, 3000.0);
+    			
+    			clearAllField();
+    			
+    		}else
+    		{
+    			myNoti.getNotification(NotificationType.ERROR, "Save Fail!", "Fail to Save "+userName+" to DB", AnimationType.SLIDE, 3000.0);
 
-			}
+    			}
+        	
+    		}else {
+    			
+    			
+    			
+    			Admin adminUpdated = new Admin(this.adminId, fName, lName, userName, email, password, phone, address, dob, status, imagename);
+    			
+    			Integer rowUpdated = adminDataUtils.updateAdmin(adminUpdated);
+    			
+    			if (rowUpdated > 0 ) {
+    				
+    				
+    				
+    				myNoti.getNotification(NotificationType.SUCCESS, "Updated Success!", "Successfully Update "+userName+" to DB", AnimationType.SLIDE, 3000.0);
+    				File deletedFile = new File("src/img/admin/"+this.oldImageName);
+    					deletedFile.delete();
+    					
+    					File imageFile = new File("src/img/admin/"+imagename);
+    					
+    					BufferedImage bufferedImage = SwingFXUtils.fromFXImage(imageAdmin.getImage(), null);
+    					
+    					ImageIO.write(bufferedImage, "jpg", imageFile);
+    					
+    					
+    					clearAllField();	
+    					disableAllField();
+    					
+    			}
+    			
+    		}
+    	}else {
+    		myNoti.getNotification(NotificationType.WARNING, "Warning", "Input fields must not be null", AnimationType.SLIDE, 2000.0);
+    	}
     	
-		}else {
-			
-			
-			
-			Admin adminUpdated = new Admin(this.adminId, fName, lName, userName, email, password, phone, address, dob, status, imagename);
-			
-			Integer rowUpdated = adminDataUtils.updateAdmin(adminUpdated);
-			
-			if (rowUpdated > 0 ) {
-				
-				
-				
-				myNoti.getNotification(NotificationType.SUCCESS, "Updated Success!", "Successfully Update "+userName+" to DB", AnimationType.SLIDE, 3000.0);
-				File deletedFile = new File("src/img/admin/"+this.oldImageName);
-					deletedFile.delete();
-					
-					File imageFile = new File("src/img/admin/"+imagename);
-					
-					BufferedImage bufferedImage = SwingFXUtils.fromFXImage(imageAdmin.getImage(), null);
-					
-					ImageIO.write(bufferedImage, "jpg", imageFile);
-					
-					
-					clearAllField();	
-					disableAllField();
-					
-			}
-			
-		}
+    	
 
     }
 

@@ -53,12 +53,16 @@ public class RoomUtils {
 				+ " `roomType`,"
 				+ " `roomPrice`,"
 				+ " `roomStatus`)"
-				+ " VALUES (?, ?, ?, ?);");
+				+ " VALUES (?, ?, ?, ?) on duplicate key update roomNumber = ?,roomType = ?,roomPrice = ?, roomStatus = ? ;");
 		
 		preStmt.setInt(1, room.getRoomNumber());
 		preStmt.setString(2, room.getRoomType());
 		preStmt.setDouble(3, room.getRoomPrice());
 		preStmt.setString(4, room.getRoomStatus());
+		preStmt.setInt(5, room.getRoomNumber());
+		preStmt.setString(6, room.getRoomType());
+		preStmt.setDouble(7, room.getRoomPrice());
+		preStmt.setString(8, room.getRoomStatus());
 		
 		Boolean isSaveOk = preStmt.execute();
 		

@@ -22,7 +22,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import tray.animations.AnimationType;
+import tray.notification.NotificationType;
 import utility.GuestDataUtils;
+import utility.MyNotification;
 
 public class ReceptionGuestsController implements Initializable {
 
@@ -75,12 +78,13 @@ public class ReceptionGuestsController implements Initializable {
     private TableColumn<Guest,Integer> numberOfDays;
     
     private final GuestDataUtils guestDataUtils=new GuestDataUtils();
+    private final MyNotification noti=new MyNotification();
 
    
 
     @FXML
     void processRefresh(ActionEvent event) {
-    	showTable("select * from guest;");
+    	showTable("select * from guest where guestStatus = 'CheckIn';");
     }
 
     @FXML
@@ -88,25 +92,30 @@ public class ReceptionGuestsController implements Initializable {
     	String column = cobColumn.getValue();
     	String query = tfSearch.getText().trim();
     	
-    	showTable("select * from guest where "+column+" = '"+query+"';");
+    	showTable("select * from guest where "+column+" = '"+query+"' and guestStatus = 'CheckIn';");
     }
 
     @FXML
     void processView(ActionEvent event) throws IOException {
-    	Guest guest= guestTable.getSelectionModel().getSelectedItem();
-      	 
-    	GuestHolder holder = GuestHolder.getGuestInstance();
-    	 
-    	holder.setGuest(guest);
-    	 
-    	Stage primaryStage = new Stage();
-     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("GuestDetailsUI.fxml"));
- 		Scene scene = new Scene(root);
- 		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
-		primaryStage.getIcons().add(icon);
- 		primaryStage.setTitle("Guest Details");
- 		primaryStage.setScene(scene);
- 		primaryStage.show();
+    	if(guestTable.getSelectionModel().getSelectedIndex()>=0) {
+    		Guest guest= guestTable.getSelectionModel().getSelectedItem();
+         	 
+        	GuestHolder holder = GuestHolder.getGuestInstance();
+        	 
+        	holder.setGuest(guest);
+        	 
+        	Stage primaryStage = new Stage();
+         	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("GuestDetailsUI.fxml"));
+     		Scene scene = new Scene(root);
+     		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+    		primaryStage.getIcons().add(icon);
+     		primaryStage.setTitle("Guest Details");
+     		primaryStage.setScene(scene);
+     		primaryStage.show();
+    	}else {
+    		noti.getNotification(NotificationType.WARNING, "Failed", "You first need to select an item", AnimationType.SLIDE, 2000.0);
+    	}
+    
     }
     
 public void showTable(String sql) {
@@ -143,7 +152,7 @@ public void showTable(String sql) {
 		guestCheckOutDate.setCellValueFactory(new PropertyValueFactory<>("guestCheckOutDate"));
 		numberOfDays.setCellValueFactory(new PropertyValueFactory<>("numberOfDays"));
 		
-		showTable("select * from guest;");
+		showTable("select * from guest where guestStatus = 'CheckIn';");
 	}
 
 }

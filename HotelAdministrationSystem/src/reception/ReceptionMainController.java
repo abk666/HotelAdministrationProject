@@ -30,6 +30,7 @@ public class ReceptionMainController implements Initializable {
 		Scene scene = new Scene(root);
 		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
 		primaryStage.getIcons().add(icon);
+		primaryStage.setResizable(false);
 		primaryStage.setTitle("Reception Booking Section");
 		primaryStage.setScene(scene);
 		primaryStage.show();
@@ -82,6 +83,7 @@ public class ReceptionMainController implements Initializable {
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("../main/LoginUI.fxml"));
 		Scene scene = new Scene(root);
 		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+		primaryStage.setTitle("Hotel Administration Login");
 		primaryStage.getIcons().add(icon);
 		primaryStage.setScene(scene);
 		

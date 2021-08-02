@@ -92,6 +92,7 @@ public class AdminViewController implements Initializable {
 	    	Stage primaryStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
 	    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("../admin/AdminListUI.fxml"));
 			Scene scene = new Scene(root);
+			
 			primaryStage.setTitle("Admin List Section");
 			primaryStage.setScene(scene);
 			primaryStage.show();

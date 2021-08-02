@@ -51,7 +51,7 @@
                   </HBox>
                   <HBox alignment="CENTER" layoutX="499.0" layoutY="1.0" prefHeight="140.0" prefWidth="377.0" spacing="20.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.rightAnchor="122.0" AnchorPane.topAnchor="1.0">
                      <children>
-                        <JFXComboBox fx:id="cobSearch" prefHeight="31.0" prefWidth="147.0" promptText="Column Name" />
+                        <JFXComboBox fx:id="cobSearch" prefHeight="31.0" prefWidth="223.0" promptText="Column Name" />
                         <JFXTextField fx:id="tfSearch" alignment="TOP_LEFT" prefHeight="31.0" prefWidth="145.0" promptText="Items" />
                         <ImageView fitHeight="64.0" fitWidth="64.0" onMouseClicked="#processSearch" pickOnBounds="true" preserveRatio="true">
                            <image>

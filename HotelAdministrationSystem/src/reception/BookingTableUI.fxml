@@ -15,10 +15,15 @@
    <children>
       <SplitPane dividerPositions="0.18" orientation="VERTICAL" prefHeight="550.0" prefWidth="750.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" SplitPane.resizableWithParent="false">
                <children>
-                  <HBox alignment="CENTER" layoutY="39.0" prefHeight="78.0" prefWidth="800.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="39.0">
+                  <HBox alignment="CENTER" layoutY="39.0" prefHeight="65.0" prefWidth="413.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="40.0">
                      <children>
+                        <JFXButton onAction="#processCheckIn" prefHeight="50.0" prefWidth="80.0" style="-fx-background-color: #3d1490;" text="CheckIn" textFill="WHITE">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </JFXButton>
                         <JFXButton onAction="#processView" prefHeight="50.0" prefWidth="97.0" style="-fx-background-color: #3d1490;" text="View Details" textFill="WHITE">
                            <font>
                               <Font size="13.0" />
@@ -32,24 +37,24 @@
                            <font>
                               <Font size="13.0" />
                            </font></JFXButton>
-                        <JFXComboBox fx:id="cobColumn" prefHeight="26.0" prefWidth="118.0" promptText="Column" />
-                        <JFXTextField fx:id="tfSearch" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="418.0" layoutY="40.0" prefHeight="64.0" prefWidth="372.0" spacing="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="40.0">
+                     <children>
+                        <JFXComboBox fx:id="cobColumn" prefHeight="31.0" prefWidth="170.0" promptText="Column" />
+                        <JFXTextField fx:id="tfSearch" prefHeight="31.0" prefWidth="124.0" />
                         <JFXButton onAction="#processSearch" prefHeight="50.0" prefWidth="80.0" style="-fx-background-color: #3d1490; -fx-background-radius: 20;" text="Search" textFill="WHITE">
                            <font>
                               <Font size="13.0" />
-                           </font></JFXButton>
+                           </font>
+                        </JFXButton>
                      </children>
                   </HBox>
-                  <Label alignment="TOP_LEFT" prefHeight="40.0" prefWidth="800.0" text="Booking Table Section">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="800.0">
                <children>
-                  <TableView fx:id="bookingTable" prefHeight="450.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="bookingTable" layoutY="80.0" prefHeight="406.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
                       <TableColumn fx:id="bookingId" prefWidth="54.0" text="ID" />
                       <TableColumn fx:id="guestName" prefWidth="65.0" text="GuestName" />
@@ -71,5 +76,10 @@
             </AnchorPane>
         </items>
       </SplitPane>
+      <Label alignment="CENTER" prefHeight="40.0" prefWidth="800.0" text="Booking Table Section">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

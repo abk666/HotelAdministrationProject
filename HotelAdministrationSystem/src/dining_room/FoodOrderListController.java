@@ -77,7 +77,7 @@ public class FoodOrderListController implements Initializable{
     	primaryStage.setResizable(false);
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("FoodOrderUI.fxml"));
 		Scene scene = new Scene(root);
-		primaryStage.setTitle("FoodOrderUI");
+		primaryStage.setTitle("Food Order UI");
 		primaryStage.setScene(scene);
 		primaryStage.show();
     	
@@ -85,58 +85,67 @@ public class FoodOrderListController implements Initializable{
 
     @FXML
     void processDelete(ActionEvent event) throws SQLException {
+        if(foodOrderTable.getSelectionModel().getSelectedIndex()>=0) {
+        	ObservableList<FoodOrder> foodOrderList = foodOrderTable.getSelectionModel().getSelectedItems();
+        	
+        	
+        	Optional<ButtonType> result = alert.getConfirmationAlert("Confirmation Dialog","Are You Sure to Delete Selected Food Order?","This action cannot be undone.");
 
-    	ObservableList<FoodOrder> foodOrderList = foodOrderTable.getSelectionModel().getSelectedItems();
+    		if (result.get() == ButtonType.OK) {
+    		
+    			Boolean flag = false;
+    			
+    			for (FoodOrder foodOrder : foodOrderList) {
+    			
+    				Boolean isDeleteOk =foodOrderDataUtils.deleteFoodOrder(foodOrder.getFoodOrderId());
+    			   	
+    			   	 if (!isDeleteOk) {
+    			   		 
+    			   		flag = true;
+    			   			
+    				}	   	 
+    			   	
+    			}
+    			
+    			if(flag == true) {
+    				
+    				myNoti.getNotification(NotificationType.SUCCESS,"Deleted!","Successfully Deleted!",AnimationType.SLIDE,3000.0);
+    				
+    			}else {
+    				
+    				myNoti.getNotification(NotificationType.ERROR,"Delete Fail","Fail to Delete!",AnimationType.SLIDE,3000.0);
+    				
+    			}
+        	
+    		}
+    		
+    		showTable("select * from hoteldb.foodorder;");
+        }
+        else {
+        	myNoti.getNotification(NotificationType.ERROR,"Delete Fail","You first need to select an item!",AnimationType.SLIDE,3000.0);
+        }
     	
-    	
-    	Optional<ButtonType> result = alert.getConfirmationAlert("Confirmation Dialog","Are You Sure to Delete Selected Food Order?","This action cannot be undone.");
-
-		if (result.get() == ButtonType.OK) {
-		
-			Boolean flag = false;
-			
-			for (FoodOrder foodOrder : foodOrderList) {
-			
-				Boolean isDeleteOk =foodOrderDataUtils.deleteFoodOrder(foodOrder.getFoodOrderId());
-			   	
-			   	 if (!isDeleteOk) {
-			   		 
-			   		flag = true;
-			   			
-				}	   	 
-			   	
-			}
-			
-			if(flag == true) {
-				
-				myNoti.getNotification(NotificationType.SUCCESS,"Deleted!","Successfully Deleted!",AnimationType.SLIDE,3000.0);
-				
-			}else {
-				
-				myNoti.getNotification(NotificationType.ERROR,"Delete Fail","Fail to Delete!",AnimationType.SLIDE,3000.0);
-				
-			}
-    	
-		}
-		
-		showTable("select * from hoteldb.foodorder;");
     }
 
     @FXML
     void processEdit(ActionEvent event) throws IOException {
-
-    	FoodOrder foodOrder = foodOrderTable.getSelectionModel().getSelectedItem();
+        if(foodOrderTable.getSelectionModel().getSelectedIndex()>=0) {
+        	FoodOrder foodOrder = foodOrderTable.getSelectionModel().getSelectedItem();
+        	
+        	FoodOrderHolder holder = FoodOrderHolder.getFoodorderInstance();
+    		holder.setFoodOrder(foodOrder);
+        	
+    		Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        	primaryStage.setResizable(false);
+        	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("FoodOrderListEditUI.fxml"));
+    		Scene scene = new Scene(root);
+    		primaryStage.setTitle("Food Order UI");
+    		primaryStage.setScene(scene);
+    		primaryStage.show();
+        }else {
+        	myNoti.getNotification(NotificationType.ERROR,"Delete Fail","You first need to select an item!",AnimationType.SLIDE,3000.0);
+        }
     	
-    	FoodOrderHolder holder = FoodOrderHolder.getFoodorderInstance();
-		holder.setFoodOrder(foodOrder);
-    	
-		Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-    	primaryStage.setResizable(false);
-    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("FoodOrderListEditUI.fxml"));
-		Scene scene = new Scene(root);
-		primaryStage.setTitle("FoodOrderUI");
-		primaryStage.setScene(scene);
-		primaryStage.show();
 		
     	
     }
@@ -148,7 +157,7 @@ public class FoodOrderListController implements Initializable{
     	primaryStage.setResizable(false);
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("FoodOrderUI.fxml"));
 		Scene scene = new Scene(root);
-		primaryStage.setTitle("FoodOrderUI");
+		primaryStage.setTitle("Food Order UI");
 		primaryStage.setScene(scene);
 		primaryStage.show();
     }

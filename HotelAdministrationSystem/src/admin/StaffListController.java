@@ -80,7 +80,7 @@ public class StaffListController implements Initializable {
     @FXML
     private TableColumn<Staff, String> imageName;
     
-    private Boolean isNewButtonClick = false;
+    
     
     private final MyNotification myNoti = new MyNotification();
 
@@ -101,44 +101,53 @@ public class StaffListController implements Initializable {
 
     @FXML
     void processDelete(ActionEvent event) throws SQLException {
-    	
-    	Staff staff = staffTable.getSelectionModel().getSelectedItem();
-      	 
-    	  Boolean isDeleteOk = staffDataUtils.deleteStaff(staff.getStaffId());
-    	  
-    	  if(!isDeleteOk) {
-    		  myNoti.getNotification(NotificationType.SUCCESS, "Deleted!", "Deleted "+staff.getStaffUserName()+" to DB", AnimationType.SLIDE, 3000.0);
-    		  		
-    		  showTable("select * from staff;");
-    		  
-    		  File imageFile = new File("src/img/staff/"+staff.getStaffImageName());
-    		  if(imageFile.exists()) {
-    			  
-    			  imageFile.delete();
-    		  }
-    	  }
-    	  else {
-    		  myNoti.getNotification(NotificationType.ERROR, " Fail to Deleted!", " Fail to Deleted "+staff.getStaffUserName()+" to DB", AnimationType.SLIDE, 3000.0);
-    		  System.out.println("Fail to Delete" + staff.getStaffUserName());
-    	  }
+    	if(staffTable.getSelectionModel().getSelectedIndex()>=0) {
+    		Staff staff = staffTable.getSelectionModel().getSelectedItem();
+         	 
+      	  Boolean isDeleteOk = staffDataUtils.deleteStaff(staff.getStaffId());
+      	  
+      	  if(!isDeleteOk) {
+      		  myNoti.getNotification(NotificationType.SUCCESS, "Deleted!", "Deleted "+staff.getStaffUserName()+" to DB", AnimationType.SLIDE, 3000.0);
+      		  		
+      		  showTable("select * from staff;");
+      		  
+      		  File imageFile = new File("src/img/staff/"+staff.getStaffImageName());
+      		  if(imageFile.exists()) {
+      			  
+      			  imageFile.delete();
+      		  }
+      	  }
+      	  else {
+      		  myNoti.getNotification(NotificationType.ERROR, " Fail to Deleted!", " Fail to Deleted "+staff.getStaffUserName()+" to DB", AnimationType.SLIDE, 3000.0);
+      		  System.out.println("Fail to Delete" + staff.getStaffUserName());
+      	  }
 
+    	}
+    	else {
+    		 myNoti.getNotification(NotificationType.ERROR, " Fail to Deleted!", "You first need to select an item!", AnimationType.SLIDE, 3000.0);
+    	}
+    
 
     }
 
     @FXML
     void processEdit(ActionEvent event) throws IOException {
-    	
-    	Staff staff = staffTable.getSelectionModel().getSelectedItem();
-    	
-    	StaffHolder holder = StaffHolder.getStaffInstance();
-    	holder.setStaff(staff);
-    	
-    	Stage primaryStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("../admin/StaffUpdateUI.fxml"));
-		Scene scene = new Scene(root);
-		primaryStage.setTitle("Staff Update Section");
-		primaryStage.setScene(scene);
-		primaryStage.show();
+    	if(staffTable.getSelectionModel().getSelectedIndex()>=0) {
+    		Staff staff = staffTable.getSelectionModel().getSelectedItem();
+        	
+        	StaffHolder holder = StaffHolder.getStaffInstance();
+        	holder.setStaff(staff);
+        	
+        	Stage primaryStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("../admin/StaffUpdateUI.fxml"));
+    		Scene scene = new Scene(root);
+    		primaryStage.setTitle("Staff Update Section");
+    		primaryStage.setScene(scene);
+    		primaryStage.show();
+    	}else{
+    		myNoti.getNotification(NotificationType.ERROR, " Fail to Deleted!", "You first need to select an item!", AnimationType.SLIDE, 3000.0);
+    	}
+    
 
     }
     
@@ -168,18 +177,22 @@ public class StaffListController implements Initializable {
 
     @FXML
     void processView(ActionEvent event) throws IOException {
-
-    	Staff staff = staffTable.getSelectionModel().getSelectedItem();
+        if(staffTable.getSelectionModel().getSelectedIndex()>=0) {
+        	Staff staff = staffTable.getSelectionModel().getSelectedItem();
+        	
+        	StaffHolder holder = StaffHolder.getStaffInstance();
+        	holder.setStaff(staff);
+        	
+        	Stage primaryStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("../admin/StaffViewUI.fxml"));
+    		Scene scene = new Scene(root);
+    		primaryStage.setTitle("Staff Profile Section");
+    		primaryStage.setScene(scene);
+    		primaryStage.show();
+        }else {
+     		myNoti.getNotification(NotificationType.ERROR, "Failed", "You must first select an item", AnimationType.SLIDE, 2000.0);
+     	}
     	
-    	StaffHolder holder = StaffHolder.getStaffInstance();
-    	holder.setStaff(staff);
-    	
-    	Stage primaryStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("../admin/StaffViewUI.fxml"));
-		Scene scene = new Scene(root);
-		primaryStage.setTitle("Staff Profile Section");
-		primaryStage.setScene(scene);
-		primaryStage.show();
     	
     }
     
@@ -202,19 +215,19 @@ public class StaffListController implements Initializable {
 			e.printStackTrace();
 		}
 		
-		id.setCellValueFactory(new PropertyValueFactory<>("id"));
-		firstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
-		lastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
-		username.setCellValueFactory(new PropertyValueFactory<>("username"));
-		email.setCellValueFactory(new PropertyValueFactory<>("email"));
-		password.setCellValueFactory(new PropertyValueFactory<>("password"));
-		role.setCellValueFactory(new PropertyValueFactory<>("role"));
-		gender.setCellValueFactory(new PropertyValueFactory<>("gender"));
-		phone.setCellValueFactory(new PropertyValueFactory<>("phone"));
-		address.setCellValueFactory(new PropertyValueFactory<>("address"));
-		status.setCellValueFactory(new PropertyValueFactory<>("status"));
-		dob.setCellValueFactory(new PropertyValueFactory<>("dob"));
-		imageName.setCellValueFactory(new PropertyValueFactory<>("imageName"));
+		id.setCellValueFactory(new PropertyValueFactory<>("staffId"));
+		firstName.setCellValueFactory(new PropertyValueFactory<>("staffFName"));
+		lastName.setCellValueFactory(new PropertyValueFactory<>("staffLName"));
+		username.setCellValueFactory(new PropertyValueFactory<>("staffUserName"));
+		email.setCellValueFactory(new PropertyValueFactory<>("staffEmail"));
+		password.setCellValueFactory(new PropertyValueFactory<>("staffPassword"));
+		role.setCellValueFactory(new PropertyValueFactory<>("staffRole"));
+		gender.setCellValueFactory(new PropertyValueFactory<>("staffGender"));
+		phone.setCellValueFactory(new PropertyValueFactory<>("staffPhNo"));
+		address.setCellValueFactory(new PropertyValueFactory<>("staffAddress"));
+		status.setCellValueFactory(new PropertyValueFactory<>("staffStatus"));
+		dob.setCellValueFactory(new PropertyValueFactory<>("staffDOB"));
+		imageName.setCellValueFactory(new PropertyValueFactory<>("staffImageName"));
 		
 		showTable("select * from staff;");
 		

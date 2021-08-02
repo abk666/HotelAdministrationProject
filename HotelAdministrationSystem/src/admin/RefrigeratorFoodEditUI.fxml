@@ -66,20 +66,20 @@
                <font>
                   <Font size="15.0" />
                </font></JFXTextField>
-            <JFXButton onAction="#processUpdate" prefHeight="45.0" prefWidth="85.0" ripplerFill="#08feff" style="-fx-background-color: #018abb; -fx-background-radius: 10;" text="Update" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <JFXButton onAction="#processUpdate" prefHeight="45.0" prefWidth="100.0" ripplerFill="#08feff" style="-fx-background-color: #018abb; -fx-background-radius: 10;" text="Update" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
                <GridPane.margin>
-                  <Insets left="100.0" />
+                  <Insets left="65.0" />
                </GridPane.margin>
             </JFXButton>
-            <JFXButton onAction="#processCancel" prefHeight="45.0" prefWidth="85.0" ripplerFill="#a7ff08" style="-fx-background-color: #f80909; -fx-background-radius: 10;" text="Cancel" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <JFXButton onAction="#processCancel" prefHeight="45.0" prefWidth="100.0" ripplerFill="#a7ff08" style="-fx-background-color: #f80909; -fx-background-radius: 10;" text="Cancel" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
                <GridPane.margin>
-                  <Insets left="195.0" />
+                  <Insets left="175.0" />
                </GridPane.margin>
             </JFXButton>
          </children>

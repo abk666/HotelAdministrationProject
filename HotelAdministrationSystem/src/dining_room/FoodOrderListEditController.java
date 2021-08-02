@@ -146,6 +146,7 @@ public class FoodOrderListEditController implements Initializable{
     	 primaryStage.hide();
     	 AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("FoodOrderListUI.fxml"));
     	 Scene scene = new Scene(root);
+    	 primaryStage.setTitle("Food Order List");
     	 primaryStage.setScene(scene);
     	 primaryStage.show();
     }
@@ -178,9 +179,9 @@ public class FoodOrderListEditController implements Initializable{
     	
     	Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
     	primaryStage.setResizable(false);
-    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("../main/MainUI.fxml"));
+    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("FoodMenuListUI.fxml"));
 		Scene scene = new Scene(root);
-		primaryStage.setTitle("MainUI");
+		primaryStage.setTitle("Dining Room Main Section");
 		primaryStage.setScene(scene);
 		primaryStage.show();
     	
@@ -197,9 +198,16 @@ public class FoodOrderListEditController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
-		ObservableList<String> foodMenuCategoryList = FXCollections.observableArrayList(
-				"Rice","Curry","Burger","Pizza","Soup","Fried","Salad","Cake","Ice Cream","Fruit","Juice","Cool Drink","Hot Drink","Beer","Wine"
-				);
+		ObservableList<String> foodMenuCategoryList = FXCollections.observableArrayList();
+				try {
+					ObservableList<DiningRoomFood>foodList=diningRoomFoodDataUtils.getAllDiningRoomFood("select * from foodmenu group by foodMenuCategory;");
+				    for (DiningRoomFood food:foodList) {
+				    	foodMenuCategoryList.add(food.getFoodMenuCategory());
+				    }
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 		cobFoodMenuCategory.setItems(foodMenuCategoryList);
 		
 		dpFoodOrderDate.setValue(LocalDate.now());

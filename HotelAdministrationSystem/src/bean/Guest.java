@@ -8,20 +8,20 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Guest {
-	public IntegerProperty guestId;
-	public StringProperty guestName;
-	public StringProperty guestNRC;
-	public IntegerProperty noOfGuests;
-	public StringProperty guestPhNo;
-	public StringProperty guestRoomType;
-	public IntegerProperty guestRoomNo;
-	public DoubleProperty guestRoomPrice;
-	public DoubleProperty foodOrderPrice;
-	public DoubleProperty guestInRoomCost;
-	public StringProperty guestCheckInDate;
-	public StringProperty guestCheckOutDate;
-	public IntegerProperty numberOfDays;
-	public StringProperty guestStatus;
+	private IntegerProperty guestId;
+	private StringProperty guestName;
+	private StringProperty guestNRC;
+	private IntegerProperty noOfGuests;
+	private StringProperty guestPhNo;
+	private StringProperty guestRoomType;
+	private IntegerProperty guestRoomNo;
+	private DoubleProperty guestRoomPrice;
+	private DoubleProperty foodOrderPrice;
+	private DoubleProperty guestInRoomCost;
+	private StringProperty guestCheckInDate;
+	private StringProperty guestCheckOutDate;
+	private IntegerProperty numberOfDays;
+	private StringProperty guestStatus;
 	
 	//For ManagerViewGuestDetails
 	public Double totalPrice;

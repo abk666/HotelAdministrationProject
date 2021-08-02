@@ -10,6 +10,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 
+import bean.BookingStatusHolder;
 import bean.Room;
 //import bean.Guest;
 import javafx.collections.FXCollections;
@@ -76,12 +77,12 @@ public class CheckInController implements Initializable{
     @FXML
     void processSave(ActionEvent event) throws SQLException, IOException {
     	if(validateFields()&& validateDate()) {
-    		
+    	    BookingStatusHolder.setButtonStatus("checkin");
     		FXMLLoader loader=new FXMLLoader(getClass().getResource("CheckInFormUI.fxml"));
         	Parent root=(Parent)loader.load();	
     		CheckInFormController formController=loader.getController();
     		formController.showForm(tfGuestName.getText(),tfGuestNRC.getText(),tfNoOfGuest.getText(), tfGuestPhNo.getText(), cobRoomType.getValue(), 
-    				tfGuestRoomNo.getText(),tfGuestRoomPrice.getText(),dpGuestCheckInDate.getValue().toString(),dpGuestCheckOutDate.getValue().toString(),tfStayDays.getText());
+    				cobRoomNo.getValue().toString(),tfGuestRoomPrice.getText(),dpGuestCheckInDate.getValue().toString(),dpGuestCheckOutDate.getValue().toString(),tfStayDays.getText());
     		Stage registerStage=new Stage();
     		registerStage.setTitle("CheckIn Confirmation Form Section");
     		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
@@ -119,7 +120,7 @@ public class CheckInController implements Initializable{
     	tfNoOfGuest.clear();
     	tfGuestPhNo.clear();
     	cobRoomType.setValue("Type");
-    	tfGuestRoomNo.clear();
+    	cobRoomNo.setValue(null);
     	tfGuestRoomPrice.clear();
     	
     	dpGuestCheckInDate.setValue(LocalDate.now());
@@ -129,7 +130,7 @@ public class CheckInController implements Initializable{
     }
     
     private boolean validateFields() {
-    	if(tfGuestName.getText().isEmpty()|tfGuestNRC.getText().isEmpty()|tfNoOfGuest.getText().isEmpty()|tfGuestPhNo.getText().isEmpty()|cobRoomType.getValue().isEmpty()|tfGuestRoomNo.getText().isEmpty()|tfGuestRoomPrice.getText().isEmpty()|tfStayDays.getText().isEmpty()) {
+    	if(tfGuestName.getText().isEmpty()||tfGuestNRC.getText().isEmpty()||tfNoOfGuest.getText().isEmpty()||tfGuestPhNo.getText().isEmpty()||cobRoomType.getValue().isEmpty()||cobRoomNo.getValue()==null||tfGuestRoomPrice.getText().isEmpty()||tfStayDays.getText().isEmpty()) {
     		alert.getAlert(AlertType.WARNING,"Validate Date Input", null, "Please Fill the blanks completely");
     		return false;
     	}
@@ -164,6 +165,7 @@ public class CheckInController implements Initializable{
 		}
 		cobRoomType.setItems(roomTypeList);
 		cobRoomNo.setDisable(true);
+		dpGuestCheckInDate.setValue(LocalDate.now());
 	}
 	
 	

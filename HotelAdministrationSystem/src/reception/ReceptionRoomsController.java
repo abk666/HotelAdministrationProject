@@ -51,6 +51,13 @@ public class ReceptionRoomsController implements Initializable{
     private Label lblToday;
     
     private final RoomUtils roomDataUtils=new RoomUtils();
+    
+    @FXML
+    void processRefresh(ActionEvent event) {
+    	showTable("select * from room;");
+    	tfSearch.clear();
+    	cobColumn.setValue(null);
+    }
 
     @FXML
     void processSearch(ActionEvent event) {

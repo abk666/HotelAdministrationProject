@@ -39,6 +39,7 @@ import utility.CheckOutUtils;
 import utility.FoodOrderDataUtils;
 import utility.InRoomCostDataUtils;
 import utility.MyNotification;
+import utility.TableAutoIncrementsUtils;
 
 public class CheckOutFormController implements Initializable{
 	 @FXML
@@ -70,6 +71,7 @@ public class CheckOutFormController implements Initializable{
 	    
 	    private final FoodOrderDataUtils foodOrderDataUtils=new FoodOrderDataUtils();
 	    private final InRoomCostDataUtils inRoomCostDataUtils=new InRoomCostDataUtils();
+	    private final TableAutoIncrementsUtils tableAutoIncrementsUtils=new TableAutoIncrementsUtils();
         private Double diningRoomPrice=0.0;
         private Double inRoomCost=0.0;
         private Double totalPrice=0.0;
@@ -94,7 +96,16 @@ public class CheckOutFormController implements Initializable{
 	 			String checkOutGuestPhNo=guest.getGuestPhNo();
 	 			Integer roomNo=guest.getGuestRoomNo();
 	 			String checkOutDate=LocalDate.now().toString();
-	 			
+	 			Integer tempId;
+	 			ObservableList<CheckOut>checkOutList=checkOutUtils.getAllCheckOut("select * from checkout;");
+	 			if(checkOutList.size()==0) {
+	 				tempId=1;
+	 			}else {
+	 				Integer index=checkOutList.size();
+	 				CheckOut tempCheckout=checkOutList.get(index-1);
+	 				tempId=tempCheckout.getCheckOutId();
+	 			}
+	 			tableAutoIncrementsUtils.setAutocrementId("checkout", tempId);
 	 			
 	 			
 	             CheckOut checkOut=new CheckOut(checkOutGuestName, checkOutGuestNRC, checkOutGuestPhNo, roomNo, checkOutDate, this.totalPrice);

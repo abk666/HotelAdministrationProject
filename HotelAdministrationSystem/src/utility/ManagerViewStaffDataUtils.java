@@ -80,7 +80,8 @@ public class ManagerViewStaffDataUtils {
 		ObservableList<String> columnLabelList = FXCollections.observableArrayList();
 		connection = dbConnection.getConnection();
 		statement = connection.createStatement();
-		resultSet = statement.executeQuery("select staffId,staffUserName,staffEmail,staffPhNo,staffAddress,staffDOB,staffGender,staffRole from hoteldb.staff;");
+		resultSet = statement.executeQuery("select * from hoteldb.staff;");
+		//staffId as Id,staffUserName as Name,staffEmail as Email,staffPhNo as Phone,staffAddress as Address,staffDOB as DateOfBirth,staffGender as Gender,staffRole as Role,staffImageName as ImageName
 		
 		ResultSetMetaData metaData = resultSet.getMetaData();
 		

@@ -42,11 +42,11 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" SplitPane.resizableWithParent="false">
                <children>
-                  <HBox alignment="CENTER" prefHeight="117.0" prefWidth="798.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <HBox alignment="CENTER" prefHeight="117.0" prefWidth="798.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Label fx:id="lblToday" prefHeight="36.0" prefWidth="118.0" text="Today" textFill="#bf12a5">
+                        <Label fx:id="lblToday" prefHeight="36.0" prefWidth="97.0" text="Today" textFill="#bf12a5">
                            <HBox.margin>
                               <Insets left="50.0" />
                            </HBox.margin>
@@ -54,8 +54,9 @@
                               <Font size="15.0" />
                            </font>
                         </Label>
-                        <Pane prefHeight="100.0" prefWidth="98.0" HBox.hgrow="ALWAYS" />
-                        <JFXComboBox fx:id="cobColumn" prefHeight="26.0" prefWidth="131.0">
+                        <Pane prefHeight="117.0" prefWidth="0.0" HBox.hgrow="ALWAYS" />
+                        <JFXButton onAction="#processRefresh" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: #3d1490; -fx-background-radius: 20;" text="Refresh" textFill="WHITE" />
+                        <JFXComboBox fx:id="cobColumn" prefHeight="31.0" prefWidth="176.0">
                            <HBox.margin>
                               <Insets />
                            </HBox.margin>
@@ -68,7 +69,7 @@
                               <Insets />
                            </HBox.margin>
                         </JFXTextField>
-                        <JFXButton onAction="#processSearch" prefHeight="50.0" prefWidth="105.0" style="-fx-background-radius: 20; -fx-background-color: #3d1490;" text="Search" textFill="WHITE">
+                        <JFXButton onAction="#processSearch" prefHeight="50.0" prefWidth="100.0" style="-fx-background-radius: 20; -fx-background-color: #3d1490;" text="Search" textFill="WHITE">
                            <font>
                               <Font size="13.0" />
                            </font></JFXButton>

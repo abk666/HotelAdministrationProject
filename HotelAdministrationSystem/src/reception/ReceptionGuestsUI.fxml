@@ -23,7 +23,7 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <TableView fx:id="guestTable" layoutY="43.0" prefHeight="447.0" prefWidth="800.0" AnchorPane.bottomAnchor="-3.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="43.0">
+                  <TableView fx:id="guestTable" layoutY="154.0" prefHeight="353.0" prefWidth="798.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="60.0">
                      <columns>
                         <TableColumn fx:id="guestId" prefWidth="46.0" text="GuestID" />
                         <TableColumn fx:id="guestName" prefWidth="34.0" text="GuestName" />
@@ -48,9 +48,9 @@
                   </TableView>
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" SplitPane.resizableWithParent="false">
                <children>
-                  <HBox alignment="CENTER" layoutY="20.0" prefHeight="64.0" prefWidth="800.0" spacing="20.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
+                  <HBox alignment="CENTER" layoutY="20.0" prefHeight="46.0" prefWidth="241.0" spacing="20.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="20.0">
                      <children>
                         <JFXButton onAction="#processView" prefHeight="50.0" prefWidth="80.0" style="-fx-background-color: #3d1490;" text="View" textFill="WHITE">
                            <font>
@@ -62,7 +62,11 @@
                               <Font size="13.0" />
                            </font>
                         </JFXButton>
-                        <JFXComboBox fx:id="cobColumn" prefHeight="26.0" prefWidth="99.0" promptText="Column" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="495.0" layoutY="-14.0" prefHeight="46.0" prefWidth="507.0" spacing="20.0" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="20.0">
+                     <children>
+                        <JFXComboBox fx:id="cobColumn" prefHeight="31.0" prefWidth="211.0" promptText="Column" />
                         <JFXTextField fx:id="tfSearch" />
                         <JFXButton onAction="#processSearch" prefHeight="50.0" prefWidth="80.0" style="-fx-background-color: #3d1490; -fx-background-radius: 20;" text="Search" textFill="WHITE">
                            <font>

@@ -11,6 +11,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 
+import bean.Import;
 import bean.ImportStatusHolder;
 import bean.ItemUsage;
 import bean.Stock;
@@ -35,6 +36,7 @@ import tray.notification.NotificationType;
 import utility.ItemUsageDataUtils;
 import utility.MyNotification;
 import utility.StockDataUtils;
+import utility.TableAutoIncrementsUtils;
 
 
 
@@ -75,11 +77,13 @@ public class ItemUsageController implements Initializable{
 	    private Integer itemId;
 	    private Integer oldItemUsageQty;
 	    private String oldItemName;
+	    private final TableAutoIncrementsUtils autoIncrementsUtils=new TableAutoIncrementsUtils();
 	   
 	    @FXML
 	    void processBack(ActionEvent event) throws IOException {
 	    	Optional<ButtonType> result=noti.getConfirmationAlert("Comfimation Dialog", "Comfirmation", "Do you really want to Exit?");
 			if(result.get()==ButtonType.OK) {
+				ImportStatusHolder.setButtonStatus("ExistItemUsage");
 				Stage primaryStage=(Stage)((Node)event.getSource()).getScene().getWindow();
 		    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("AccountantMainUI.fxml"));
 				Scene scene = new Scene(root);
@@ -97,11 +101,11 @@ public class ItemUsageController implements Initializable{
 	    		 ItemUsage itemUsage=itemUsageTable.getSelectionModel().getSelectedItem();
 	  	       boolean isDeleteOk=itemUsageDataUtils.deleteItemUsage(itemUsage.getItemUsageId());
 	  	       if(!isDeleteOk) {
-	  	    	   System.out.println("Successfully deleted!");
+	  	    	   noti.getNotification(NotificationType.SUCCESS, "Success", "Successfully deleted", AnimationType.SLIDE, 2000.0);
 	  	    	   showTable("select * from itemusage;");
 	  	       } 
 	    	 }else {
-		    	  noti.getNotification(NotificationType.ERROR, "Fail!", "You first need to select an item", AnimationType.SLIDE, 2000.0);
+		    	  noti.getNotification(NotificationType.WARNING, "Fail!", "You first need to select an item", AnimationType.SLIDE, 2000.0);
 		      }
 	       
 	    }
@@ -115,6 +119,7 @@ public class ItemUsageController implements Initializable{
 				Scene scene = new Scene(root);
 				Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
 				primaryStage.setResizable(false);
+				primaryStage.setTitle("Hotel Administration Login");
 				primaryStage.getIcons().add(icon);
 				primaryStage.setScene(scene);
 				primaryStage.show();
@@ -123,7 +128,18 @@ public class ItemUsageController implements Initializable{
 	    }
 	    
 	    @FXML
-	    void processNew(MouseEvent event) {
+	    void processNew(MouseEvent event) throws SQLException {
+	    	Integer tempId;
+	    	ObservableList<ItemUsage>usageList=itemUsageDataUtils.getAllItemUsage("select * from itemusage;");
+	    	if(usageList.size()==0) {
+	    		tempId=1;
+	    	}else {
+	    		Integer index=usageList.size();
+	        	ItemUsage tempItemUsage=usageList.get(index-1);
+	        	tempId=tempItemUsage.getItemUsageId();
+	    	}
+	    	System.out.println(tempId);
+	    	autoIncrementsUtils.setAutocrementId("itemUsage",tempId);
 	    	 enableAllFields();
 	         isSaveButtonClicked=true;
 	         dpDate.setValue(LocalDate.now());
@@ -162,7 +178,7 @@ public class ItemUsageController implements Initializable{
 	             		  noti.getNotification(NotificationType.ERROR, "Failed!", "Fail to save!", AnimationType.SLIDE, 2000.0);
 	             	   }
 	       		 }else {
-	       			noti.getNotification(NotificationType.ERROR, "Failed!", "Insufficient Stock!", AnimationType.SLIDE, 2000.0);
+	       			noti.getNotification(NotificationType.WARNING, "Failed!", "Insufficient Stock!", AnimationType.SLIDE, 2000.0);
 	                }
 	       		 
 	           	  
@@ -193,7 +209,7 @@ public class ItemUsageController implements Initializable{
 	               		noti.getNotification(NotificationType.ERROR, "Failed!", "Fail to Update!", AnimationType.SLIDE, 2000.0);
 	               	   }
 	               }else {
-	            	   noti.getNotification(NotificationType.ERROR, "Failed!", "Insufficient Stock!", AnimationType.SLIDE, 2000.0);
+	            	   noti.getNotification(NotificationType.WARNING, "Failed!", "Insufficient Stock!", AnimationType.SLIDE, 2000.0);
 	               }
 	           	   
 	              }
@@ -209,7 +225,7 @@ public class ItemUsageController implements Initializable{
 	    	  String query=tfSearch.getText().trim();
 	    	  showTable("select * from itemusage where "+column+" = '"+query+"';");
 	      }else {
-	    	  noti.getNotification(NotificationType.ERROR, "Failed!", "Fields Must no be null!", AnimationType.SLIDE, 2000.0);
+	    	  noti.getNotification(NotificationType.WARNING, "Failed!", "Fields Must no be null!", AnimationType.SLIDE, 2000.0);
 	      }
 	    }
 
@@ -228,7 +244,7 @@ public class ItemUsageController implements Initializable{
 		          this.oldItemUsageQty=itemUsage.getItemQty();
 		          this.oldItemName=itemUsage.getItemName();
 	    	}else {
-		    	  noti.getNotification(NotificationType.ERROR, "Fail!", "You first need to select an item", AnimationType.SLIDE, 2000.0);
+		    	  noti.getNotification(NotificationType.WARNING, "Fail!", "You first need to select an item", AnimationType.SLIDE, 2000.0);
 		      }
 	    	
 	          
@@ -285,7 +301,7 @@ public void ClearAll() {
 		public void initialize(URL arg0, ResourceBundle arg1) {
 			try {
 				ObservableList<String> itemNameList=FXCollections.observableArrayList();
-				ObservableList<Stock>stockItemList=stockDataUtils.getAllStock("select * from stock;");
+				ObservableList<Stock>stockItemList=stockDataUtils.getAllStock("select * from stock where itemStock>0;");
 				for(Stock stockItem:stockItemList) {
 					itemNameList.add(stockItem.getItemName());
 					}

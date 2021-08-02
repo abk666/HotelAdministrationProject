@@ -131,7 +131,7 @@ public class DiningRoomFoodEditController implements Initializable{
         	Double foodMenuPrice = Double.parseDouble(tfPrice.getText());
         	
         	String imageName = "";
-        	if (this.foodMenuImageName != null || !this.foodMenuImageName.isEmpty()) {
+        	if (this.foodMenuImageName != null) {
         		
     	    	int indexDot = this.foodMenuImageName.indexOf(".");
     			imageName = this.foodMenuImageName.substring(0,indexDot)+".jpg";
@@ -216,6 +216,7 @@ public class DiningRoomFoodEditController implements Initializable{
 		cobFoodCategory.setValue(food.getFoodMenuCategory());
 		tfPrice.setText(food.getFoodMenuPrice().toString());
 		this.id = food.getFoodMenuId();
+		this.oldImageName=food.getFoodMenuImage();
 		
 	}
     	

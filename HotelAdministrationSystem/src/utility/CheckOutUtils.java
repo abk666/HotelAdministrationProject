@@ -49,6 +49,25 @@ public class CheckOutUtils {
 		connection.close();
 		return guestList;
 	}
+	public ObservableList<CheckOut>getAllCheckOut(String sql) throws SQLException{
+		ObservableList<CheckOut>checkout=FXCollections.observableArrayList();
+		connection=dbConnection.getConnection();
+		statement=connection.createStatement();
+		resultSet=statement.executeQuery(sql);
+		while(resultSet.next()) {
+			checkout.add(new CheckOut(resultSet.getInt("checkOutId") ,
+					resultSet.getString("checkOutGuestName") ,
+					resultSet.getString("checkOutGuestNRC") ,
+					resultSet.getString("checkOutGuestPhNo") ,
+					resultSet.getInt("roomNo") ,
+					resultSet.getString("checkOutDate") ,
+					resultSet.getDouble("totalPrice") ));
+		}
+		connection.close();
+		return checkout;
+		
+		
+	}
 	public void updateNumOfDays(LocalDate todayDate,LocalDate checkInDate,Integer guestId) throws SQLException {
 		long dayDifference=ChronoUnit.DAYS.between( checkInDate,todayDate);
 		connection = dbConnection.getConnection();
@@ -76,6 +95,12 @@ public class CheckOutUtils {
 		
 		
 	}
+	public void DeleteCheckOut(Integer checkOutId) throws SQLException {
+		connection = dbConnection.getConnection();
+		statement=connection.createStatement();
+		statement.execute("delete from checkout where checkOutId= '"+checkOutId+"';");
+		connection.close();
+		}
 	public void DeleteFoodOrderList(Integer foodOrderId) throws SQLException {
 		connection = dbConnection.getConnection();
 		statement=connection.createStatement();

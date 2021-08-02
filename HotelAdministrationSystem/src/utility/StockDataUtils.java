@@ -51,9 +51,15 @@ public class StockDataUtils {
 				StockDataUtils stockDataUtils=new StockDataUtils();
 				Stock stock=stockDataUtils.getAllStock("select * from stock where itemName = '"+itemUsage.getItemName()+"';").get(0);
 				connection=dbConnection.getConnection();
+				Integer totalStock;
 				Integer newStock=stock.getItemStock()-itemUsage.getItemQty();
+				if(newStock<0) {
+					totalStock=0;
+				}else {
+					totalStock=newStock;
+				}
 				statement=connection.createStatement();
-				statement.execute("update `stock` set `itemStock` = '"+newStock+"' where (`stockId` = '"+stock.getStockId()+"');");
+				statement.execute("update `stock` set `itemStock` = '"+totalStock+"' where (`stockId` = '"+stock.getStockId()+"');");
 			}
 //		}
 	
@@ -64,24 +70,30 @@ public class StockDataUtils {
 		}
 	public boolean reduceStock(Integer stockQty,Integer itemQty,Integer stockId) throws SQLException {
 		Integer newStock=stockQty-itemQty;
+		Integer itemStock=0;
+		if(newStock<0) {
+			itemStock=0;
+		}else {
+			itemStock=newStock;
+		}
 		connection=dbConnection.getConnection();
 		statement=connection.createStatement();
-		boolean isReducedOk=statement.execute("update `stock` set `itemStock` = '"+newStock+"' where (`stockId` = '"+stockId+"');");
+		boolean isReducedOk=statement.execute("update `stock` set `itemStock` = '"+itemStock+"' where (`stockId` = '"+stockId+"');");
 		
 		connection.close();
 		return isReducedOk;
 		
 	}
-	public void reduceExpiredItem() throws SQLException {
-		connection=dbConnection.getConnection();
-
-		ObservableList<Import>importList=importDataUtils.getTotalQty("select importItemName,sum(importItemQty) as TOTAL_QUANTITY from import where itemStatus='Expired' group by importItemName ;");
-		for(Import importItem:importList) {
-			statement=connection.createStatement();
-          statement.executeUpdate("update `stock` set `itemStock` = '0' where (`itemName` = '"+importItem.getImportItemName()+"');");
-		  connection.close();
-		  
-		}
-
-	}
+////	public void reduceExpiredItem() throws SQLException {
+////		connection=dbConnection.getConnection();
+////
+////		ObservableList<Import>importList=importDataUtils.getTotalQty("select importItemName,sum(importItemQty) as TOTAL_QUANTITY from import where itemStatus='Expired' group by importItemName ;");
+////		for(Import importItem:importList) {
+////			statement=connection.createStatement();
+////          statement.executeUpdate("update `stock` set `itemStock` = '0' where (`itemName` = '"+importItem.getImportItemName()+"');");
+////		  connection.close();
+////		  
+////		}
+//
+//	}
 }

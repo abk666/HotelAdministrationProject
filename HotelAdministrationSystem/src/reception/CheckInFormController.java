@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 import java.util.ResourceBundle;
 
+import bean.BookingStatusHolder;
 import bean.Guest;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,6 +19,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import tray.animations.AnimationType;
 import tray.notification.NotificationType;
+import utility.BookingDataUtils;
 import utility.GuestDataUtils;
 import utility.MyNotification;
 
@@ -56,6 +58,7 @@ public class CheckInFormController implements Initializable{
     private final GuestDataUtils guestDataUtils=new GuestDataUtils();
     
     private final MyNotification noti=new MyNotification();
+    private final BookingDataUtils bookingDataUtils=new BookingDataUtils();
 
     @FXML
     void processCancel(ActionEvent event) throws IOException {
@@ -72,7 +75,7 @@ public class CheckInFormController implements Initializable{
 
     @FXML
     void processConfirm(ActionEvent event) throws SQLException {
-
+        
     	String guestName = lblGuestName.getText().trim();
     	String guestNRC = lblGuestNRC.getText().trim();
     	int noOfGuests= Integer.parseInt(lblNoOfGuest.getText());
@@ -106,7 +109,12 @@ public class CheckInFormController implements Initializable{
         	
         	 noti.getNotification(NotificationType.SUCCESS, "Success!", "Successfully Checked In!", AnimationType.SLIDE, 2000.0);
 			System.out.println("Successfully Saved "+guestName+" to DB");
-			
+			if(BookingStatusHolder.getButtonStatus()=="booking") {
+				boolean isDeleteOk=bookingDataUtils.deleteBooking(BookingStatusHolder.getBookingId());
+				if(!isDeleteOk) {
+					System.out.println("Successfully Deleted");
+				}
+			}
 			
 		
     	}else {

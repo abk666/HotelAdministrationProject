@@ -8,17 +8,17 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Booking {
-	public IntegerProperty bookingId;
-	public StringProperty guestName;
-	public StringProperty guestPhNo;
-	public StringProperty roomType;
-	public IntegerProperty roomNo;
-	public DoubleProperty roomPrice;
-	public IntegerProperty noOfGuest;
-	public StringProperty bookedDate;
-	public StringProperty checkInDate;
-	public IntegerProperty numberOfDays;
-	public StringProperty checkOutDate;
+	private IntegerProperty bookingId;
+	private StringProperty guestName;
+	private StringProperty guestPhNo;
+	private StringProperty roomType;
+	private IntegerProperty roomNo;
+	private DoubleProperty roomPrice;
+	private IntegerProperty noOfGuest;
+	private StringProperty bookedDate;
+	private StringProperty checkInDate;
+	private IntegerProperty numberOfDays;
+	private StringProperty checkOutDate;
 	public Booking(Integer bookingId, String guestName, String guestPhNo, String roomType, Integer roomNo,
 			Double roomPrice, Integer noOfGuest, String bookedDate, String checkInDate, Integer numberOfDays,
 			String checkOutDate) {

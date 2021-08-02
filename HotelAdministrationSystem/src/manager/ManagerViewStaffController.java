@@ -92,19 +92,27 @@ public class ManagerViewStaffController implements Initializable {
     @FXML
     void processFired(MouseEvent event) throws SQLException {
     	
-    	ObservableList<Staff> staffList = staffTable.getSelectionModel().getSelectedItems();
     	
-    	Optional<ButtonType> result = alert.getConfirmationAlert("Confirmation Dialog","Are You Sure to Delete Selected Staff?","This action cannot be undone.");
+    	if(staffTable.getSelectionModel().getSelectedIndex()<0) {
+    		myNoti.getNotification(NotificationType.WARNING,"Required Data!","Please Select The Data You Want Firstly.",AnimationType.SLIDE,3000.0);
+    	}
+    	else{
+    		ObservableList<Staff> staffList = staffTable.getSelectionModel().getSelectedItems();
+    		Optional<ButtonType> result = alert.getConfirmationAlert("Confirmation Dialog","Are You Sure to Delete Selected Staff?","This action cannot be undone.");
+    	
 
 		if (result.get() == ButtonType.OK) {
+			
+			Boolean flag = false;
 		
 			for (Staff staff : staffList) {
-			
+				
 				Boolean isDeleteOk = staffDataUtils.deleteFlaskStaff(staff.getStaffId());
 			   	
 			   	 if (!isDeleteOk) {
-					myNoti.getNotification(NotificationType.SUCCESS,"Deleted!","Successfully Deleted!",AnimationType.SLIDE,3000.0);
-				
+			   		 
+			   		flag = true;
+			   	
 					File imageFile = new File("src/img/"+staff.getStaffImageName());
 					
 					if (imageFile.exists()) {
@@ -112,18 +120,25 @@ public class ManagerViewStaffController implements Initializable {
 					}
 						
 						
-				}else {
-					myNoti.getNotification(NotificationType.ERROR,"Delete Fail","Fail to Delete!",AnimationType.SLIDE,3000.0);
-						//System.out.println("Fail To Delete "+diningRoomFood.getFoodMenuName());
 				}
 			   	 
+			}
+			
+			if(flag == true) {
+				
+				myNoti.getNotification(NotificationType.SUCCESS,"Deleted!","Successfully Deleted!",AnimationType.SLIDE,3000.0);
+				
+			}else {
+				
+				myNoti.getNotification(NotificationType.ERROR,"Delete Fail","Fail to Delete!",AnimationType.SLIDE,3000.0);
+				
 			}
 			
 		}
 		
 		showTable("select * from hoteldb.staff where staffStatus = 'Active';");
- 	
-    }
+    	}
+ }
 
     @FXML
     void processRefresh(MouseEvent event) {
@@ -163,18 +178,26 @@ public class ManagerViewStaffController implements Initializable {
     void processView(MouseEvent event) throws IOException {
 
     	Staff staff = staffTable.getSelectionModel().getSelectedItem();
-    	
-    	StaffHolder holder = StaffHolder.getStaffInstance();
-    	holder.setStaff(staff);
-    	
-    	Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-    	primaryStage.setResizable(false);
-    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("ManagerViewStaffProfileUI.fxml"));
-		Scene scene = new Scene(root);
-		primaryStage.setTitle("ManagerViewStaffProfileUI");
-		primaryStage.setScene(scene);
-		primaryStage.show();
-		
+
+    	if(staff == null) {
+    		
+    		myNoti.getNotification(NotificationType.WARNING,"Required Data!","Please Select The Data You Want Firstly.",AnimationType.SLIDE,3000.0);
+    		
+    	}else {
+    		
+    		StaffHolder holder = StaffHolder.getStaffInstance();
+        	holder.setStaff(staff);
+        	
+        	Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        	primaryStage.setResizable(false);
+        	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("ManagerViewStaffProfileUI.fxml"));
+    		Scene scene = new Scene(root);
+    		primaryStage.setTitle("ManagerViewStaffProfileUI");
+    		primaryStage.setScene(scene);
+    		primaryStage.show();
+    		
+    	}
+    		
     }
 
 	@Override

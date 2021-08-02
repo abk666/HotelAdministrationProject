@@ -107,7 +107,7 @@ public class CheckOutController implements Initializable{
 				primaryStage.setScene(scene);
 				primaryStage.show();
 	    	}else {
-		    	  noti.getNotification(NotificationType.ERROR, "Fail!", "You first need to select an item", AnimationType.SLIDE, 2000.0);
+		    	  noti.getNotification(NotificationType.WARNING, "Fail!", "You first need to select an item", AnimationType.SLIDE, 2000.0);
 		      }
 	    	
 	    }
@@ -118,7 +118,7 @@ public class CheckOutController implements Initializable{
         	  if(cobRoomNo.getValue()!=null) {
         		  showTable("select * from guest where guestRoomNo = '"+cobRoomNo.getValue()+"'");
         	  }else {
-        		  noti.getNotification(NotificationType.ERROR, "Fail!", "Fail to Search,Fields must not be null.", AnimationType.SLIDE, 2000.0);
+        		  noti.getNotification(NotificationType.WARNING, "Fail!", "Fail to Search,Fields must not be null.", AnimationType.SLIDE, 2000.0);
         	  }
         	  
         	  
@@ -127,7 +127,7 @@ public class CheckOutController implements Initializable{
         	  if(!tfName.getText().isEmpty()) {
         		  showTable("select * from guest where guestName = '"+tfName.getText().trim()+"'");
         	  }else {
-        		  noti.getNotification(NotificationType.ERROR, "Fail!", "Fail to Search,Fields must not be null.", AnimationType.SLIDE, 2000.0);
+        		  noti.getNotification(NotificationType.WARNING, "Fail!", "Fail to Search,Fields must not be null.", AnimationType.SLIDE, 2000.0);
         	  }
         	 
           }
@@ -171,7 +171,7 @@ public class CheckOutController implements Initializable{
 				primaryStage.setScene(scene);
 				primaryStage.show();
 	    	}else {
-		    	  noti.getNotification(NotificationType.ERROR, "Fail!", "You first need to select an item", AnimationType.SLIDE, 2000.0);
+		    	  noti.getNotification(NotificationType.WARNING, "Fail!", "You first need to select an item", AnimationType.SLIDE, 2000.0);
 		      }
 	    	
 	    }
@@ -184,6 +184,7 @@ public class CheckOutController implements Initializable{
 			Scene scene = new Scene(root);
 			Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
 			primaryStage.setResizable(false);
+			primaryStage.setTitle("Hotel Administration Login");
 			primaryStage.getIcons().add(icon);
 			primaryStage.setScene(scene);
 			primaryStage.show();

@@ -14,6 +14,7 @@ import com.jfoenix.controls.JFXTextField;
 
 import bean.DiningRoomFood;
 import bean.FoodOrder;
+import bean.Room;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -33,6 +34,7 @@ import tray.notification.NotificationType;
 import utility.DiningRoomFoodDataUtils;
 import utility.FoodOrderDataUtils;
 import utility.MyNotification;
+import utility.RoomUtils;
 
 public class FoodOrderController implements Initializable{
 
@@ -52,7 +54,7 @@ public class FoodOrderController implements Initializable{
     private JFXTextField tfFoodOrderQty;
 
     @FXML
-    private JFXTextField tfGuestRoomNo;
+    private JFXComboBox<Integer> cobRoomNo;
 
     @FXML
     private JFXDatePicker dpFoodOrderDate;
@@ -68,6 +70,7 @@ public class FoodOrderController implements Initializable{
     private final FoodOrderDataUtils foodOrderDataUtils = new FoodOrderDataUtils();
     
     private final MyNotification myNoti = new MyNotification();
+    private final RoomUtils roomDataUtils=new RoomUtils();
     
     @FXML
     void processCancel(ActionEvent event) {
@@ -76,7 +79,7 @@ public class FoodOrderController implements Initializable{
     	tfFoodOrderPrice.clear();
     	tfFoodOrderQty.clear();
     	dpFoodOrderDate.setValue(LocalDate.now());
-    	tfGuestRoomNo.clear();
+    	cobRoomNo.setValue(null);
     }
 
     @FXML
@@ -85,7 +88,7 @@ public class FoodOrderController implements Initializable{
     	if(tfFoodOrderName.getText() == null || tfFoodOrderName.getText().length() == 0 || 
     			tfFoodOrderPrice.getText() == null || tfFoodOrderPrice.getText().length() == 0 ||
     			tfFoodOrderQty.getText() == null || tfFoodOrderQty.getText().length() == 0 ||
-    			tfGuestRoomNo.getText() == null || tfGuestRoomNo.getText().length() == 0 ||
+    			cobRoomNo.getValue() == null || 
     			dpFoodOrderDate.getValue() == null) {
     		
     		
@@ -103,7 +106,7 @@ public class FoodOrderController implements Initializable{
         	Double totalPrice = price * qty;
         	
         	String foodOrderDate = dpFoodOrderDate.getValue().toString();
-        	Integer guestRoomNo = Integer.parseInt(tfGuestRoomNo.getText());
+        	Integer guestRoomNo = cobRoomNo.getValue();
        
     		FoodOrder foodOrder =  new FoodOrder(foodOrderName, price, foodOrderDate, qty, guestRoomNo,totalPrice);
     		Boolean isSaveOk = foodOrderDataUtils.saveFoodOrder(foodOrder);
@@ -129,7 +132,7 @@ public class FoodOrderController implements Initializable{
     	 primaryStage.hide();
     	 AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("FoodOrderListUI.fxml"));
     	 Scene scene = new Scene(root);
-    	 primaryStage.setTitle("FoodOrderListUI");
+    	 primaryStage.setTitle("Food Order List UI");
     	 primaryStage.setScene(scene);
     	 primaryStage.show();
     }
@@ -164,7 +167,7 @@ public class FoodOrderController implements Initializable{
     	primaryStage.setResizable(false);
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("../dining_room/FoodMenuListUI.fxml"));
 		Scene scene = new Scene(root);
-		primaryStage.setTitle("MainUI");
+		primaryStage.setTitle("DiningRoom Main Section");
 		primaryStage.setScene(scene);
 		primaryStage.show();
     	
@@ -181,11 +184,29 @@ public class FoodOrderController implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
-		ObservableList<String> foodMenuCategoryList = FXCollections.observableArrayList(
-				"Rice","Curry","Burger","Pizza","Soup","Fried","Salad","Cake","Ice Cream","Fruit","Juice","Cool Drink","Hot Drink","Beer","Wine","Purified Water","Hotpot","Hotdog"
-				);
+		ObservableList<String> foodMenuCategoryList = FXCollections.observableArrayList();
+				try {
+					ObservableList<DiningRoomFood>foodList=diningRoomFoodDataUtils.getAllDiningRoomFood("select * from foodmenu group by foodMenuCategory;");
+				    for (DiningRoomFood food:foodList) {
+				    	foodMenuCategoryList.add(food.getFoodMenuCategory());
+				    }
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 		cobFoodMenuCategory.setItems(foodMenuCategoryList);
-	
+		ObservableList<Integer>roomNo=FXCollections.observableArrayList();
+		try {
+			ObservableList<Room>roomList=roomDataUtils.getAllRoom("select * from room where roomStatus= 'CheckIn'");
+		
+			for(Room room:roomList) {
+				roomNo.add(room.getRoomNumber());
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    cobRoomNo.setItems(roomNo);
 		dpFoodOrderDate.setValue(LocalDate.now());
 		foodMenuName.setCellValueFactory(new PropertyValueFactory<>("foodMenuName"));
 		foodMenuPrice.setCellValueFactory(new PropertyValueFactory<>("foodMenuPrice"));

@@ -3,6 +3,7 @@ package admin;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXComboBox;
@@ -18,6 +19,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -25,6 +27,9 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import tray.animations.AnimationType;
+import tray.notification.NotificationType;
+import utility.MyNotification;
 import utility.RoomUtils;
 
 public class AdminRoomController implements Initializable{
@@ -66,6 +71,7 @@ public class AdminRoomController implements Initializable{
     private TableColumn<Room, String> roomStatus;
     
     private final RoomUtils roomUtils = new RoomUtils();
+    private final MyNotification noti=new MyNotification();
     
     private Boolean isNewButtonClick = false ;
     
@@ -78,6 +84,7 @@ public class AdminRoomController implements Initializable{
     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("../main/LoginUI.fxml"));
 		Scene scene = new Scene(root);
 		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
+		primaryStage.setTitle("Hotel Administration Login");
 		primaryStage.getIcons().add(icon);
 		primaryStage.setScene(scene);
 		
@@ -93,17 +100,25 @@ public class AdminRoomController implements Initializable{
 
     @FXML
     void processDelete(ActionEvent event) throws SQLException {
-
-    	Room room = adminRoomTable.getSelectionModel().getSelectedItem();
-    	
-    	Boolean isDeleteOk = roomUtils.deleteRoom(room.getRoomId());
-    	
-    	if (!isDeleteOk) {
-    		System.out.println("Deleted"+room.getRoomNumber());
-    		showTable("select * from room;");
-    	}else {
-    		System.out.println("Fail to Delete"+room.getRoomNumber());
+    	Optional<ButtonType> result=noti.getConfirmationAlert("Comfirmation", "Are you sure?", "Do you really want to delete?");
+    	if(result.get()==ButtonType.OK) {
+    		 if(adminRoomTable.getSelectionModel().getSelectedIndex()>=0) {
+     			Room room = adminRoomTable.getSelectionModel().getSelectedItem();
+     	    	
+     	    	Boolean isDeleteOk = roomUtils.deleteRoom(room.getRoomId());
+     	    	
+     	    	if (!isDeleteOk) {
+     	    		System.out.println("Deleted"+room.getRoomNumber());
+     	    		showTable("select * from room;");
+     	    	}else {
+     	    		System.out.println("Fail to Delete"+room.getRoomNumber());
+     	    	}
+     	 }else {
+          	noti.getNotification(NotificationType.ERROR, "Failed", "You must first select an item", AnimationType.SLIDE, 2000.0);
+          }
     	}
+    	
+    
     }
     
 
@@ -116,19 +131,23 @@ public class AdminRoomController implements Initializable{
 
     @FXML
     void processEdit(ActionEvent event) {
-
-    	isNewButtonClick = false;
-    	
-    	enableAllField();
-    	
-    	Room room = adminRoomTable.getSelectionModel().getSelectedItem();
-    	
-    	tfroomNumber.setText(room.getRoomNumber().toString());
-    	cobroomType.setValue(room.getRoomType());
-    	tfroomPrice.setText(room.getRoomPrice().toString());
-    	cobroomStatus.setValue(room.getRoomStatus());
-    	
-    	this.id = room.getRoomId();
+        if(adminRoomTable.getSelectionModel().getSelectedIndex()>=0) {
+        	isNewButtonClick = false;
+        	
+        	enableAllField();
+        	
+        	Room room = adminRoomTable.getSelectionModel().getSelectedItem();
+        	
+        	tfroomNumber.setText(room.getRoomNumber().toString());
+        	cobroomType.setValue(room.getRoomType());
+        	tfroomPrice.setText(room.getRoomPrice().toString());
+        	cobroomStatus.setValue(room.getRoomStatus());
+        	
+        	this.id = room.getRoomId();
+        }else {
+        	noti.getNotification(NotificationType.ERROR, "Failed", "You must first select an item", AnimationType.SLIDE, 2000.0);
+        }
+    
     }
 
     @FXML
@@ -159,42 +178,64 @@ public class AdminRoomController implements Initializable{
     	cobroomType.setValue("");
     	cobroomStatus.setValue("");
     }
+    public boolean isDouble(String num) {
+    	   try {
+    		   Double.parseDouble(num);
+    		   return true;
+    	} catch (Exception e) {
+    		
+    	}return false;
+    	    }
+    	    public boolean isInteger(String num) {
+    	   try {
+    		   Integer.parseInt(num);
+    		   return true;
+    	       } catch (Exception e) {
+    		
+    	       }return false;
+    	  }
+
 
     @FXML
     void processSave(ActionEvent event) throws SQLException {
-
-      	String roomType = cobroomType.getValue();
-    	Integer roomNumber = Integer.parseInt(tfroomNumber.getText().trim());
-    	Double roomPrice = Double.parseDouble(tfroomPrice.getText().trim());
-    	String roomStatus = cobroomStatus.getValue();
-    	
-    	
-    	if (isNewButtonClick) {
-        	Room room = new Room(roomType, roomNumber, roomPrice, roomStatus);
+        if(isDouble(tfroomPrice.getText().trim())&&isInteger(tfroomNumber.getText().trim())&& cobroomStatus.getValue()!=null && cobroomType.getValue()!=null && !tfroomNumber.getText().trim().isEmpty() && !tfroomPrice.getText().trim().isEmpty()) {
+        	String roomType = cobroomType.getValue();
+        	Integer roomNumber = Integer.parseInt(tfroomNumber.getText().trim());
+        	Double roomPrice = Double.parseDouble(tfroomPrice.getText().trim());
+        	String roomStatus = cobroomStatus.getValue();
         	
-        	Boolean isSaveOk =roomUtils.saveRoom(room);
         	
-        	if (!isSaveOk) {
-    			System.out.println("Successfully Saved "+roomNumber+" to DB");
-    			showTable("select * from room;");
-    			
-    			clearAllField();
+        	if (isNewButtonClick) {
+            	Room room = new Room(roomType, roomNumber, roomPrice, roomStatus);
+            	
+            	Boolean isSaveOk =roomUtils.saveRoom(room);
+            	
+            	if (!isSaveOk) {
+            		noti.getNotification(NotificationType.SUCCESS, "Success", "Successfully Saved "+roomNumber+" to DB", AnimationType.SLIDE, 2000.0);
+        			showTable("select * from room;");
+        			
+        			clearAllField();
+        		}else {
+        			noti.getNotification(NotificationType.ERROR, "Failed", "Fail to save "+roomNumber+" to DB", AnimationType.SLIDE, 2000.0);
+        		}
     		}else {
-    			System.out.println("Fail to Save "+roomNumber+" to DB");
+    			Room roomUpdated = new Room(this.id, roomType, roomNumber, roomPrice, roomStatus);
+    			
+    			Integer rowUpdated = roomUtils.updateRoom(roomUpdated);
+    			
+    			if (rowUpdated > 0) {
+    				noti.getNotification(NotificationType.SUCCESS, "Success", "Successfully Updated "+roomNumber+" to DB", AnimationType.SLIDE, 2000.0);
+    				showTable("select * from room;");
+    				clearAllField();
+    			}else {
+    				noti.getNotification(NotificationType.ERROR, "Failed", "Fail to update "+roomNumber+" in DB", AnimationType.SLIDE, 2000.0);
+    			}
+    			
     		}
-		}else {
-			Room roomUpdated = new Room(this.id, roomType, roomNumber, roomPrice, roomStatus);
-			
-			Integer rowUpdated = roomUtils.updateRoom(roomUpdated);
-			
-			if (rowUpdated > 0) {
-				showTable("select * from room;");
-				clearAllField();
-			}else {
-				System.out.println("Fail to Updated "+roomNumber+" to DB");
-			}
-			
-		}
+        }else {
+        	noti.getNotification(NotificationType.WARNING, "Failed", "Input fields must not be null!", AnimationType.SLIDE, 2000.0);
+        }
+      
 
 
     }

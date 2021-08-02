@@ -49,9 +49,9 @@ public class ManagerViewStaffProfileController implements Initializable{
     	
     	Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
     	primaryStage.setResizable(false);
-    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("ManagerMainUI.fxml"));
+    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("ManagerViewStaffUI.fxml"));
 		Scene scene = new Scene(root);
-		primaryStage.setTitle("ManagerMainUI");
+		primaryStage.setTitle("ManagerViewStaffUI");
 		primaryStage.setScene(scene);
 		primaryStage.show();
     	
@@ -64,7 +64,7 @@ public class ManagerViewStaffProfileController implements Initializable{
 		Staff staff = holder.getStaff();
 		
 		
-		staffImage.setImage(new Image(getClass().getResourceAsStream("../img/"+staff.getStaffImageName())));
+		staffImage.setImage(new Image(getClass().getResourceAsStream("../img/staff/"+staff.getStaffImageName())));
 		
 		lblStaffName.setText(staff.getStaffUserName());
 		lblStaffEmail.setText(staff.getStaffEmail());

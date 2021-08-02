@@ -13,6 +13,7 @@ import com.jfoenix.controls.JFXTextField;
 import bean.Import;
 import bean.ImportHolder;
 import bean.ImportStatusHolder;
+import bean.Stock;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -35,6 +36,7 @@ import tray.animations.AnimationType;
 import tray.notification.NotificationType;
 import utility.ImportDataUtils;
 import utility.MyNotification;
+import utility.StockDataUtils;
 
 public class ImportController implements Initializable{
 	 @FXML
@@ -89,6 +91,7 @@ public class ImportController implements Initializable{
 	    private RadioButton rbGood;
 	    
 	    private final ImportDataUtils importDataUtils=new ImportDataUtils();
+	    private final StockDataUtils stockDataUtils=new StockDataUtils();
 	   private final MyNotification noti=new MyNotification();
 ;
 	   
@@ -119,15 +122,20 @@ public class ImportController implements Initializable{
 	    				
 	    					Boolean isDeleteOk=importDataUtils.deleteImportItems(importItem);
 	    					if(!isDeleteOk) {
-	    						System.out.println("successfully deleted!");
-
+	    						Stock stock=stockDataUtils.getAllStock("select * from stock where itemName = '"+importItem.getImportItemName()+"';").get(0);
+	    						Boolean isReduceOk=stockDataUtils.reduceStock(stock.getItemStock(), importItem.getImportItemQty(), stock.getStockId());
+	    						if(!isReduceOk) {
+	    							noti.getNotification(NotificationType.SUCCESS, "Success", "Successfully Saved", AnimationType.SLIDE, 2000.0);
+	    						}
+	    						
+                                
 	    					
 	    					}
 	    					showTable("select * from import where itemStatus='Good';");
 	    			}
 	    				
 	    	 }else {
-		    	  noti.getNotification(NotificationType.ERROR, "Fail!", "You first need to select an item", AnimationType.SLIDE, 2000.0);
+		    	  noti.getNotification(NotificationType.WARNING, "Fail!", "You first need to select an item", AnimationType.SLIDE, 2000.0);
 		      }
 	    	
 
@@ -156,7 +164,7 @@ public class ImportController implements Initializable{
 	   		primaryStage.setScene(scene);
 	   		primaryStage.show();
 	      }else {
-	    	  noti.getNotification(NotificationType.ERROR, "Fail!", "You first need to select an item", AnimationType.SLIDE, 2000.0);
+	    	  noti.getNotification(NotificationType.WARNING, "Fail!", "You first need to select an item", AnimationType.SLIDE, 2000.0);
 	      }
 	    
 	 
@@ -177,7 +185,7 @@ public class ImportController implements Initializable{
 	    	    showTable("select * from import where "+column+"= '"+query+"' and itemStatus='Good';");
 	    	}
 	    	else {
-	    		noti.getNotification(NotificationType.ERROR, "Fail!", "Fail to Search,Fields must not be null.", AnimationType.SLIDE, 2000.0);
+	    		noti.getNotification(NotificationType.WARNING, "Fail!", "Fail to Search,Fields must not be null.", AnimationType.SLIDE, 2000.0);
 	    	}
 	  
 
@@ -185,8 +193,10 @@ public class ImportController implements Initializable{
 
 	    @FXML
 	    void processBack(ActionEvent event) throws IOException {
+	    	
 	    	Optional<ButtonType> result=noti.getConfirmationAlert("Comfimation Dialog", "Comfirmation", "Do you really want to Exit?");
 			if(result.get()==ButtonType.OK) {
+				ImportStatusHolder.setButtonStatus("ExistImport");
 				Stage primaryStage=(Stage)((Node)event.getSource()).getScene().getWindow();
 		    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("AccountantMainUI.fxml"));
 				Scene scene = new Scene(root);
@@ -209,7 +219,7 @@ public class ImportController implements Initializable{
 				Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
 				primaryStage.setResizable(false);
 				primaryStage.getIcons().add(icon);
-			    primaryStage.setTitle("Hotel Administration LogIn");
+			    primaryStage.setTitle("Hotel Administration Login");
 				primaryStage.setScene(scene);
 				primaryStage.show();
 			}

@@ -22,6 +22,7 @@ public class HouseKeepingController {
 			Stage primaryStage=(Stage)((Node)event.getSource()).getScene().getWindow();
 	    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("../main/LogInUI.fxml"));
 			Scene scene = new Scene(root);
+			primaryStage.setTitle("Hotel Administration Login");
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		}

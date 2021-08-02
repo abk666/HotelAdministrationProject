@@ -143,11 +143,12 @@ if(checkUser.isUserValid(email,password,role,loginType)) {
             		}
                    }else {
                    	 noti.getNotification(NotificationType.ERROR, "LogIn failed!", "Incorrect username or password", AnimationType.SLIDE, 2000.0);
+                   	 lblEmail.setText("");
                     }
             	}else {
         	    	System.out.println("Email");
         	    	lblEmail.setVisible(true);
-        	    	lblEmail.setText("Email must contain @ sign and must no be null.");
+        	    	lblEmail.setText("Email must contain @ sign!");
         	    	lblEmail.setTextFill(Paint.valueOf("Red"));
 
         	    	}

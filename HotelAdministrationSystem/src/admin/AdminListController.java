@@ -95,48 +95,53 @@ public class AdminListController implements Initializable {
 
     @FXML
     void processDelete(ActionEvent event) throws SQLException {
-    	
-    	Admin admin = adminTable.getSelectionModel().getSelectedItem();
-   	 
-  	  Boolean isDeleteOk = adminDataUtils.deleteAdmin(admin.getId());
-  	  
-  	  if(!isDeleteOk) {
-  		  myNoti.getNotification(NotificationType.SUCCESS, "Deleted!", "Deleted "+admin.getUsername()+" to DB", AnimationType.SLIDE, 3000.0);
-  		  		
-  		  showTable("select * from admin;");
-  		  
-  		  File imageFile = new File("src/img/admin/"+admin.getImageName());
-  		  if(imageFile.exists()) {
-  			  
-  			  imageFile.delete();
-  		  }
-  	  }
-  	  else {
-  		  myNoti.getNotification(NotificationType.ERROR, " Fail to Deleted!", " Fail to Deleted "+admin.getUsername()+" to DB", AnimationType.SLIDE, 3000.0);
-  		  System.out.println("Fail to Delete" + admin.getUsername());
-  	  }
+    	if(adminTable.getSelectionModel().getSelectedIndex()>=0) {
+    		Admin admin = adminTable.getSelectionModel().getSelectedItem();
+    	   	 
+    	  	  Boolean isDeleteOk = adminDataUtils.deleteAdmin(admin.getId());
+    	  	  
+    	  	  if(!isDeleteOk) {
+    	  		  myNoti.getNotification(NotificationType.SUCCESS, "Deleted!", "Deleted "+admin.getUsername()+" to DB", AnimationType.SLIDE, 3000.0);
+    	  		  		
+    	  		  showTable("select * from admin;");
+    	  		  
+    	  		  File imageFile = new File("src/img/admin/"+admin.getImageName());
+    	  		  if(imageFile.exists()) {
+    	  			  
+    	  			  imageFile.delete();
+    	  		  }
+    	  	  }
+    	  	  else {
+    	  		  myNoti.getNotification(NotificationType.ERROR, " Fail to Deleted!", " Fail to Deleted "+admin.getUsername()+" to DB", AnimationType.SLIDE, 3000.0);
+    	  		  System.out.println("Fail to Delete" + admin.getUsername());
+    	  	  }
+    	}else {
+    		myNoti.getNotification(NotificationType.ERROR, "Failed", "You must first select an item", AnimationType.SLIDE, 2000.0);
+    	}
+    
 
     }
 
     @FXML
     void processEdit(ActionEvent event) throws IOException {
     	
-
+     if(adminTable.getSelectionModel().getSelectedIndex()>=0) {
+    	 Admin admin = adminTable.getSelectionModel().getSelectedItem();
+     	
+     	AdminHolder holder = AdminHolder.getAdminInstance();
+     	holder.setAdmin(admin);
+     	
+     	Stage primaryStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+     	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("../admin/AdminUpdateUI.fxml"));
+     	primaryStage.setTitle("Admin Update Section");
+ 		Scene scene = new Scene(root);
+ 		primaryStage.setScene(scene);
+ 		primaryStage.show(); 
+     }else {
+ 		myNoti.getNotification(NotificationType.ERROR, "Failed", "You must first select an item", AnimationType.SLIDE, 2000.0);
+ 	}
     	
-    	Admin admin = adminTable.getSelectionModel().getSelectedItem();
-    	
-    	AdminHolder holder = AdminHolder.getAdminInstance();
-    	holder.setAdmin(admin);
-    	
-    	Stage primaryStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("../admin/AdminUpdateUI.fxml"));
-    	primaryStage.setTitle("Admin Update Section");
-		Scene scene = new Scene(root);
-		primaryStage.setScene(scene);
-		primaryStage.show();
-		
-
-    }
+    	 }
     
     @FXML
     void processRefresh(ActionEvent event) {
@@ -158,18 +163,23 @@ public class AdminListController implements Initializable {
     
     @FXML
     void processView(ActionEvent event) throws IOException {
+    	if(adminTable.getSelectionModel().getSelectedIndex()>=0) {
+    		Admin admin = adminTable.getSelectionModel().getSelectedItem();
+        	
+        	AdminHolder holder = AdminHolder.getAdminInstance();
+        	holder.setAdmin(admin);
+        	
+        	Stage primaryStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("../admin/AdminViewUI.fxml"));
+    		Scene scene = new Scene(root);
+    		primaryStage.setTitle("Admin Profile Section");
+    		primaryStage.setScene(scene);
+    		primaryStage.show();
+    	}
+    	else {
+     		myNoti.getNotification(NotificationType.ERROR, "Failed", "You must first select an item", AnimationType.SLIDE, 2000.0);
+     	}
     	
-    	Admin admin = adminTable.getSelectionModel().getSelectedItem();
-    	
-    	AdminHolder holder = AdminHolder.getAdminInstance();
-    	holder.setAdmin(admin);
-    	
-    	Stage primaryStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("../admin/AdminViewUI.fxml"));
-		Scene scene = new Scene(root);
-		primaryStage.setTitle("Admin Profile Section");
-		primaryStage.setScene(scene);
-		primaryStage.show();
 
     }
 

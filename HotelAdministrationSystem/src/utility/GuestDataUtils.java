@@ -95,6 +95,7 @@ public class GuestDataUtils {
 					
 				}
 				
+				
 				//Update U
 				public Integer updateGuest(Guest guest) throws SQLException {
 					connection = dbConnection.getConnection();
@@ -150,6 +151,16 @@ public class GuestDataUtils {
 					connection = dbConnection.getConnection();
 					statement=connection.createStatement();
 					statement.execute("update `room` set `roomStatus` = 'CheckIn' where (`roomId` = '"+roomList.getRoomId()+"');");
+				}
+				public void deleteGuestData(Integer guestId) throws SQLException {
+					connection = dbConnection.getConnection();
+					preStmt = connection.prepareStatement("delete from guest where guestId = ?;");
+					
+					preStmt.setInt(1,guestId);
+					
+					preStmt.execute();
+					connection.close();
+					
 				}
 				//Delete D
 				public Boolean deleteGuest(Integer guestId) throws SQLException {

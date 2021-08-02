@@ -138,6 +138,7 @@ public class ImportDataUtils {
 		return null;
 		
 	}
+	
 
 	//extraction column names
 	public ObservableList<String> getAllImportColumn() throws SQLException{

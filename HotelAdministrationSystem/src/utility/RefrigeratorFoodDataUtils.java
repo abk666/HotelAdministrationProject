@@ -105,13 +105,32 @@ public class RefrigeratorFoodDataUtils {
 			return isDeleteOk;
 		}
 		
-		//Read ColumnLabel For Admin
+		//Read ColumnLabel For AdminRefrigerator
 		public ObservableList<String> getAllColumnLabel() throws SQLException{
 			
 			ObservableList<String> columnLabelList = FXCollections.observableArrayList();
 			connection = dbConnection.getConnection();
 			statement = connection.createStatement();
 			resultSet = statement.executeQuery("select * from hoteldb.refrigeratoritem;");
+			//itemId as Id,itemName as Name,itemCategory as Category,itemPrice as Price,itemQty as Quantity,itemImage as ImageName
+			
+			ResultSetMetaData metaData = resultSet.getMetaData();
+			
+			Integer count = metaData.getColumnCount();
+			
+			for(int x = 1 ; x <= count ; x++) {
+				
+				columnLabelList.add(metaData.getColumnLabel(x));
+			}
+			return columnLabelList;
+		}
+	public ObservableList<String> foodForRoom() throws SQLException{
+			
+			ObservableList<String> columnLabelList = FXCollections.observableArrayList();
+			connection = dbConnection.getConnection();
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery("select itemName,itemPrice,itemCategory from refrigeratoritem;");
+			//itemId as Id,itemName as Name,itemCategory as Category,itemPrice as Price,itemQty as Quantity,itemImage as ImageName
 			
 			ResultSetMetaData metaData = resultSet.getMetaData();
 			

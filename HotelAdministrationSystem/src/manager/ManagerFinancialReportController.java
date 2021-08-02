@@ -112,6 +112,7 @@ public class ManagerFinancialReportController implements Initializable{
     		Scene scene = new Scene(root);
     		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
     		primaryStage.getIcons().add(icon);
+    		primaryStage.setTitle("Hotel Administration Login");
     		primaryStage.setScene(scene);
     		primaryStage.show();
     	}

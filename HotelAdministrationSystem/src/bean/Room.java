@@ -8,11 +8,12 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Room {
-	public IntegerProperty roomId;
-	public StringProperty roomType;
-	public IntegerProperty roomNumber;
-	public DoubleProperty roomPrice;
-	public StringProperty roomStatus;
+	private IntegerProperty roomId;
+	private StringProperty roomType;
+	private IntegerProperty roomNumber;
+	private DoubleProperty roomPrice;
+	private StringProperty roomStatus;
+	
 	public Room(Integer roomId,String roomType, Integer roomNumber,  Double roomPrice,
 			String roomStatus) {
 		super();
