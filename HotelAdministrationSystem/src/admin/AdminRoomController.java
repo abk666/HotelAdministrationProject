@@ -80,14 +80,10 @@ public class AdminRoomController implements Initializable{
     @FXML
     void processBack(MouseEvent event) throws IOException {
     	Stage primaryStage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-    	primaryStage.hide();
-    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("../main/LoginUI.fxml"));
+    	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("AdminMainUI.fxml"));
 		Scene scene = new Scene(root);
-		Image icon=new Image(getClass().getResourceAsStream("../img/hotel.png"));
-		primaryStage.setTitle("Hotel Administration Login");
-		primaryStage.getIcons().add(icon);
+		primaryStage.setTitle("Admin Main UI");
 		primaryStage.setScene(scene);
-		
 		primaryStage.show();
     }
     

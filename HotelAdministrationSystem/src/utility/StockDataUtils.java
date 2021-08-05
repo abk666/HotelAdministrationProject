@@ -42,10 +42,23 @@ public class StockDataUtils {
 		ObservableList<Import>importList=importDataUtils.getTotalQty("select importItemName,sum(importItemQty) as TOTAL_QUANTITY from import where itemStatus='Good' group by importItemName ;");
 		for(Import importItem:importList) {
 			statement=connection.createStatement();
+			Integer tempStockId;
+			StockDataUtils stockDataUtils=new StockDataUtils();
+			TableAutoIncrementsUtils autoIncrementsUtils=new TableAutoIncrementsUtils();
+	    	ObservableList<Stock>stockList=stockDataUtils.getAllStock("select * from stock;");
+	    	if(stockList.size()==0) {
+	    		tempStockId=1;
+	    	}else {
+	    		Integer index=stockList.size();
+	    		Stock tempStock=stockList.get(index-1);
+	    		tempStockId=tempStock.getStockId();
+	    	}
+	    	autoIncrementsUtils.setAutocrementId("stock", tempStockId);
           updatedRows=statement.executeUpdate("insert into stock(itemName,itemStock) values('"+importItem.getImportItemName()+"','"+importItem.getImportItemQty()+"') on duplicate key update itemName='"+importItem.getImportItemName()+"',itemStock='"+importItem.getImportItemQty()+"';");
 
 		}
 //		if(updatedRows<1) {
+		if(itemUsageDataUtils.getTotalUsage("select itemName,sum(itemQty) as TOTAL_QUANTITY from itemusage group by itemName ;").size()>=0) {
 			ObservableList<ItemUsage>itemUsageList=itemUsageDataUtils.getTotalUsage("select itemName,sum(itemQty) as TOTAL_QUANTITY from itemusage group by itemName ;");
 			for(ItemUsage itemUsage: itemUsageList) {
 				StockDataUtils stockDataUtils=new StockDataUtils();
@@ -61,6 +74,8 @@ public class StockDataUtils {
 				statement=connection.createStatement();
 				statement.execute("update `stock` set `itemStock` = '"+totalStock+"' where (`stockId` = '"+stock.getStockId()+"');");
 			}
+		}
+			
 //		}
 	
 		

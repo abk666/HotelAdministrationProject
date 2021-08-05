@@ -88,40 +88,40 @@ public class ManagerViewGuestNotStayController implements Initializable {
     
     @FXML
     void processGuestDetails(MouseEvent event) throws IOException, SQLException {
-    	
-    	CheckOut guestCheckOut = guestCheckOutTable.getSelectionModel().getSelectedItem();
-    	
-    	if(guestCheckOut == null) {
-    		
-    		myNoti.getNotification(NotificationType.WARNING,"Required Data!","Please Select The Data You Want Firstly.",AnimationType.SLIDE,3000.0);
-    		
+    	if(guestCheckOutTable.getSelectionModel().getSelectedIndex()>=0) {
+    		CheckOut guestCheckOut = guestCheckOutTable.getSelectionModel().getSelectedItem();
+        	
+        	
+        		
+        		String nrc =  guestCheckOut.getCheckOutGuestNRC();
+            	String checkOutDate = guestCheckOut.getCheckOutDate();
+            	Double totalPrice = guestCheckOut.getTotalPrice();
+            	
+            	Guest guest = guestDataUtils.getAllGuest("select * from hoteldb.guest where guestNRC = '"+nrc+"';").get(0);
+            	String checkInDate = guest.getGuestCheckInDate();
+            	
+            	long dayDifference=ChronoUnit.DAYS.between(LocalDate.parse(checkInDate),LocalDate.parse(checkOutDate));
+            	
+            	guest.setGuestCheckOutDate(checkOutDate);	
+            	guest.setNumberOfDays((int)dayDifference);
+            	guest.setTotalPrice(totalPrice);
+        	
+            	GuestHolder holder = GuestHolder.getGuestInstance();
+            	holder.setGuest(guest);
+            	
+            	Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
+            	primaryStage.setResizable(false);
+            	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("ManagerViewNotStayGuestDetailsUI.fxml"));
+        		Scene scene = new Scene(root);
+        		primaryStage.setTitle("ManagerViewNotStayGuestDetailsUI");
+        		primaryStage.setScene(scene);
+        		primaryStage.show();
+        		
+        	
     	}else {
-    		
-    		String nrc =  guestCheckOut.getCheckOutGuestNRC();
-        	String checkOutDate = guestCheckOut.getCheckOutDate();
-        	Double totalPrice = guestCheckOut.getTotalPrice();
-        	
-        	Guest guest = guestDataUtils.getManagerViewGuest("select * from hoteldb.guest where guestNRC = '"+nrc+"';");
-        	String checkInDate = guest.getGuestCheckInDate();
-        	
-        	long dayDifference=ChronoUnit.DAYS.between(LocalDate.parse(checkInDate),LocalDate.parse(checkOutDate));
-        	
-        	guest.setGuestCheckOutDate(checkOutDate);	
-        	guest.setNumberOfDays((int)dayDifference);
-        	guest.setTotalPrice(totalPrice);
-    	
-        	GuestHolder holder = GuestHolder.getGuestInstance();
-        	holder.setGuest(guest);
-        	
-        	Stage primaryStage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        	primaryStage.setResizable(false);
-        	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("ManagerViewNotStayGuestDetailsUI.fxml"));
-    		Scene scene = new Scene(root);
-    		primaryStage.setTitle("ManagerViewNotStayGuestDetailsUI");
-    		primaryStage.setScene(scene);
-    		primaryStage.show();
-    		
+    		myNoti.getNotification(NotificationType.WARNING,"Required Data!","Please Select The Data You Want Firstly.",AnimationType.SLIDE,3000.0);
     	}
+    	
 	
     }
 
@@ -192,9 +192,9 @@ public class ManagerViewGuestNotStayController implements Initializable {
 			ObservableList<Guest>guestList=guestDataUtils.getAllGuest("select * from guest where guestStatus='CheckOut';");
 			
 			for(Guest guest:guestList) {
-				long yearDifference=ChronoUnit.DAYS.between( LocalDate.parse(guest.getGuestCheckOutDate()),LocalDate.now());
-				
-				if(yearDifference>1) {
+				long yearDifference=ChronoUnit.YEARS.between( LocalDate.parse(guest.getGuestCheckOutDate()),LocalDate.now());
+				System.out.println(yearDifference);
+				if(yearDifference>=1) {
 					guestUtils.deleteGuestData(guest.getGuestId());
 					
 				}

@@ -91,6 +91,7 @@ public class BookingTableController implements Initializable {
         	 
         	holder.setBooking(booking);
         	 BookingStatusHolder.setBookingId(booking.getBookingId());
+        	 BookingStatusHolder.setButtonStatus("booking");
         	Stage primaryStage = new Stage();
          	AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("CheckInBookingUI.fxml"));
      		Scene scene = new Scene(root);
@@ -141,6 +142,7 @@ public class BookingTableController implements Initializable {
     }
     @FXML
     void processView(ActionEvent event) throws IOException {
+    	BookingStatusHolder.setButtonStatus("booking");
      	if(bookingTable.getSelectionModel().getSelectedIndex()<0) {
         	noti.getNotification(NotificationType.WARNING, "Warning", "You must first select an item!", AnimationType.SLIDE, 2000.0);	
         	}else {
@@ -187,7 +189,7 @@ public class BookingTableController implements Initializable {
 			ObservableList<Booking>bookingList=bookingDataUtils.getAllBooking("select * from booking;");
 			for(Booking booking:bookingList) {
 				long dayDifference=ChronoUnit.DAYS.between(LocalDate.now(),LocalDate.parse(booking.getCheckInDate()));
-				System.out.println(dayDifference);
+//				System.out.println(dayDifference);
 				if(dayDifference<0) {
 				 Optional<ButtonType>result=noti.getConfirmationAlert("Comfirmation", "Guest "+booking.getGuestName()+"'s checkin date is expired", "Do you want to delete?");
 				 if(result.get()==ButtonType.OK) {

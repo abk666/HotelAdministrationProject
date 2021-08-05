@@ -99,9 +99,10 @@ public class BookingDetailsController implements Initializable{
     	Integer rowUpdated = bookingDataUtils.updateBooking(bookingUpdated);
 		
 		if (rowUpdated > 0) {
-			
+			BookingHolder holder=BookingHolder.getBookingInstance();
+			Booking booking=holder.getBooking();
 			noti.getNotification(NotificationType.SUCCESS, "Success", "Successfully Updated "+guestName+" to DB", AnimationType.SLIDE, 2000.0);
-			
+			bookingDataUtils.UpdateRoomStatus(booking.getRoomNo());
 			
 		}else {
 			

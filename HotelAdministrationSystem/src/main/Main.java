@@ -33,13 +33,7 @@ public class Main extends Application {
 	
 	public static void main(String[] args) {
 		
-		DbConnection dbConnection=new DbConnection();
-		if (dbConnection.getConnection()!=null){
-			System.out.println("Success!");
-		}else
-		{
-			System.out.println("Fail to connect!");
-		}
+	
 		launch(args);
 	}
 }

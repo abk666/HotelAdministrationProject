@@ -167,7 +167,7 @@ public class FoodOrderListController implements Initializable{
 
     	cobSearch.setValue("Column");
     	tfSearch.clear();
-    	showTable("select * from hoteldb.foodorder;");
+    	showTable("select * from foodorder;");
     }
 
     @FXML
@@ -176,7 +176,7 @@ public class FoodOrderListController implements Initializable{
     	String column = cobSearch.getValue();
     	String query = tfSearch.getText().trim();
     	
-    	showTable("select * from hoteldb.foodorder where "+column+" = '"+query+"';");
+    	showTable("select * from foodorder where "+column+" = '"+query+"';");
     }
     
     public void showTable(String sql) {

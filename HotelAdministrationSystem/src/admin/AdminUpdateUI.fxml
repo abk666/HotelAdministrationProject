@@ -82,7 +82,7 @@
             <Image url="@../img/Logout%20(2).png" />
          </image>
       </ImageView>
-      <Label alignment="CENTER" layoutX="431.0" layoutY="574.0" onMouseClicked="#processLogOut" prefHeight="35.0" prefWidth="100.0" text="LogOut" textFill="#48616f">
+      <Label alignment="CENTER" layoutX="431.0" layoutY="574.0" onMouseClicked="#processLogOut" prefHeight="35.0" prefWidth="100.0" text="Back" textFill="#48616f">
          <font>
             <Font size="20.0" />
          </font>

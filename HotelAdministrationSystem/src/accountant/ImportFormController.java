@@ -99,17 +99,8 @@ public class ImportFormController implements Initializable{
     	}
     	
     	autoIncrementsUtils.setAutocrementId("import",tempId);
-    	//for stock table
-    	Integer tempStockId;
-    	ObservableList<Stock>stockList=stockDataUtils.getAllStock("select * from stock;");
-    	if(stockList.size()==0) {
-    		tempStockId=1;
-    	}else {
-    		Integer index=stockList.size();
-    		Stock tempStock=stockList.get(index-1);
-    		tempStockId=tempStock.getStockId();
-    	}
-    	autoIncrementsUtils.setAutocrementId("stock", tempStockId);
+    
+    
     	//Check validation for every Inputs
     	if(isDouble(tfPrice.getText().trim())&& isInteger(tfQuantity.getText().trim())&&!tfName.getText().trim().isEmpty() && cobCategory.getValue()!=null && !tfPrice.getText().trim().isEmpty() && !tfQuantity.getText().trim().isEmpty() && cobUnit.getValue()!=null
     	  && dpExpiredDate.getValue()!=null && dpImportDate.getValue()!=null ) {
